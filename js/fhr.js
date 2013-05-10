@@ -8,8 +8,7 @@ $(function() {
         navItems = navListItems.find('a'),
         contentContainers = $('.mainContent'),
         rawContentContainers = $('.rawdata-display'),
-        rawHeadings = $('.raw_heading'),
-        newTab = $('.newtab');
+        rawHeadings = $('.raw_heading');
 
     var showContainer = function(anchor) {
         // Get the id of the container to show from the href.
@@ -18,13 +17,6 @@ $(function() {
 
         container.show();
     };
-
-    newTab.click(function(event) {
-        var url = $(this).attr('href');
-        event.preventDefault();
-
-        window.open(url);
-    });
 
     // Handle clicks on the main presistent header
     navItems.click(function(event) {
