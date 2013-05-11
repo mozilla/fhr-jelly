@@ -12,12 +12,12 @@
           <div class="headerContainer">
             <div class="navAndBlurb">
               <ul class="nav">
-                <li class="nav-category"><a href="#health" class="active" target="_top">{{ _('Firefox Health Report') }}</a></li>
+                <li class="nav-category"><a href="#health" class="active">{{ _('Firefox Health Report') }}</a></li>
                 <li class="nav-separator"></li>
-                <li class="nav-category"><a href="#raw" target="_top">{{ _('Raw Data') }}</a></li>
+                <li class="nav-category"><a href="#raw">{{ _('Raw Data') }}</a></li>
               </ul>
-              <div class="blurb">{{ _('Get insights and performance information about your version of Firefox.') }} <a href="https://support.mozilla.org/kb/firefox-health-report-understand-your-browser-perf" class="learn_more" target="_top">{{ _('Learn more...') }}</a>
-                <a href="//www.mozilla.org/legal/privacy/firefox.html" class="newtab" target="_top">{{ _('Privacy Policy') }}</a></div>
+              <div class="blurb">{{ _('Get insights and performance information about your version of Firefox.') }} <a href="https://support.mozilla.org/kb/firefox-health-report-understand-your-browser-perf" class="learn_more">{{ _('Learn more...') }}</a>
+                <a href="//www.mozilla.org/legal/privacy/firefox.html" class="newtab">{{ _('Privacy Policy') }}</a></div>
             </div>
           </div>
 
@@ -36,7 +36,7 @@
                     <div class="panelContainerBase">
                         <div class="panelContainerContent">
                         <p>{{ _('You\'ve chosen to stop sharing data with Mozilla, but you\'ll still be able to see how your browser is performing.') }}</p>
-                        <p class="greyText">{{ _('Your Health Report data will also be removed from Mozilla\'s servers. Learn more in our <a href="%(privacy_url)s" class="newtab">privacy policy.</a>')|format(privacy_url='http://www.mozilla.org/legal/privacy/firefox.html" target="_top') }}</p>
+                        <p class="greyText">{{ _('Your Health Report data will also be removed from Mozilla\'s servers. Learn more in our <a href="%(privacy_url)s" class="newtab">privacy policy.</a>')|format(privacy_url='http://www.mozilla.org/legal/privacy/firefox.html') }}</p>
                         </div>
                     </div>
                 </div>
@@ -46,7 +46,7 @@
                     <div class="panelContainerBase">
                         <div class="panelContainerContent">
                             <p>{{ _('You\'ve chosen to share your data with Mozilla from time to time. Thanks for being part of our mission to build a brighter future for the Web.') }}</p>
-                            <p class="greyText">{{ _('Learn how we handle your data in our <a href="%(privacy_url)s" class="newtab">privacy policy.</a>')|format(privacy_url='http://www.mozilla.org/legal/privacy/firefox.html" target="_top') }}</p>
+                            <p class="greyText">{{ _('Learn how we handle your data in our <a href="%(privacy_url)s" class="newtab">privacy policy.</a>')|format(privacy_url='http://www.mozilla.org/legal/privacy/firefox.html') }}</p>
                         </div>
                     </div>
                 </div>
@@ -56,7 +56,7 @@
         <div class="outerContainer">
             <div class="sidebar">
                 <!-- enabled by media queries -->
-                <a href="#showstats" id="showstats" class="menu_toggle" target="_top"><span class="visually-hidden" aria-hidden="true">{{ _('Show Statistics') }}</span></a>
+                <a href="#showstats" id="showstats" class="menu_toggle"><span class="visually-hidden" aria-hidden="true">{{ _('Show Statistics') }}</span></a>
                 <div class="statsBox">
 
                     <div class="statsBoxSection">
@@ -119,7 +119,7 @@
                             <div class="text">{{ _('Tips') }}</div>
                         </div>
                         <div class="tipBox-content">
-                            <p>Help us make Firefox Health Report more useful for you. Take a <a href ="http://www.surveygizmo.com/s3/1227362/Firefox-Health-Report-Feedback" class="newtab" target="_top">brief survey</a> and tell us what you think so far!</p>
+                            <p>Help us make Firefox Health Report more useful for you. Take a <a href ="http://www.surveygizmo.com/s3/1227362/Firefox-Health-Report-Feedback" class="newtab">brief survey</a> and tell us what you think so far!</p>
                         </div>
                     </div>
 
@@ -132,7 +132,7 @@
                         <div class="tipBox-content">
                             <p>{{ _('It looks like your browser has crashed a number of times recently. To learn more:') }}</p>
                             <ul>
-                                <li>{{ _('Visit our <a href="%(sumo_url)s">support website</a>')|format(sumo_url='https://support.mozilla.org/kb/firefox-crashes-troubleshoot-prevent-and-get-help" target="_top') }}</li>
+                                <li>{{ _('Visit our <a href="%(sumo_url)s">support website</a>')|format(sumo_url='https://support.mozilla.org/kb/firefox-crashes-troubleshoot-prevent-and-get-help') }}</li>
                             </ul>
                         </div>
                     </div>
@@ -146,8 +146,8 @@
                         <div class="tipBox-content">
                             <p>{{ _('Your browser seems to be running slower than usual. To learn more:') }}</p>
                             <ul>
-                                <li>{{ _('Visit our <a href="%(sumo_url)s">support website</a>')|format(sumo_url='https://support.mozilla.org/"  target="_top') }}</li>
-                                <li>{{ _('View more <a href="%(details_url)s">detailed information</a>')|format(details_url='https://support.mozilla.org/kb/reset-firefox-easily-fix-most-problems"  target="_top') }}</li>
+                                <li>{{ _('Visit our <a href="%(sumo_url)s">support website</a>')|format(sumo_url='https://support.mozilla.org/') }}</li>
+                                <li>{{ _('View more <a href="%(details_url)s">detailed information</a>')|format(details_url='https://support.mozilla.org/kb/reset-firefox-easily-fix-most-problems') }}</li>
                             </ul>
                         </div>
                     </div>
@@ -170,14 +170,14 @@
                     <div id="graph_selector" class="selector">
                         <h4>{{ _('Graph:') }}</h4>
                         <ul>
-                            <li><a href="#median" class="active" id="graph_median" target="_top">{{ _('Average') }}</a></li>
-                            <li><a href="#all" id="graph_all" target="_top">{{ _('All') }}</a></li>
+                            <li><a href="#median" class="active" id="graph_median">{{ _('Average') }}</a></li>
+                            <li><a href="#all" id="graph_all">{{ _('All') }}</a></li>
                         </ul>
                     </div>
 
                     <div class="graph"></div>
                     <div class="yaxis-label">{{ _('Time (in seconds)') }}</div>
-                    <figcaption>{{ _('Startup time helps determine how well your version of Firefox is performing. In general, faster times (i.e. less time) indicate better performance.') }}  <a href="https://support.mozilla.org/kb/firefox-health-report-understand-your-browser-perf" target="_top">{{ _('Learn more...') }}</a></figcaption>
+                    <figcaption>{{ _('Startup time helps determine how well your version of Firefox is performing. In general, faster times (i.e. less time) indicate better performance.') }}  <a href="https://support.mozilla.org/kb/firefox-health-report-understand-your-browser-perf">{{ _('Learn more...') }}</a></figcaption>
                 </figure>
             </div>
             <!-- RAW DATA -->
@@ -188,8 +188,8 @@
 
                     <div class="selector raw">
                         <ul id="raw_selector">
-                            <li><a href="#data" class="active data_heading" target="_top">{{ _('Raw Data') }}</a></li>
-                            <li><a href="#glossary" class="glossary_heading" target="_top">{{ _('Glossary') }}</a></li>
+                            <li><a href="#data" class="active data_heading">{{ _('Raw Data') }}</a></li>
+                            <li><a href="#glossary" class="glossary_heading">{{ _('Glossary') }}</a></li>
                         </ul>
                     </div>
 
@@ -205,13 +205,13 @@
                         <h3>1) {{ _('What the Firefox Health Report Measures') }}</h3>
                         <p>{{ _('The Firefox Health Report (FHR) has 4 categories of metrics:') }}</p>
                         <dl>
-                            <dt><a href="#sec-2-1" target="_top">{{ _('Configuration') }}</a></dt>
+                            <dt><a href="#sec-2-1">{{ _('Configuration') }}</a></dt>
                             <dd>{{ _('Device hardware, operating system, Firefox version') }}</dd>
-                            <dt><a href="#sec-2-2" target="_top">{{ _('Customizations') }}</a></dt>
+                            <dt><a href="#sec-2-2">{{ _('Customizations') }}</a></dt>
                             <dd>{{ _('Add-ons, count and type') }}</dd>
-                            <dt><a href="#sec-2-3" target="_top">{{ _('Performance') }}</a></dt>
+                            <dt><a href="#sec-2-3">{{ _('Performance') }}</a></dt>
                             <dd>{{ _('Timing of browser events, rendering, session restores') }}</dd>
-                            <dt><a href="#sec-2-4" target="_top">{{ _('Wear and Tear') }}</a></dt>
+                            <dt><a href="#sec-2-4">{{ _('Wear and Tear') }}</a></dt>
                             <dd>{{ _('Length of session, how old a profile is, count of crashes, count of pages') }}</dd>
                         </dl>
                         </section>
@@ -232,7 +232,7 @@
                                 <tbody>
                                     <tr>
                                         <td class="left">appABI</td>
-                                        <td class="left">{{ _('Binary interface for XPCOM') }} (<a href="https://developer.mozilla.org/XPCOM_ABI" dir="{{ DIR }}" target="_top">https://developer.mozilla.org/XPCOM_ABI</a>)</td>
+                                        <td class="left">{{ _('Binary interface for XPCOM') }} (<a href="https://developer.mozilla.org/XPCOM_ABI" dir="{{ DIR }}">https://developer.mozilla.org/XPCOM_ABI</a>)</td>
                                     </tr>
                                     <tr>
                                         <td class="left">appBuildID</td>
