@@ -75,6 +75,7 @@ def update(ctx):
 
 @task
 def deploy(ctx):
+    generate_files()
     deploy_app()
 
 
