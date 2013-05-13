@@ -34,7 +34,8 @@ def update_locales(ctx):
 def generate_files(ctx):
     """Use the local, IT-written deploy script to check in changes."""
     command = './generate.py --output-dir %s -f --nowarn'
-    ctx.local(command % settings.SRC_DIR + '/web-output')
+    with ctx.lcd(settings.SRC_DIR):
+        ctx.local(command % settings.SRC_DIR + '/web-output')
 
 
 @task
@@ -70,12 +71,12 @@ def pre_update(ctx, ref=settings.UPDATE_REF):
 
 @task
 def update(ctx):
+    generate_files()
     checkin_changes()
 
 
 @task
 def deploy(ctx):
-    generate_files()
     deploy_app()
 
 
