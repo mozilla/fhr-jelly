@@ -22,6 +22,7 @@ def update_code(ctx, tag):
         ctx.local('git fetch')
         ctx.local('git pull -f')
 
+
 @task
 def update_locales(ctx):
     """Update a locale directory from SVN."""
@@ -32,7 +33,9 @@ def update_locales(ctx):
 @task
 def generate_files(ctx):
     """Use the local, IT-written deploy script to check in changes."""
-    ctx.local('./generate.py --output-dir %s -f --nowarn' % settings.SRC_DIR+'/web-output')
+    command = './generate.py --output-dir %s -f --nowarn'
+    ctx.local(command % settings.SRC_DIR + '/web-output')
+
 
 @task
 def checkin_changes(ctx):
@@ -40,7 +43,8 @@ def checkin_changes(ctx):
     ctx.local(settings.DEPLOY_SCRIPT)
 
 
-@hostgroups(settings.WEB_HOSTGROUP, remote_kwargs={'ssh_key': settings.SSH_KEY})
+@hostgroups(settings.WEB_HOSTGROUP,
+            remote_kwargs={'ssh_key': settings.SSH_KEY})
 def deploy_app(ctx):
     """Call the remote update script to push changes to webheads."""
     ctx.remote(settings.REMOTE_UPDATE_SCRIPT)
@@ -54,7 +58,6 @@ def update_info(ctx):
         ctx.local('git branch >> ../logs/revision.txt')
         ctx.local('git log -3 >> ../logs/revision.txt')
         ctx.local('git status >> ../logs/revision.txt')
-
         ctx.local('git rev-parse HEAD > ../logs/revision')
 
 
@@ -72,7 +75,7 @@ def update(ctx):
 
 @task
 def deploy(ctx):
-    
+    generate_files()
     deploy_app()
 
 
