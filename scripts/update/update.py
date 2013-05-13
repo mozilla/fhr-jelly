@@ -33,7 +33,7 @@ def update_locales(ctx):
 @task
 def generate_files(ctx):
     """Use the local, IT-written deploy script to check in changes."""
-    command = './generate.py --output-dir %s -f --nowarn'
+    command = './generate.py --output-dir %s -f --nowarn '
     with ctx.lcd(os.path.join(settings.SRC_DIR, 'fhr-jelly')):
         ctx.local(command % settings.SRC_DIR + '/web-output')
 
