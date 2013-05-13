@@ -13,9 +13,9 @@
           <div class="headerContainer">
             <div class="navAndBlurb">
               <ul class="nav">
-                <li class="nav-category"><a href="#health" class="active">{{ _('Firefox Health Report') }}</a></li>
+                <li class="nav-category"><a href="#health" target="_self" class="active">{{ _('Firefox Health Report') }}</a></li>
                 <li class="nav-separator"></li>
-                <li class="nav-category"><a href="#raw">{{ _('Raw Data') }}</a></li>
+                <li class="nav-category"><a href="#raw" target="_self">{{ _('Raw Data') }}</a></li>
               </ul>
               <div class="blurb">{{ _('Get insights and performance information about your version of Firefox.') }} <a href="https://support.mozilla.org/kb/firefox-health-report-understand-your-browser-perf" class="learn_more">{{ _('Learn more...') }}</a>
                 <a href="//www.mozilla.org/legal/privacy/firefox.html" class="newtab">{{ _('Privacy Policy') }}</a></div>
@@ -189,8 +189,8 @@
 
                     <div class="selector raw">
                         <ul id="raw_selector">
-                            <li><a href="#data" class="active data_heading">{{ _('Raw Data') }}</a></li>
-                            <li><a href="#glossary" class="glossary_heading">{{ _('Glossary') }}</a></li>
+                            <li><a href="#data" target="_self" class="active data_heading">{{ _('Raw Data') }}</a></li>
+                            <li><a href="#glossary" target="_self" class="glossary_heading">{{ _('Glossary') }}</a></li>
                         </ul>
                     </div>
 
@@ -206,13 +206,13 @@
                         <h3>1) {{ _('What the Firefox Health Report Measures') }}</h3>
                         <p>{{ _('The Firefox Health Report (FHR) has 4 categories of metrics:') }}</p>
                         <dl>
-                            <dt><a href="#sec-2-1">{{ _('Configuration') }}</a></dt>
+                            <dt><a href="#sec-2-1" target="_self">{{ _('Configuration') }}</a></dt>
                             <dd>{{ _('Device hardware, operating system, Firefox version') }}</dd>
-                            <dt><a href="#sec-2-2">{{ _('Customizations') }}</a></dt>
+                            <dt><a href="#sec-2-2" target="_self">{{ _('Customizations') }}</a></dt>
                             <dd>{{ _('Add-ons, count and type') }}</dd>
-                            <dt><a href="#sec-2-3">{{ _('Performance') }}</a></dt>
+                            <dt><a href="#sec-2-3" target="_self">{{ _('Performance') }}</a></dt>
                             <dd>{{ _('Timing of browser events, rendering, session restores') }}</dd>
-                            <dt><a href="#sec-2-4">{{ _('Wear and Tear') }}</a></dt>
+                            <dt><a href="#sec-2-4" target="_self">{{ _('Wear and Tear') }}</a></dt>
                             <dd>{{ _('Length of session, how old a profile is, count of crashes, count of pages') }}</dd>
                         </dl>
                         </section>
