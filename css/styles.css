@@ -476,7 +476,7 @@ h3 {
 .rawdata-container h2,
 .graphbox h2 {
     margin: 0;
-    padding: 0;
+    padding: 0px 0px 14px 0px;
     font-size: 2rem;
     font-weight: lighter;
 }
