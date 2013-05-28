@@ -209,10 +209,10 @@ getSessionsCount = function(customPayload) {
 },
 // Computes the median of an array of values.
 computeMedian = function(values) {
-    if(values.length == 0) {
+    if(values.length === 0) {
         return null;
     }
-    if(values.length == 1) {
+    if(values.length === 1) {
         return values[0];
     }
     values.sort(function(a,b) {return a - b;});
@@ -439,8 +439,29 @@ var populateData = function(healthreport) {
 };
 
 function init() {
-  window.addEventListener("message", receiveMessage, false);
-  reqPrefs();
+    var fhr = {},
+          cache_buster = Math.random();
+
+    $.getJSON('js/config.json?' + cache_buster, function(data) {
+        fhr = data.fhr;
+
+        if(fhr.debug === "true") {
+            var custom_event = {
+                data: {
+                    type: 'payload',
+                    content: ''
+                }
+            };
+            $.getJSON(fhr.jsonurl, function(data) {
+                // receiveMessage expects a string
+                custom_event.data.content = JSON.stringify(data);
+                receiveMessage(custom_event);
+            });
+        } else {
+            window.addEventListener("message", receiveMessage, false);
+            reqPrefs();
+        }
+    });
 }
 
 function receiveMessage(event) {
