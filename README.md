@@ -50,28 +50,30 @@ strings and add them to the .lang files.
 
 should do the trick.
 
-## Run individual functions against your own custom JSON
+## Enable Debug Mode
 
-To enable further debugging of individual functions of FHR you can use the roll your
-own JSON page. In order to use this, follow these steps:
+To render the FHR page using a custom JSON payload, follow these steps:
 
 1) Clone this repo:
 
     git clone git://github.com/mozilla/fhr-jelly.git
-    
+
 2) You need to run this on a simple web server. The easiest is to use the built in
 server that comes with Python. Add the following to your .bash_profile
 
     # usage
     # $ server
     alias server='python -m SimpleHTTPServer && open http://localhost:8000'
-    
-3) Change directory into the FHR clone and run:
 
-    server
+3) Open up js/config.json and change the debug property to true.
 
-4) Open up your browser and point it to http://localhost:8000/tests/custom/no_index.html.
-Paste your JSON and fire away!
+4) Nxt, open up json/payload.json and paste your custom JSON in here.
+
+5) Run generate:
+
+    ./generate.py --output-dir html -f
+
+6) Open up your browser and point it to http://about:healthreport
 
 ## License
 
