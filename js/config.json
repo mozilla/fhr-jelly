@@ -1,0 +1,6 @@
+{
+    "fhr": {
+        "debug": "false",
+        "jsonurl": "http://localhost:8000/en-US/json/payload.json"
+    }
+}
