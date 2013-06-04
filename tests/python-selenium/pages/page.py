@@ -24,9 +24,9 @@ class Page(object):
         self.timeout = testsetup.timeout
         self._selenium_root = hasattr(self, '_root_element') and self._root_element or self.selenium
 
-    def open(self, url_fragment):
+    def open(self):
         """Open the specified url_fragment, which is relative to the base_url, in the current window."""
-        self.selenium.get(self.base_url + url_fragment)
+        self.selenium.get(self.base_url)
         self.is_the_current_page
 
     @property

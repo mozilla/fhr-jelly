@@ -15,7 +15,7 @@ class HomePage(Base):
 
     def go_to_page(self):
         """Open the home page."""
-        self.open('/en-US')
+        self.open()
 
     def open_locale_fr(self):
         """Open home page for the fr locale"""
