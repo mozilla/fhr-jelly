@@ -88,27 +88,36 @@ $(function() {
     })();
 
     var drawGraph = function(median) {
-
         var graphData = getAllStartupTimes(median),
-            options = {
-                colors: ['#50B432'],
-                series: {
-                    points: {
-                        show: true,
-                        radius: 5
-                    }
-                },
-                xaxis: {
-                    mode: 'time',
-                    ticks: graphData.dateCount,
-                    show: true
-                }
-            },
-            graphContainer = $('.graph'),
-            graph = $.plot(graphContainer, [graphData.startupTimes], options);
+              graphContainer = $('.graph'),
+              currentLocale = $('html').attr('lang');
 
-        // We are drawing a graph so show the Y-label
-        $('.yaxis-label').show();
+        // We need to localize our month names so first load our localized data,
+        // then set the graph options and draw the graph.
+        $.getJSON('js/locale/date_format.json', function(data) {
+            var options = {
+                  colors: ['#50B432'],
+                  series: {
+                      points: {
+                          show: true,
+                          radius: 5
+                      }
+                  },
+                  xaxis: {
+                      mode: 'time',
+                      ticks: graphData.dateCount,
+                      monthNames: data[currentLocale].monthNameShort.split(','),
+                      show: true
+                  }
+              };
+
+              var graph = $.plot(graphContainer, [graphData.startupTimes], options);
+              // We are drawing a graph so show the Y-label
+              $('.yaxis-label').show();
+        }).fail(function(jqxhr, textStatus, error) {
+            var errorTxt = textStatus + '[' + error + ']';
+            graphContainer.text('The following error occurred while drawing the graph: ' + errorTxt);
+        });
     },
     clearSelectors = function(selector) {
         var graphSelectors = $(selector).find('li a');
