@@ -1,4 +1,5 @@
 *.pyc
 locale/
+!js/locale/
 html/
 tests/python-selenium/results/
