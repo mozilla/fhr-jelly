@@ -65,9 +65,11 @@ server that comes with Python. Add the following to your .bash_profile
     # $ server
     alias server='python -m SimpleHTTPServer && open http://localhost:8000'
 
-3) run cp js/config.js-local js/config.js
+From the command line run the following:
 
-4) run cp json/payload.json-local json/payload.json
+3) cp js/config.js-local js/config.js
+
+4) cp json/payload.json-local json/payload.json
 
 5) Open up js/config.json and change the debug property to true.
 
