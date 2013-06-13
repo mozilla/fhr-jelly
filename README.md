@@ -65,15 +65,21 @@ server that comes with Python. Add the following to your .bash_profile
     # $ server
     alias server='python -m SimpleHTTPServer && open http://localhost:8000'
 
-3) Open up js/config.json and change the debug property to true.
+From the command line run the following:
 
-4) Nxt, open up json/payload.json and paste your custom JSON in here.
+3) cp js/config.js-local js/config.js
 
-5) Run generate:
+4) cp json/payload.json-local json/payload.json
+
+5) Open up js/config.json and change the debug property to true.
+
+6) Nxt, open up json/payload.json and paste your custom JSON in here.
+
+7) Run generate:
 
     ./generate.py --output-dir html -f
 
-6) Open up your browser and point it to about:healthreport
+8) Open up your browser and point it to about:healthreport
 
 ## License
 
