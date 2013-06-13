@@ -128,7 +128,7 @@ This software is licensed under the [MPL] 2.0:
 [webqa]: http://quality.mozilla.org/teams/web-qa/
 [firefox]: http://quality.mozilla.org/teams/desktop-firefox/
 [webdriver]: http://seleniumhq.org/docs/03_webdriver.html
-[mozwebqa]:http://02.chat.mibbit.com/?server=irc.mozilla.org&channel=#mozwebqa
+[mozwebqa]:http://chat.mibbit.com/?server=irc.mozilla.org&channel=#mozwebqa
 [GitWin]: http://help.github.com/win-set-up-git/
 [GitMacOSX]: http://help.github.com/mac-set-up-git/
 [GitLinux]: http://help.github.com/linux-set-up-git/
