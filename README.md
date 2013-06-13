@@ -73,7 +73,7 @@ server that comes with Python. Add the following to your .bash_profile
 
     ./generate.py --output-dir html -f
 
-6) Open up your browser and point it to http://about:healthreport
+6) Open up your browser and point it to about:healthreport
 
 ## License
 
