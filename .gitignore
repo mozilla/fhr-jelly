@@ -2,4 +2,5 @@
 locale/
 !js/locale/
 html/
+node_modules/
 tests/python-selenium/results/

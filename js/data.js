@@ -8,14 +8,19 @@ var ONE_DAY = 1000 * 60 * 60 * 24,
     // Is this the first load for the document?
     isFirstLoad = true;
 
-// Converts the day passed to a Date object and checks
+// Converts the date passed [2013-06-13] to a Date object and checks
 // whether the current month is equal to the month of the
 // day argument passed.
 var isCurrentMonth = function(day) {
-    var currentMonth = new Date().getMonth() + 1,
-        thisDate = new Date(day).getMonth() + 1;
+    var currentYear = new Date().getYear(),
+          currentMonth = new Date().getMonth() + 1,
+          year = new Date(day).getYear(),
+          month = new Date(day).getMonth() + 1;
 
-    return thisDate === currentMonth ? true : false;
+    if(currentYear === year && currentMonth === month) {
+        return true;
+    }
+    return false;
 },
 // Gets all dates from the object, sort in the specified
 // oder and returns the new array.

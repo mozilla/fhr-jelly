@@ -1,3 +1,11 @@
+test('is-current-month', 2, function() {
+    var oldDate = '2012-06-13',
+          today = new Date();
+
+    equal(isCurrentMonth(oldDate), false, 'We were expecting false and got ' + isCurrentMonth(oldDate));
+    equal(isCurrentMonth(today), true, 'We were expecting true and got ' + isCurrentMonth(today));
+});
+
 asyncTest('bookmarks', function() {
     $.getJSON('/tests/json/single_session.json', function(payload) {
         var bookmarksCount = getBookmarksTotal(payload.data.days);
