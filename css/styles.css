@@ -54,8 +54,9 @@ h3 {
 .persistentHeader {
     position: relative;
     background-color: #f2f4f5;
+    padding-bottom: 15px;
     width: 100%;
-    height: 100px;
+    height: auto;
     box-shadow: 0 -1px 4px hsla(210,35%,8%,.03) inset,
                 0 -1px 0 hsla(210,35%,8%,.05) inset;
     z-index: 100;
@@ -167,9 +168,9 @@ h3 {
 .nav li a {
     display: inline-block;
     color: #5c6166;
-    padding: 20px 0;
+    padding: 10px 0;
     font-size: 24px;
-    line-height: .4rem;
+    line-height: 1.5rem;
     font-weight: lighter;
 }
 .nav li a.active {
