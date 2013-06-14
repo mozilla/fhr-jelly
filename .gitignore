@@ -4,5 +4,6 @@ locale/
 html/
 node_modules/
 tests/python-selenium/results/
+results/
 json/payload.json
 js/config.json

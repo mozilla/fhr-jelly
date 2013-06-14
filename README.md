@@ -71,15 +71,13 @@ From the command line run the following:
 
 4) cp json/payload.json-local json/payload.json
 
-5) Open up js/config.json and change the debug property to true.
+5) Next, open up json/payload.json and paste your custom JSON in here.
 
-6) Nxt, open up json/payload.json and paste your custom JSON in here.
-
-7) Run generate:
+6) Run generate:
 
     ./generate.py --output-dir html -f
 
-8) Open up your browser and point it to about:healthreport
+7) Open up your browser and point it to about:healthreport
 
 ## License
 

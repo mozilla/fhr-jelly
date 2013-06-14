@@ -3,6 +3,7 @@ var ONE_DAY = 1000 * 60 * 60 * 24,
     TWO_WEEKS = ONE_DAY * 14,
     THIRTY_DAYS_IN_SECONDS = 2592000,
     PAINT_TIME_THRESHOLD = 300000,
+    CONFIG_URL = 'js/config.json?',
     payload = null,
     prefs = null,
     // Is this the first load for the document?
@@ -21,6 +22,12 @@ var isCurrentMonth = function(day) {
         return true;
     }
     return false;
+},
+fileExists = function() {
+    var http = new XMLHttpRequest();
+    http.open('HEAD', CONFIG_URL, false);
+    http.send();
+    return http.status !== 404;
 },
 // Gets all dates from the object, sort in the specified
 // oder and returns the new array.
@@ -447,10 +454,11 @@ function init() {
     var fhr = {},
           cache_buster = Math.random();
 
-    $.getJSON('js/config.json?' + cache_buster, function(data) {
-        fhr = data.fhr;
+    // First ensure that the config.json file exists
+    if(fileExists()) {
+        $.getJSON(CONFIG_URL + cache_buster, function(data) {
+            fhr = data.fhr;
 
-        if(fhr.debug === "true") {
             var custom_event = {
                 data: {
                     type: 'payload',
@@ -462,11 +470,11 @@ function init() {
                 custom_event.data.content = JSON.stringify(data);
                 receiveMessage(custom_event);
             });
-        } else {
-            window.addEventListener("message", receiveMessage, false);
-            reqPrefs();
-        }
-    });
+        });
+    } else {
+        window.addEventListener("message", receiveMessage, false);
+        reqPrefs();
+    }
 }
 
 function receiveMessage(event) {
