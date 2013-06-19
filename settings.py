@@ -43,6 +43,7 @@ LANG_FALLBACK = {
     'ja-JP-mac' : 'ja',
     'mn'        : 'ru',
     'nn-NO'     : 'nb-NO',
+    'oc'        : 'fr',
     'sw'        : 'en-US',
     'ur'        : 'en-US',
     'wo'        : 'fr',
