@@ -44,7 +44,6 @@ LANG_FALLBACK = {
     'mn'        : 'ru',
     'nn-NO'     : 'nb-NO',
     'sw'        : 'en-US',
-    'ur'        : 'en-US',
     'wo'        : 'fr',
 }
 
