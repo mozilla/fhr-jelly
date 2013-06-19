@@ -23,7 +23,10 @@ var isCurrentMonth = function(day) {
     }
     return false;
 },
-fileExists = function() {
+// Returns true if the file exists else false
+// @configurl the URL for the file to check (optional)
+fileExists = function(configurl) {
+    CONFIG_URL = configurl ? configurl : CONFIG_URL;
     var http = new XMLHttpRequest();
     http.open('HEAD', CONFIG_URL, false);
     http.send();
