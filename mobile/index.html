@@ -1,12 +1,54 @@
 <!doctype html>
     <head>
-        <meta />
-        <title>FHR Android</title>
+        <meta charset="utf-8" />
+        <title>Firefox Health Report</title>
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" type="text/css" href="css/main.css" media="screen" />
     </head>
     <body>
-        <div id="raw">
+        <header>
+            <h1>Firefox Health Report</h1>
+            <p>Insights and performance about your browser. <a href="">Learn More</a></p>
+        </header>
+
+        <section id="dashboard">
+            <main role="main">
+                <div id="tips">
+                    <div class="tip" id="newfox">
+                        <header>
+                            <h4>Tip</h4>
+                        </header>
+                        <p><span aria-hidden="true" class="firefox_icon"></span>Looks like your Firefox is brand new! Check back after using Firefox for a while.</p>
+                    </div>
+                    <ul class="carousel_counter">
+                        <li><a href="#newfox" class="active">Tip 1</a></li>
+                        <li><a href="#newfox">Tip 2</a></li>
+                        <li><a href="#newfox">Tip 3</a></li>
+                        <li><a href="#newfox">Tip 4</a></li>
+                    </ul>
+                </div>
+
+                <h2>Important Metrics</h2>
+                <p>Firefox Health Report records information about your browser and device. You can see the information we record below. You can also see what you share with Mozilla.</p>
+                <h3>Configuration</h3>
+                <p>Device hardware, operating system, Firefox version.</p>
+                <h3>Customization</h3>
+                <p>Extensions, plugins, and number off installed add-ons.</p>
+                <h3>Performance</h3>
+                <p>Key performance measures, such as launch speed</p>
+                <h3>Wear and tear</h3>
+                <p>Browsing duration, install time, number of bookmarks and pages.</p>
+            </main>
+        </section>
+
+        <section id="raw">
             <pre></pre>
-        </div>
+        </section>
+
+        <footer>
+            <p>You are currently sharing your health report with Mozilla. <a href="">Choose what I share</a></p>
+        </footer>
+
         <script type="application/javascript;version=1.8" src="js/mobile.js"></script>
     </body>
 </html>
