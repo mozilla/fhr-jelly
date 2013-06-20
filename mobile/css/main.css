@@ -1,0 +1,122 @@
+@font-face {
+    font-family: 'icons';
+    src: url('../fonts/icons.eot');
+    src: url('../fonts/icons.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/icons.woff') format('woff'),
+         url('../fonts/icons.ttf') format('truetype'),
+         url('../fonts/icons.svg#icons') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, hr, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figure, figcaption, hgroup, menu, footer, header, nav, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+article, aside, canvas, figure, figure img, figcaption, footer, header, nav, section, audio, video {
+    display: block;
+}
+
+a img { border: 0; }
+
+/* apply a natural box layout model to all elements */
+* {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+body {
+  background-color: #fff;
+  color: #222;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font: 400 12px/18px 'Open Sans', sans-serif;
+}
+header {
+    background-color: #f1f4f6;
+    border-bottom: 1px solid #cfd9e1;
+    padding: 14px;
+}
+h1 {
+    padding-bottom: 14px;
+    color: #ff9400;
+    font-size: 1.6rem;
+    font-weight: 300;
+}
+h2 {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 2rem;
+}
+h3 {
+    color: #00acff;
+    margin-top: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 2rem;
+}
+a:link,
+a:visited {
+    color: #00acff;
+}
+main {
+    background-color: #fafbfc;
+    padding: 14px;
+    border-bottom: 1px solid #cfd9e1;
+}
+#raw {
+    display: none;
+}
+.tip {
+    width: 100%;
+    border-radius: 3px;
+    box-shadow: 1px 1px 4px rgb(215, 215, 215);
+}
+.tip header {
+    padding: 7px 7px 7px 14px;
+    font-size: 14px;
+    font-weight: 600;
+}
+.tip p {
+    position: relative;
+    padding: 14px 14px 14px 52px;
+}
+.firefox_icon {
+    position: absolute;
+    top: 35%;
+    left: 14px;
+    font-size: 29px;
+}
+footer {
+    padding: 14px;
+}
+/* Carousel */
+.carousel_counter {
+    margin: 14px auto 28px auto;
+    width: 75px;
+}
+.carousel_counter li {
+    display: inline;
+}
+.carousel_counter a {
+    display: inline-block;
+    background-color: #D0DBE1;
+    margin-right: 10px;
+    width: 6px;
+    height: 6px;
+    text-decoration: none;
+    text-indent: -9999em;
+}
+.carousel_counter a.active {
+    background-color: #00acff;
+}
+/* Icons */
+.firefox_icon:before {
+    color: #949494;
+    font-family: 'icons';
+    content: " \e800";
+}

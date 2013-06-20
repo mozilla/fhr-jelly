@@ -1,0 +1,13 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg">
+<metadata>Copyright (C) 2012 by original authors @ fontello.com</metadata>
+<defs>
+<font id="icons" horiz-adv-x="1000" >
+<font-face font-family="icons" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
+<missing-glyph horiz-adv-x="1000" />
+<glyph glyph-name="firefox" unicode="&#xe800;" d="M504-137c-216 0-387 126-466 306-88 200-18 521 139 663l-6-157c8 10 68 13 77 0 32 62 136 108 220 110-32-27-106-124-99-174 41-13 103-13 136-15 10-5 8-40-12-68-26-36-97-49-97-49l8-106-78 37c-25-63 35-120 98-109 69 12 93 57 142 54 48-3 67-29 61-55-8-30-60-25-60-25-44-70-102-100-197-92 144-119 338-11 387 86s6 242-43 283c58-25 99-51 119-107 11 125-46 267-149 350 193-56 311-206 314-445s-211-488-496-488z" horiz-adv-x="1000" />
+<glyph glyph-name="lock" unicode="&#xe801;" d="M393 279q0 30-21 50t-50 21-50-21-21-50q0-21 11-37t28-26l-39-128q-3-8 3-16t15-7l107 0q9 0 15 7t3 16l-39 128q18 9 28 26t11 37z m-214 143l286 0 0 107q0 59-42 101t-101 42-101-42-42-101l0-107z m464-54l0-321q0-22-16-38t-38-16l-536 0q-22 0-38 16t-16 38l0 321q0 22 16 38t38 16l18 0 0 107q0 103 74 176t176 74 176-74 74-176l0-107 18 0q22 0 38-16t16-38z" horiz-adv-x="642.857" />
+</font>
+</defs>
+</svg>
