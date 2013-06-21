@@ -62,6 +62,38 @@
             <main role="main">
                 <h2>Configuration</h2>
                 <p>Device hardware, operating system, Firefox version.</p>
+                <dl>
+                    <dt>cpuCount (environment):</dt>
+                    <dd id="cpu_count">The number of CPU cores reported by Android.</dd>
+                    <dt>memoryMB (environment):</dt>
+                    <dd id="memory">The mount of memory reported by Android. Typically excludes graphics memory.</dd>
+                    <dt>appName (environment):</dt>
+                    <dd id="app_name">The internal application name for the browser.</dd>
+                    <dt>appID (environment):</dt>
+                    <dd id="app_id">The internal identifier for the application.</dd>
+                    <dt>appVersion (environment):</dt>
+                    <dd id="app_version">The current version of the browser</dd>
+                    <dt>appBuildID (environment):</dt>
+                    <dd id="build_id">The internal build timestamp.</dd>
+                    <dt>updateChannel (environment):</dt>
+                    <dd class="update_channel">Firefox is distributed through channels: Nightly builds, the Aurora pre-release channel, a stable Beta, and the public release. This field identifies the channel.</dd>
+                    <dt>vendor (environment):</dt>
+                    <dd id="vendor">The organization that built this application. Typically "Mozilla".</dd>
+                    <dt>platformVersion (environment):</dt>
+                    <dd id="platform">An internal version identifier. Typically the same as appVersion.</dd>
+                    <dt>platformBuildID (environment):</dt>
+                    <dd id="platform_build_id">On Android this is an alternative name for appBuildID.</dd>
+                    <dt>xpcomabi (environment):</dt>
+                    <dd id="xpcomabi">The CPU architecture for which this application was built.</dd>
+                    <dt>os (environment):</dt>
+                    <dd>Android</dd>
+                    <dt>architecture (environment):</dt>
+                    <dd id="environment">The CPU architecture for this device.</dd>
+                    <dt>sysName (environment):</dt>
+                    <dd>Android</dd>
+                    <dt>sysVersion (environment):</dt>
+                    <dd id="android_version">The Android OS revision.</dd>
+                </dl>
             </main>
         </section>
 

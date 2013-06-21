@@ -64,6 +64,15 @@ a:visited {
     color: #00acff;
     text-decoration: none;
 }
+dl {
+    margin-top: 14px;
+}
+dt {
+    font-weight: 600;
+}
+dd {
+    margin-bottom: 14px;
+}
 main {
     background-color: #fafbfc;
     padding: 14px;
