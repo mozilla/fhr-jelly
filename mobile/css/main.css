@@ -44,7 +44,7 @@ header {
 h1 {
     padding-bottom: 14px;
     color: #ff9400;
-    font-size: 1.6rem;
+    font-size: 28px;
     font-weight: 300;
 }
 h2 {
@@ -62,14 +62,12 @@ h3 {
 a:link,
 a:visited {
     color: #00acff;
+    text-decoration: none;
 }
 main {
     background-color: #fafbfc;
     padding: 14px;
     border-bottom: 1px solid #cfd9e1;
-}
-#raw {
-    display: none;
 }
 .tip {
     width: 100%;
@@ -111,7 +109,7 @@ footer {
     text-decoration: none;
     text-indent: -9999em;
 }
-.carousel_counter a.active {
+.carousel_counter .active {
     background-color: #00acff;
 }
 /* Icons */
@@ -119,4 +117,31 @@ footer {
     color: #949494;
     font-family: 'icons';
     content: " \e800";
+}
+/* Panel States */
+.inactive {
+    position: relative;
+    left: -760px;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: left 400ms,
+                width 400ms,
+                opacity 400ms;
+}
+.active {
+    left: 0;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+    opacity: 1;
+}
+/* Breadcrumbs */
+.breadcrumbs {
+    margin: 14px 0 0 14px;
+    padding: 0;
+}
+.breadcrumbs li {
+    display: inline;
 }

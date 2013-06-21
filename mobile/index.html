@@ -1,6 +1,8 @@
 <!doctype html>
     <head>
         <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="cleartype" content="on">
         <title>Firefox Health Report</title>
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" type="text/css" href="css/main.css" media="screen" />
@@ -11,7 +13,7 @@
             <p>Insights and performance about your browser. <a href="">Learn More</a></p>
         </header>
 
-        <section id="dashboard">
+        <section id="dashboard" class="panel active">
             <main role="main">
                 <div id="tips">
                     <div class="tip" id="newfox">
@@ -29,8 +31,8 @@
                 </div>
 
                 <h2>Important Metrics</h2>
-                <p>Firefox Health Report records information about your browser and device. You can see the information we record below. You can also see what you share with Mozilla.</p>
-                <h3>Configuration</h3>
+                <p>Firefox Health Report records information about your browser and device. You can <a href="#raw" class="navigate">see the information we record</a>. You can also see what you share with Mozilla.</p>
+                <h3><a href="#configuration" class="navigate">Configuration</a></h3>
                 <p>Device hardware, operating system, Firefox version.</p>
                 <h3>Customization</h3>
                 <p>Extensions, plugins, and number off installed add-ons.</p>
@@ -41,14 +43,33 @@
             </main>
         </section>
 
-        <section id="raw">
-            <pre></pre>
+        <section id="raw" class="panel inactive">
+            <ul class="breadcrumbs">
+                <li><a href="#dashboard" class="navigate">HOME</a> &raquo;</li>
+                <li>RAW DATA</li>
+            </ul>
+            <main role="main">
+                <h2>Raw Data</h2>
+                <pre></pre>
+            </main>
+        </section>
+
+        <section id="configuration" class="panel inactive">
+            <ul class="breadcrumbs">
+                <li><a href="#dashboard" class="navigate">HOME</a> &raquo;</li>
+                <li>CONFIGURATION</li>
+            </ul>
+            <main role="main">
+                <h2>Configuration</h2>
+                <p>Device hardware, operating system, Firefox version.</p>
+            </main>
         </section>
 
         <footer>
             <p>You are currently sharing your health report with Mozilla. <a href="">Choose what I share</a></p>
         </footer>
 
+         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script type="application/javascript;version=1.8" src="js/mobile.js"></script>
     </body>
 </html>
