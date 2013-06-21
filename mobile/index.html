@@ -10,7 +10,7 @@
     <body>
         <header>
             <h1>Firefox Health Report</h1>
-            <p>Insights and performance about your browser. <a href="">Learn More</a></p>
+            <p>Insights and performance about your browser. <a href="#learnmore" class="navigate">Learn More</a></p>
         </header>
 
         <section id="dashboard" class="panel active">
@@ -36,9 +36,9 @@
                 <p>Device hardware, operating system, Firefox version.</p>
                 <h3><a href="#customization" class="navigate">Customization</a></h3>
                 <p>Extensions, plugins, and number off installed add-ons.</p>
-                <h3>Performance</h3>
+                <h3><a href="#performance" class="navigate">Performance</a></h3>
                 <p>Key performance measures, such as launch speed</p>
-                <h3>Wear and tear</h3>
+                <h3><a href="#weartear" class="navigate">Wear and tear</a></h3>
                 <p>Browsing duration, install time, number of bookmarks and pages.</p>
             </main>
         </section>
@@ -117,6 +117,49 @@
                     <dt>addons:</dt>
                     <dd id="addons">A collection describing the installed add-ons. Not all add-ons are reported: only plugins, extensions, and services.</dd>
                 </dl>
+            </main>
+        </section>
+
+        <section id="performance" class="panel inactive">
+            <ul class="breadcrumbs">
+                <li><a href="#dashboard" class="navigate">HOME</a> &raquo;</li>
+                <li>PERFORMANCE</li>
+            </ul>
+            <main role="main">
+                <h2>Performance</h2>
+                <p>Key performance measures, such as launch speed</p>
+                <dl>
+                    <dt>Search Counts:</dt>
+                    <dd id="search_count">A count of how many searches you issued to each of Mozilla's partner providers.</dd>
+                    <dt>Sessions and Startup Times</dt>
+                    <dd id="sessions_startup_time">For each browsing session, Firefox Health Report records approximately how long you browsed (in seconds), and whether the session ended normally or because of a crash. Also includes startup times (in milliseconds) if available.</dd>
+                </dl>
+            </main>
+        </section>
+
+        <section id="weartear" class="panel inactive">
+            <ul class="breadcrumbs">
+                <li><a href="#dashboard" class="navigate">HOME</a> &raquo;</li>
+                <li>WEAR AND TEAR</li>
+            </ul>
+            <main role="main">
+                <h2>Wear and Tear</h2>
+                <p>Key performance measures, such as launch speed</p>
+                <dl>
+                    <dt>Profile Creation:</dt>
+                    <dd id="profile_creation">The day on which your browser profile was created. Counted in days since January 1st 1970.</dd>
+                </dl>
+            </main>
+        </section>
+
+        <section id="learnmore" class="panel inactive">
+            <ul class="breadcrumbs">
+                <li><a href="#dashboard" class="navigate">HOME</a> &raquo;</li>
+                <li>LEARN MORE</li>
+            </ul>
+            <main role="main">
+                <p>Firefox Health Report (FHR) analyses your browser's performance information, in order to provide you with useful tips that help you get the best from Firefox. For more information on Firefox Health Report, visit the Mozilla Support section.</p>
+                <p>For more information about how we handle your data, see our privacy policy.</p>
             </main>
         </section>
 
