@@ -1,0 +1,167 @@
+{
+  "data": {
+    "last": {},
+    "days": {
+      "2013-06-21": {
+        "S0wGHkU4PpuwWL2tQ6V9uN7+wcc=": {
+          "org.mozilla.appSessions": {
+            "normal": [
+              {
+                "r": "P",
+                "d": 15
+              },
+              {
+                "r": "P",
+                "d": 102
+              },
+              {
+                "r": "P",
+                "d": 0
+              },
+              {
+                "r": "P",
+                "d": 98
+              },
+              {
+                "r": "P",
+                "d": 15
+              },
+              {
+                "r": "P",
+                "sg": 3810,
+                "d": 112,
+                "sj": 807
+              },
+              {
+                "r": "P",
+                "d": 62
+              },
+              {
+                "r": "P",
+                "d": 11
+              },
+              {
+                "r": "P",
+                "d": 30
+              },
+              {
+                "r": "P",
+                "d": 60
+              },
+              {
+                "r": "P",
+                "d": 110
+              },
+              {
+                "r": "P",
+                "d": 6
+              },
+              {
+                "r": "P",
+                "d": 54
+              },
+              {
+                "r": "P",
+                "d": 60
+              },
+              {
+                "r": "P",
+                "d": 60
+              }
+            ],
+            "_v": "4"
+          }
+        }
+      },
+      "2013-06-23": {
+        "S0wGHkU4PpuwWL2tQ6V9uN7+wcc=": {
+          "org.mozilla.appSessions": {
+            "normal": [
+              {
+                "r": "P",
+                "sg": 5821,
+                "d": 6,
+                "sj": 1145
+              },
+              {
+                "r": "P",
+                "d": 28
+              },
+              {
+                "r": "P",
+                "d": 129
+              },
+              {
+                "r": "P",
+                "d": 21
+              },
+              {
+                "r": "P",
+                "d": 72
+              },
+              {
+                "r": "P",
+                "d": 5
+              },
+              {
+                "r": "P",
+                "d": 186
+              },
+              {
+                "r": "P",
+                "d": 2
+              }
+            ],
+            "_v": "4"
+          }
+        }
+      }
+    }
+  },
+  "environments": {
+    "current": {
+      "org.mozilla.sysinfo.sysinfo": {
+        "memoryMB": 343,
+        "cpuCount": 1,
+        "architecture": "armeabi-v7a",
+        "_v": 1,
+        "version": "4.1.1",
+        "name": "Android"
+      },
+      "org.mozilla.profile.age": {
+        "_v": 1,
+        "profileCreation": 15877
+      },
+      "org.mozilla.addons.active": {
+        "_v": 1
+      },
+      "org.mozilla.appInfo.appinfo": {
+        "isTelemetryEnabled": 1,
+        "_v": 2,
+        "isBlocklistEnabled": 1
+      },
+      "geckoAppInfo": {
+        "updateChannel": "nightly",
+        "id": "{aa3c5121-dab2-40e2-81ca-7ea25febc110}",
+        "os": "Android",
+        "platformBuildID": "20130621031051",
+        "platformVersion": "24.0a1",
+        "vendor": "Mozilla",
+        "name": "fennec",
+        "xpcomabi": "arm-eabi-gcc3",
+        "appBuildID": "20130621031051",
+        "_v": 1,
+        "version": "24.0a1"
+      },
+      "hash": "S0wGHkU4PpuwWL2tQ6V9uN7+wcc=",
+      "org.mozilla.addons.counts": {
+        "extension": 0,
+        "plugin": 0,
+        "_v": 1,
+        "theme": 0
+      }
+    }
+  },
+  "thisPingDate": "2013-06-23",
+  "version": 3
+}
