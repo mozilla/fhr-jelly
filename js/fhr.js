@@ -151,10 +151,6 @@ $(function() {
     function showTipboxes(payload) {
         clearTimeout(waitr);
 
-        if(payload.data.last['org.mozilla.appInfo.appinfo'].locale === 'en-US') {
-            $('#survey').show();
-        }
-
         // User has a crashy browser
         if(getTotalNumberOfCrashes('week') > 5) {
             $('#crashyfox').show('slow');
