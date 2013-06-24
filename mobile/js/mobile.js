@@ -16,6 +16,11 @@ window.onload = function() {
         setActivePanel($(this).attr('href'));
     });
 
+    $("#showsettings").on('click', function(event) {
+        event.preventDefault();
+        showSettings();
+    });
+
     function init() {
       window.addEventListener('message', receiveMessage, false);
     }
@@ -45,6 +50,10 @@ window.onload = function() {
 
     function requestPayload() {
       sendToBrowser('RequestCurrentPayload');
+    }
+
+    function showSettings() {
+      sendToBrowser('ShowSettings');
     }
 
     function sendToBrowser(type) {
