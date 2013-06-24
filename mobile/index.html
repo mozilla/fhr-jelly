@@ -1,6 +1,8 @@
 <!doctype html>
     <head>
         <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="cleartype" content="on">
         <title>Firefox Health Report</title>
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" type="text/css" href="css/main.css" media="screen" />
@@ -8,10 +10,10 @@
     <body>
         <header>
             <h1>Firefox Health Report</h1>
-            <p>Insights and performance about your browser. <a href="">Learn More</a></p>
+            <p>Insights and performance about your browser. <a href="#learnmore" class="navigate">Learn More</a></p>
         </header>
 
-        <section id="dashboard">
+        <section id="dashboard" class="panel active">
             <main role="main">
                 <div id="tips">
                     <div class="tip" id="newfox">
@@ -29,26 +31,143 @@
                 </div>
 
                 <h2>Important Metrics</h2>
-                <p>Firefox Health Report records information about your browser and device. You can see the information we record below. You can also see what you share with Mozilla.</p>
-                <h3>Configuration</h3>
+                <p>Firefox Health Report records information about your browser and device. You can <a href="#raw" class="navigate">see the information we record</a>. You can also see what you share with Mozilla.</p>
+                <h3><a href="#configuration" class="navigate">Configuration</a></h3>
                 <p>Device hardware, operating system, Firefox version.</p>
-                <h3>Customization</h3>
+                <h3><a href="#customization" class="navigate">Customization</a></h3>
                 <p>Extensions, plugins, and number off installed add-ons.</p>
-                <h3>Performance</h3>
+                <h3><a href="#performance" class="navigate">Performance</a></h3>
                 <p>Key performance measures, such as launch speed</p>
-                <h3>Wear and tear</h3>
+                <h3><a href="#weartear" class="navigate">Wear and tear</a></h3>
                 <p>Browsing duration, install time, number of bookmarks and pages.</p>
             </main>
         </section>
 
-        <section id="raw">
-            <pre></pre>
+        <section id="raw" class="panel inactive">
+            <ul class="breadcrumbs">
+                <li><a href="#dashboard" class="navigate">HOME</a> &raquo;</li>
+                <li>RAW DATA</li>
+            </ul>
+            <main role="main">
+                <h2>Raw Data</h2>
+                <pre></pre>
+            </main>
+        </section>
+
+        <section id="configuration" class="panel inactive">
+            <ul class="breadcrumbs">
+                <li><a href="#dashboard" class="navigate">HOME</a> &raquo;</li>
+                <li>CONFIGURATION</li>
+            </ul>
+            <main role="main">
+                <h2>Configuration</h2>
+                <p>Device hardware, operating system, Firefox version.</p>
+                <dl>
+                    <dt>cpuCount:</dt>
+                    <dd id="cpu_count">The number of CPU cores reported by Android.</dd>
+                    <dt>memoryMB:</dt>
+                    <dd id="memory">The mount of memory reported by Android. Typically excludes graphics memory.</dd>
+                    <dt>appName:</dt>
+                    <dd id="app_name">The internal application name for the browser.</dd>
+                    <dt>appID:</dt>
+                    <dd id="app_id">The internal identifier for the application.</dd>
+                    <dt>appVersion:</dt>
+                    <dd id="app_version">The current version of the browser</dd>
+                    <dt>appBuildID:</dt>
+                    <dd id="build_id">The internal build timestamp.</dd>
+                    <dt>updateChannel:</dt>
+                    <dd class="update_channel">Firefox is distributed through channels: Nightly builds, the Aurora pre-release channel, a stable Beta, and the public release. This field identifies the channel.</dd>
+                    <dt>vendor:</dt>
+                    <dd id="vendor">The organization that built this application. Typically "Mozilla".</dd>
+                    <dt>platformVersion:</dt>
+                    <dd id="platform">An internal version identifier. Typically the same as appVersion.</dd>
+                    <dt>platformBuildID:</dt>
+                    <dd id="platform_build_id">On Android this is an alternative name for appBuildID.</dd>
+                    <dt>xpcomabi:</dt>
+                    <dd id="xpcomabi">The CPU architecture for which this application was built.</dd>
+                    <dt>os:</dt>
+                    <dd>Android</dd>
+                    <dt>architecture:</dt>
+                    <dd id="environment">The CPU architecture for this device.</dd>
+                    <dt>sysName:</dt>
+                    <dd>Android</dd>
+                    <dt>sysVersion:</dt>
+                    <dd id="android_version">The Android OS revision.</dd>
+                </dl>
+            </main>
+        </section>
+
+        <section id="customization" class="panel inactive">
+            <ul class="breadcrumbs">
+                <li><a href="#dashboard" class="navigate">HOME</a> &raquo;</li>
+                <li>CUSTOMIZATION</li>
+            </ul>
+            <main role="main">
+                <h2>Customization</h2>
+                <p>Whether Firefox fetches add-on blocklist results to protect you against malicious add-ons. Defaults to on.</p>
+                <dl>
+                    <dt>isTelemetryEnabled:</dt>
+                    <dd id="telemetry">Whether Firefox reports detailed usage data to help with development. Defaults to off for most channels.</dd>
+                    <dt>extensionCount:</dt>
+                    <dd id="extension_count">How many extension add-ons are installed.</dd>
+                    <dt>pluginCount:</dt>
+                    <dd>How many plugin add-ons are installed.</dd>
+                    <dt>themeCount:</dt>
+                    <dd id="themes">How many theme add-ons are installed.</dd>
+                    <dt>addons:</dt>
+                    <dd id="addons">A collection describing the installed add-ons. Not all add-ons are reported: only plugins, extensions, and services.</dd>
+                </dl>
+            </main>
+        </section>
+
+        <section id="performance" class="panel inactive">
+            <ul class="breadcrumbs">
+                <li><a href="#dashboard" class="navigate">HOME</a> &raquo;</li>
+                <li>PERFORMANCE</li>
+            </ul>
+            <main role="main">
+                <h2>Performance</h2>
+                <p>Key performance measures, such as launch speed</p>
+                <dl>
+                    <dt>Search Counts:</dt>
+                    <dd id="search_count">A count of how many searches you issued to each of Mozilla's partner providers.</dd>
+                    <dt>Sessions and Startup Times</dt>
+                    <dd id="sessions_startup_time">For each browsing session, Firefox Health Report records approximately how long you browsed (in seconds), and whether the session ended normally or because of a crash. Also includes startup times (in milliseconds) if available.</dd>
+                </dl>
+            </main>
+        </section>
+
+        <section id="weartear" class="panel inactive">
+            <ul class="breadcrumbs">
+                <li><a href="#dashboard" class="navigate">HOME</a> &raquo;</li>
+                <li>WEAR AND TEAR</li>
+            </ul>
+            <main role="main">
+                <h2>Wear and Tear</h2>
+                <p>Key performance measures, such as launch speed</p>
+                <dl>
+                    <dt>Profile Creation:</dt>
+                    <dd id="profile_creation">The day on which your browser profile was created. Counted in days since January 1st 1970.</dd>
+                </dl>
+            </main>
+        </section>
+
+        <section id="learnmore" class="panel inactive">
+            <ul class="breadcrumbs">
+                <li><a href="#dashboard" class="navigate">HOME</a> &raquo;</li>
+                <li>LEARN MORE</li>
+            </ul>
+            <main role="main">
+                <p>Firefox Health Report (FHR) analyses your browser's performance information, in order to provide you with useful tips that help you get the best from Firefox. For more information on Firefox Health Report, visit the Mozilla Support section.</p>
+                <p>For more information about how we handle your data, see our privacy policy.</p>
+            </main>
         </section>
 
         <footer>
             <p>You are currently sharing your health report with Mozilla. <a href="">Choose what I share</a></p>
         </footer>
 
+         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script type="application/javascript;version=1.8" src="js/mobile.js"></script>
     </body>
 </html>
