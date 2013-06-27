@@ -1,6 +1,8 @@
 window.onload = function() {
 
-    var panels = $('.panel');
+    var panels = $('.panel'),
+          payload = null,
+          prefs = null;
 
     function setActivePanel(panelId) {
         panels.each(function() {
@@ -26,6 +28,9 @@ window.onload = function() {
     }
 
     function receiveMessage(event) {
+        var enabled = $('#enabled'),
+              disabled = $('#disabled');
+
         switch (event.data.type) {
         case 'begin':
           // The wrapper page is ready to receive our messages.
@@ -34,7 +39,16 @@ window.onload = function() {
           break;
 
         case 'prefs':
-          // Great. Eventually we'll show appropriate UI.
+          prefs = event.data.content;
+
+          // Toggle footer message based on prefs state
+          if(prefs.enabled) {
+              enabled.show();
+              disabled.hide();
+          } else {
+              disabled.show();
+              enabled.hide();
+          }
           break;
 
         case 'payload':

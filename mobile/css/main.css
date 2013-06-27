@@ -154,3 +154,6 @@ footer {
 .breadcrumbs li {
     display: inline;
 }
+.share_status {
+    display: none;
+}
