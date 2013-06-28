@@ -1,5 +1,7 @@
 # Firefox Health Report - Jelly
 
+[![Build Status](https://travis-ci.org/mozilla/fhr-jelly.png?branch=master)](https://travis-ci.org/mozilla/fhr-jelly)
+
 This is a very simple static website generator for the content ("jelly") that will be injected
 into the about:healthreport page.
 
