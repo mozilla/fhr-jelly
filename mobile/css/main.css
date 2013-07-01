@@ -73,10 +73,13 @@ dt {
 dd {
     margin-bottom: 14px;
 }
-main {
+.main {
     background-color: #fafbfc;
     padding: 14px;
     border-bottom: 1px solid #cfd9e1;
+}
+.main p {
+    margin-bottom: 10px;
 }
 .tip {
     width: 100%;
@@ -98,13 +101,23 @@ main {
     left: 14px;
     font-size: 29px;
 }
+.external_icon {
+    padding-right: .3rem;
+}
+.eye_icon,
+.eye_off_icon {
+    padding: 0 5px 0 0;
+    font-size: 24px;
+    vertical-align: middle;
+}
 footer {
     padding: 14px;
 }
 /* Carousel */
 .carousel_counter {
     margin: 14px auto 28px auto;
-    width: 75px;
+    width: 100%;
+    text-align: center;
 }
 .carousel_counter li {
     display: inline;
@@ -125,7 +138,22 @@ footer {
 .firefox_icon:before {
     color: #949494;
     font-family: 'icons';
-    content: " \e800";
+    content: " \e840";
+}
+.external_icon:before {
+    color: #949494;
+    font-family: 'icons';
+    content: " \f08e";
+}
+.eye_icon:before {
+    color: rgb(129, 188, 46);
+    font-family: 'icons';
+    content: " \e09d";
+}
+.eye_off_icon:before {
+    color: #949494;
+    font-family: 'icons';
+    content: " \e102";
 }
 /* Panel States */
 .inactive {
