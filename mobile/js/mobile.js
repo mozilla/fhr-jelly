@@ -23,6 +23,31 @@ window.onload = function() {
         showSettings();
     });
 
+    function populateData(data) {
+        var sysInfo = data.environments.current['org.mozilla.sysinfo.sysinfo'],
+              geckoAppInfo = data.environments.current['geckoAppInfo'],
+              appInfo = data.environments.current['org.mozilla.appInfo.appinfo'],
+              addonsCount = data.environments.current['org.mozilla.addons.counts'];
+
+        $('#cpu_count > span').text(sysInfo.cpuCount);
+        $('#memory > span').text(sysInfo.memoryMB + ' MB');
+        $('#app_name > span').text(geckoAppInfo.name);
+        $('#app_id > span').text(geckoAppInfo.id);
+        $('#app_version > span').text(geckoAppInfo.version);
+        $('#build_id > span').text(geckoAppInfo.appBuildID);
+        $('#update_channel > span').text(geckoAppInfo.updateChannel);
+        $('#vendor > span').text(geckoAppInfo.vendor);
+        $('#platform > span').text(geckoAppInfo.platformVersion);
+        $('#platform_build_id > span').text(geckoAppInfo.platformBuildID);
+        $('#xpcomabi > span').text(geckoAppInfo.xpcomabi);
+        $('#environment > span').text(sysInfo.architecture);
+        $('#android_version > span').text(sysInfo.version);
+        $('#telemetry > span').text(appInfo.isTelemetryEnabled === 1 ? 'true' : 'false');
+        $('#extension_count > span').text(addonsCount.extension);
+        $('#plugin_count > span').text(addonsCount.plugin);
+        $('#themes > span').text(addonsCount.theme);
+    }
+
     function init() {
       window.addEventListener('message', receiveMessage, false);
     }
@@ -54,6 +79,7 @@ window.onload = function() {
         case 'payload':
           payload = JSON.parse(event.data.content);
           document.querySelector('#raw pre').textContent = JSON.stringify(payload, null, 2);
+          populateData(payload);
           break;
         }
     }

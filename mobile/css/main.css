@@ -110,6 +110,13 @@ dd {
     font-size: 24px;
     vertical-align: middle;
 }
+.data_container span {
+    display: block;
+    float: right;
+    margin-right: 10px;
+    font-size: 14px;
+    font-weight: 600;
+}
 footer {
     padding: 14px;
 }
