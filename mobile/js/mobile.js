@@ -1,15 +1,25 @@
 window.onload = function() {
 
     var panels = $('.panel'),
-          payload = null,
-          prefs = null;
+        payload = null,
+        prefs = null;
+
+    // As we navigate between panels, for panels local to
+    // the health report, we manage history using URL
+    // hashes and listening for hashchanges.
+    window.addEventListener('hashchange', function() {
+        setActivePanel(window.location.hash);
+    });
 
     function setActivePanel(panelId) {
         panels.each(function() {
             $(this).removeClass('active')
-                      .addClass('inactive');
+                   .addClass('inactive');
         });
 
+        // Add panelId as hash to URL, this ensures we have
+        // history entries to navigate between the local panels.
+        window.location.hash = panelId;
         $(panelId).addClass('active');
     }
 
