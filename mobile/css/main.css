@@ -93,13 +93,10 @@ dd {
 }
 .tip p {
     position: relative;
-    padding: 14px 14px 14px 52px;
+    padding: 18px 14px 18px 62px;
 }
 .firefox_icon {
-    position: absolute;
-    top: 35%;
-    left: 14px;
-    font-size: 29px;
+    background: transparent url(../img/icon_firefox.png) 15px 45% no-repeat;
 }
 .external_icon {
     padding-right: .3rem;
@@ -135,11 +132,6 @@ footer {
     background-color: #00acff;
 }
 /* Icons */
-.firefox_icon:before {
-    color: #949494;
-    font-family: 'icons';
-    content: " \e840";
-}
 .external_icon:before {
     color: #949494;
     font-family: 'icons';
