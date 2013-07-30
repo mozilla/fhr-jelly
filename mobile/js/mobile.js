@@ -2,7 +2,37 @@ window.onload = function() {
 
     var panels = $('.panel'),
         payload = null,
-        prefs = null;
+        prefs = null,
+        tips = document.querySelectorAll('li.enabled');
+
+    // Tip Carousel
+    // If we have more than one tip run the code,
+    // else do nothing
+    if(tips.length > 1) {
+      var loopr = 0,
+          counter = 0,
+          tipsLength = tips.length;
+
+      function showActiveTip(activeTip) {
+          // hide all tips.
+          for(tip in tips) {
+              if(tips.hasOwnProperty(tip)) {
+                  tips[tip].style.display = "none";
+              }
+          }
+          // Make the current tip visible
+          activeTip.style.display = "block";
+      }
+
+      (function rotateTips() {
+          var currentTip = counter < tipsLength ? counter : counter = 0;
+
+          showActiveTip(tips[counter]);
+          counter += 1;
+
+          loopr = setTimeout(rotateTips, 5000);
+      })();
+    }
 
     // As we navigate between panels, for panels local to
     // the health report, we manage history using URL

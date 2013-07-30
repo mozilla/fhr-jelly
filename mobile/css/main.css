@@ -81,20 +81,6 @@ dd {
 .main p {
     margin-bottom: 10px;
 }
-.tip {
-    width: 100%;
-    border-radius: 3px;
-    box-shadow: 1px 1px 4px rgb(215, 215, 215);
-}
-.tip header {
-    padding: 7px 7px 7px 14px;
-    font-size: 14px;
-    font-weight: 600;
-}
-.tip p {
-    position: relative;
-    padding: 18px 14px 18px 62px;
-}
 .firefox_icon {
     background: transparent url(../img/icon_firefox.png) 15px 45% no-repeat;
 }
@@ -110,26 +96,28 @@ dd {
 footer {
     padding: 14px;
 }
-/* Carousel */
-.carousel_counter {
-    margin: 14px auto 28px auto;
+.tip {
     width: 100%;
-    text-align: center;
+    border-radius: 3px;
+    box-shadow: 1px 1px 4px rgb(215, 215, 215);
 }
-.carousel_counter li {
-    display: inline;
+.tip h4 {
+    background-color: #999;
+    color: #fff;
+    padding: 7px 7px 7px 14px;
+    font-size: 14px;
+    font-weight: 600;
 }
-.carousel_counter a {
-    display: inline-block;
-    background-color: #D0DBE1;
-    margin-right: 10px;
-    width: 6px;
-    height: 6px;
-    text-decoration: none;
-    text-indent: -9999em;
+.tip p {
+    position: relative;
+    padding: 18px 14px 18px 62px;
 }
-.carousel_counter .active {
-    background-color: #00acff;
+/* Carousel */
+.carousel li {
+    display: none;
+}
+li.active_tip {
+    display: block;
 }
 /* Icons */
 .external_icon:before {
