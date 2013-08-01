@@ -64,6 +64,10 @@ a:visited {
     color: #00acff;
     text-decoration: none;
 }
+h1 a:link,
+h1 a:visited {
+    color: #ff9400;
+}
 dl {
     margin-top: 14px;
 }
