@@ -113,9 +113,10 @@ footer {
     box-shadow: 1px 1px 4px rgb(215, 215, 215);
 }
 .tip h4 {
-    background-color: #999;
-    color: #fff;
+    background-color: #f1f4f6;
+    color: #000;
     padding: 7px 7px 7px 14px;
+    border-bottom: 1px solid #cfd9e1;
     font-size: 14px;
     font-weight: 600;
 }
