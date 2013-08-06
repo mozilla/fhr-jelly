@@ -23,15 +23,6 @@ var isCurrentMonth = function(day) {
     }
     return false;
 },
-// Returns true if the file exists else false
-// @configurl the URL for the file to check (optional)
-fileExists = function(configurl) {
-    CONFIG_URL = configurl ? configurl : CONFIG_URL;
-    var http = new XMLHttpRequest();
-    http.open('HEAD', CONFIG_URL, false);
-    http.send();
-    return http.status !== 404;
-},
 // Gets all dates from the object, sort in the specified
 // oder and returns the new array.
 sortDates = function(days, descending) {
@@ -457,10 +448,10 @@ function init() {
     var fhr = {},
           cache_buster = Math.random();
 
-    // First ensure that the config.json file exists
-    if(fileExists()) {
-        $.getJSON(CONFIG_URL + cache_buster, function(data) {
-            fhr = data.fhr;
+    $.getJSON(CONFIG_URL + cache_buster, function(data) {
+        fhr = data.fhr;
+
+        if(fhr.debug == 'true') {
 
             var custom_event = {
                 data: {
@@ -468,16 +459,17 @@ function init() {
                     content: ''
                 }
             };
+
             $.getJSON(fhr.jsonurl, function(data) {
                 // receiveMessage expects a string
                 custom_event.data.content = JSON.stringify(data);
                 receiveMessage(custom_event);
             });
-        });
-    } else {
-        window.addEventListener("message", receiveMessage, false);
-        reqPrefs();
-    }
+        } else {
+            window.addEventListener("message", receiveMessage, false);
+            reqPrefs();
+        }
+    });
 }
 
 function receiveMessage(event) {
