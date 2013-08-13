@@ -1,11 +1,23 @@
+/* jshint jquery: true, devel: true */
 window.onload = function() {
-
+    'use strict';
     var panels = $('.panel'),
         payload = null,
         prefs = null,
         tips = document.querySelectorAll('li.enabled');
 
     // Tip Carousel
+    function showActiveTip(activeTip) {
+        // hide all tips.
+        for(var tip in tips) {
+          if(tips.hasOwnProperty(tip)) {
+              tips[tip].style.display = 'none';
+          }
+        }
+        // Make the current tip visible
+        activeTip.style.display = 'block';
+    }
+
     // If we have more than one tip run the code,
     // else do nothing
     if(tips.length > 1) {
@@ -13,21 +25,10 @@ window.onload = function() {
           counter = 0,
           tipsLength = tips.length;
 
-      function showActiveTip(activeTip) {
-          // hide all tips.
-          for(tip in tips) {
-              if(tips.hasOwnProperty(tip)) {
-                  tips[tip].style.display = "none";
-              }
-          }
-          // Make the current tip visible
-          activeTip.style.display = "block";
-      }
-
       (function rotateTips() {
           var currentTip = counter < tipsLength ? counter : counter = 0;
 
-          showActiveTip(tips[counter]);
+          showActiveTip(tips[currentTip]);
           counter += 1;
 
           loopr = setTimeout(rotateTips, 5000);
@@ -65,7 +66,7 @@ window.onload = function() {
 
     function populateData(data) {
         var sysInfo = data.environments.current['org.mozilla.sysinfo.sysinfo'],
-              geckoAppInfo = data.environments.current['geckoAppInfo'],
+              geckoAppInfo = data.environments.current.geckoAppInfo,
               appInfo = data.environments.current['org.mozilla.appInfo.appinfo'],
               addonsCount = data.environments.current['org.mozilla.addons.counts'];
 
@@ -138,8 +139,8 @@ window.onload = function() {
 
     function sendToBrowser(type) {
       try {
-        let event = new CustomEvent('RemoteHealthReportCommand', {detail: {command: type}});
-        document.dispatchEvent(event);
+        let fhrEvent = new CustomEvent('RemoteHealthReportCommand', {detail: {command: type}});
+        document.dispatchEvent(fhrEvent);
       } catch(e) {
         console.log('Caught exception: ' + e);
       }
