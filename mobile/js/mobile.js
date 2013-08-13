@@ -58,7 +58,7 @@ window.onload = function() {
         setActivePanel($(this).attr('href'));
     });
 
-    $("#showsettings").on('click', function(event) {
+    $('footer a[id*="showsettings"]').on('click', function(event) {
         event.preventDefault();
         showSettings();
     });
