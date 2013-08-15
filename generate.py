@@ -26,14 +26,19 @@ from dotlang.translate import translate
 ENV = jinja2.Environment(
     loader=jinja2.FileSystemLoader([
         os.path.join(settings.ROOT, 'templates'),
+        os.path.join(settings.ROOT, 'mobile')
     ]), extensions=[])
 # Hook up template filters.
 helpers.load_filters(ENV)
 
 
-optparser = OptionParser(usage='%prog --output-dir=/tmp/path/example')
+optparser = OptionParser(usage='%prog --output-dir=/tmp/path/example --platform=desktop')
 optparser.add_option("--output-dir", action="store", dest="output_path",
                      help="Specify the output directory")
+optparser.add_option('-p', '--platform', action='store', dest='platform',
+                    default=settings.TARGET_PLATFORM,
+                    help=("Target platform for which to generate files, "
+                          "specify either 'desktop' or 'mobile'"))
 optparser.add_option('-f', '--force', action='store_true', dest='force',
                      default=False, help='Delete output dir if it exists.')
 optparser.add_option('--nowarn', action='store_false', dest='warn',
@@ -42,10 +47,17 @@ optparser.add_option('--nowarn', action='store_false', dest='warn',
 optparser.add_option('-v', '--version', action='store', dest='version',
                     default=settings.BUILD_VERSION,
                     help="Version to generate. Accepts 'passive' or 'urgent'")
+
 (options, args) = optparser.parse_args()
 
-OUTPUT_PATH = (options.output_path if options.output_path else
-               os.path.join(settings.ROOT, 'html'))
+PLATFORM = options.platform
+
+if options.output_path:
+    OUTPUT_PATH = options.output_path
+elif PLATFORM == 'desktop':
+    OUTPUT_PATH = os.path.join(settings.BUILD_ROOT, 'html')
+elif PLATFORM == 'mobile':
+    OUTPUT_PATH = os.path.join(settings.BUILD_ROOT, 'mobile')
 
 
 def copy_file(output_dir, fileName):
@@ -64,13 +76,15 @@ def write_output(output_dir, filename, text):
 
 def main():
     """Function run when script is run from the command line."""
-    template = ENV.get_template('index.html')
+    # Determine which template to load.
+    if PLATFORM == 'desktop':
+        template = ENV.get_template('index.html')
+    else:
+        template = ENV.get_template('mobile.html')
 
     # allow parameter to override settings build version
     if options.version not in ('passive', 'urgent'):
         options.version = settings.BUILD_VERSION
-
-    sys.stdout.write("Writing %s template to %s\n" % (options.version, OUTPUT_PATH))
 
     if os.path.exists(OUTPUT_PATH):
         if not options.force:
@@ -78,9 +92,13 @@ def main():
                              'run with --force to overwrite automatically.\n' % (
                                  OUTPUT_PATH))
             sys.exit(1)
-        else:
+        elif options.output_path:
             shutil.rmtree(OUTPUT_PATH)
+        else:
+            shutil.rmtree(settings.BUILD_ROOT)
     os.makedirs(OUTPUT_PATH)
+
+    sys.stdout.write("Writing %s template to %s\n" % (options.version, OUTPUT_PATH))
 
     # Copy "root" files into output dir's root.
     for f in (glob.glob(os.path.join(settings.ROOT, 'root', '*')) +
@@ -89,9 +107,14 @@ def main():
 
     # Place static files into output dir.
     STATIC_PATH = os.path.join(OUTPUT_PATH, 'static')
-    for folder in settings.STATIC_FOLDERS:
+    STATIC_DIRS = (settings.STATIC_FOLDERS if PLATFORM == 'desktop' else
+                    settings.STATIC_FOLDERS_MOBILE)
+    STATIC_ROOT = (settings.ROOT if PLATFORM == 'desktop' else
+                    settings.MOBILE_ROOT)
+
+    for folder in STATIC_DIRS:
         folder_path = os.path.join(STATIC_PATH, folder)
-        shutil.copytree(os.path.join(settings.ROOT, folder), folder_path)
+        shutil.copytree(os.path.join(STATIC_ROOT, folder), folder_path)
 
     for lang in settings.LANGS:
         # Make language dir, or symlink to fallback language
@@ -103,7 +126,7 @@ def main():
             os.makedirs(LANG_PATH)
 
         # symlink static folders into language dir
-        for folder in settings.STATIC_FOLDERS:
+        for folder in STATIC_DIRS:
             os.symlink(os.path.join('..', 'static', folder),
                        os.path.join(LANG_PATH, folder))
 
