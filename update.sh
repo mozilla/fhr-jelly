@@ -40,9 +40,6 @@ popd
 ./generate.py --output-dir $WEB_DIR -f --nowarn
 checkretval
 
-./generate.py --output-dir $WEB_DIR/mobile -p mobile -f --nowarn
-checkretval
-
 popd
 
 /data/$ENV/deploy -n $SITE

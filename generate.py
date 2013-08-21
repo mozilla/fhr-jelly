@@ -25,8 +25,7 @@ from dotlang.translate import translate
 
 ENV = jinja2.Environment(
     loader=jinja2.FileSystemLoader([
-        os.path.join(settings.ROOT, 'templates'),
-        os.path.join(settings.ROOT, 'mobile')
+        os.path.join(settings.ROOT, 'templates')
     ]), extensions=[])
 # Hook up template filters.
 helpers.load_filters(ENV)
@@ -35,10 +34,6 @@ helpers.load_filters(ENV)
 optparser = OptionParser(usage='%prog --output-dir=/tmp/path/example --platform=desktop')
 optparser.add_option("--output-dir", action="store", dest="output_path",
                      help="Specify the output directory")
-optparser.add_option('-p', '--platform', action='store', dest='platform',
-                    default=settings.TARGET_PLATFORM,
-                    help=("Target platform for which to generate files, "
-                          "specify either 'desktop' or 'mobile'"))
 optparser.add_option('-f', '--force', action='store_true', dest='force',
                      default=False, help='Delete output dir if it exists.')
 optparser.add_option('--nowarn', action='store_false', dest='warn',
@@ -50,14 +45,8 @@ optparser.add_option('-v', '--version', action='store', dest='version',
 
 (options, args) = optparser.parse_args()
 
-PLATFORM = options.platform
-
-if options.output_path:
-    OUTPUT_PATH = options.output_path
-elif PLATFORM == 'desktop':
-    OUTPUT_PATH = os.path.join(settings.BUILD_ROOT, 'html')
-elif PLATFORM == 'mobile':
-    OUTPUT_PATH = os.path.join(settings.BUILD_ROOT, 'mobile')
+OUTPUT_PATH = (options.output_path if options.output_path else
+                os.path.join(settings.BUILD_ROOT, 'html'))
 
 
 def copy_file(output_dir, fileName):
@@ -76,11 +65,10 @@ def write_output(output_dir, filename, text):
 
 def main():
     """Function run when script is run from the command line."""
-    # Determine which template to load.
-    if PLATFORM == 'desktop':
-        template = ENV.get_template('index.html')
-    else:
-        template = ENV.get_template('mobile.html')
+    templates = {
+        'html': 'index.html',
+        'mobile': 'mobile.html'
+    }
 
     # allow parameter to override settings build version
     if options.version not in ('passive', 'urgent'):
@@ -92,10 +80,8 @@ def main():
                              'run with --force to overwrite automatically.\n' % (
                                  OUTPUT_PATH))
             sys.exit(1)
-        elif options.output_path:
-            shutil.rmtree(OUTPUT_PATH)
         else:
-            shutil.rmtree(settings.BUILD_ROOT)
+            shutil.rmtree(OUTPUT_PATH)
     os.makedirs(OUTPUT_PATH)
 
     sys.stdout.write("Writing %s template to %s\n" % (options.version, OUTPUT_PATH))
@@ -107,28 +93,37 @@ def main():
 
     # Place static files into output dir.
     STATIC_PATH = os.path.join(OUTPUT_PATH, 'static')
-    STATIC_DIRS = (settings.STATIC_FOLDERS if PLATFORM == 'desktop' else
-                    settings.STATIC_FOLDERS_MOBILE)
-    STATIC_ROOT = (settings.ROOT if PLATFORM == 'desktop' else
-                    settings.MOBILE_ROOT)
-
-    for folder in STATIC_DIRS:
+    MOBILE_STATIC_PATH = os.path.join(STATIC_PATH, 'mobile')
+    for folder in settings.STATIC_FOLDERS:
         folder_path = os.path.join(STATIC_PATH, folder)
-        shutil.copytree(os.path.join(STATIC_ROOT, folder), folder_path)
+        shutil.copytree(os.path.join(settings.ROOT, folder),
+                        folder_path)
+
+    for folder in settings.MOBILE_STATIC_FOLDERS:
+        mobile_folder_path = os.path.join(MOBILE_STATIC_PATH, folder)
+        shutil.copytree(os.path.join(settings.MOBILE_ROOT, folder),
+                        mobile_folder_path)
 
     for lang in settings.LANGS:
         # Make language dir, or symlink to fallback language
         LANG_PATH = os.path.join(OUTPUT_PATH, lang)
+        MOBILE_LANG_PATH = os.path.join(LANG_PATH, 'mobile')
         if lang in settings.LANG_FALLBACK:
             os.symlink(settings.LANG_FALLBACK[lang], LANG_PATH)
             continue
         else:
             os.makedirs(LANG_PATH)
+            os.makedirs(MOBILE_LANG_PATH)
 
-        # symlink static folders into language dir
-        for folder in STATIC_DIRS:
-            os.symlink(os.path.join('..', 'static', folder),
+        # symlink desktop static folders into language dir
+        for folder in settings.STATIC_FOLDERS:
+            os.symlink(os.path.join(STATIC_PATH, folder),
                        os.path.join(LANG_PATH, folder))
+
+        # symlink mobile static folders into language dir
+        for folder in settings.MOBILE_STATIC_FOLDERS:
+            os.symlink(os.path.join(MOBILE_STATIC_PATH, folder),
+                       os.path.join(MOBILE_LANG_PATH, folder))
 
         # Data to be passed to template
         data = {
@@ -140,7 +135,12 @@ def main():
         # Load _() translation shortcut for jinja templates and point it to dotlang.
         ENV.globals['_'] = lambda txt: translate(lang, txt, warn=options.warn)
 
-        write_output(LANG_PATH, 'index.html', template.render(data))
+        for platform, template in templates.iteritems():
+            OUTPUT_LANG_PATH = (LANG_PATH if platform == 'html' else
+                                os.path.join(LANG_PATH, 'mobile'))
+            tmpl = ENV.get_template(template)
+
+            write_output(OUTPUT_LANG_PATH, 'index.html', tmpl.render(data));
 
 
 if __name__ == '__main__':

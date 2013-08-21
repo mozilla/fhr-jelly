@@ -29,20 +29,19 @@ Specify a version to build in settings.py. Available versions are 'passive' and 
 
 ### Generating output files
 
-Specify an output directory (it shouldn't be the same directory as the repo), specify the
-build you need i.e. desktop or mobile, and allow a few seconds for the script to scrape
-Mozilla's FTP server.
+Specify an output directory (it shouldn't be the same directory as the repo) and allow a few seconds for
+the script to scrape Mozilla's FTP server.
 
-    ./generate.py --output-dir html --platform mobile
+    ./generate.py --output-dir html
 
 To delete the output dir before generating the output (careful!), use
 the --force option.
 
-    ./generate.py --output-dir html --platform mobile -f
+    ./generate.py --output-dir html -f
 
 The build version can be overwritten with the --version command line argument.
 
-    ./generate.py --version urgent --output-dir html --platform mobile -f
+    ./generate.py --version urgent --platform mobile -f
 
 ### Extracting .lang files
 

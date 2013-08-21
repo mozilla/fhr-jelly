@@ -2,7 +2,7 @@ import os
 
 
 ROOT = os.path.dirname(__file__)
-MOBILE_ROOT = os.path.join(os.path.dirname(__file__), 'mobile')
+MOBILE_ROOT = os.path.join(ROOT, 'mobile')
 
 # Root folder for build artifacts
 BUILD_ROOT = os.path.join(ROOT, 'build/')
@@ -10,8 +10,7 @@ BUILD_ROOT = os.path.join(ROOT, 'build/')
 # Static folders. All of these will be copied into the output dir, and
 # symlinked from the locale directories.
 STATIC_FOLDERS = ['css', 'fonts', 'img', 'js', 'json']
-
-STATIC_FOLDERS_MOBILE = ['css', 'fonts', 'img', 'js']
+MOBILE_STATIC_FOLDERS = ['css', 'fonts', 'img', 'js']
 
 # L10n dir
 LOCALE_DIR = os.path.join(ROOT, 'locale')
@@ -56,6 +55,3 @@ LANG_FALLBACK = {
 
 # View to build - specify either 'passive' or 'urgent'
 BUILD_VERSION = 'passive'
-
-# Target platform to build for - specify either 'desktop' or 'mobile'
-TARGET_PLATFORM = 'desktop'
