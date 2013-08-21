@@ -31,7 +31,7 @@ ENV = jinja2.Environment(
 helpers.load_filters(ENV)
 
 
-optparser = OptionParser(usage='%prog --output-dir=/tmp/path/example --platform=desktop')
+optparser = OptionParser(usage='%prog --output-dir=/tmp/path/example')
 optparser.add_option("--output-dir", action="store", dest="output_path",
                      help="Specify the output directory")
 optparser.add_option('-f', '--force', action='store_true', dest='force',

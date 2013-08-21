@@ -41,7 +41,7 @@ the --force option.
 
 The build version can be overwritten with the --version command line argument.
 
-    ./generate.py --version urgent --platform mobile -f
+    ./generate.py --version urgent -f
 
 ### Extracting .lang files
 
