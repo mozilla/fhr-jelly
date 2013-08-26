@@ -29,8 +29,8 @@ Specify a version to build in settings.py. Available versions are 'passive' and 
 
 ### Generating output files
 
-Specify an output directory (it shouldn't be the same directory as the repo) and allow
-a few seconds for the script to scrape Mozilla's FTP server.
+Specify an output directory (it shouldn't be the same directory as the repo) and allow a few seconds for
+the script to scrape Mozilla's FTP server.
 
     ./generate.py --output-dir html
 
@@ -41,7 +41,7 @@ the --force option.
 
 The build version can be overwritten with the --version command line argument.
 
-    ./generate.py --version urgent --output-dir html -f
+    ./generate.py --version urgent -f
 
 ### Extracting .lang files
 

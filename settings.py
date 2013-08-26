@@ -2,10 +2,15 @@ import os
 
 
 ROOT = os.path.dirname(__file__)
+MOBILE_ROOT = os.path.join(ROOT, 'mobile')
+
+# Root folder for build artifacts
+BUILD_ROOT = os.path.join(ROOT, 'build/')
 
 # Static folders. All of these will be copied into the output dir, and
 # symlinked from the locale directories.
-STATIC_FOLDERS = ['css', 'fonts', 'img', 'js', 'json', 'mobile']
+STATIC_FOLDERS = ['css', 'fonts', 'img', 'js', 'json']
+MOBILE_STATIC_FOLDERS = ['css', 'fonts', 'img', 'js']
 
 # L10n dir
 LOCALE_DIR = os.path.join(ROOT, 'locale')

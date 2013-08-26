@@ -25,7 +25,7 @@ from dotlang.translate import translate
 
 ENV = jinja2.Environment(
     loader=jinja2.FileSystemLoader([
-        os.path.join(settings.ROOT, 'templates'),
+        os.path.join(settings.ROOT, 'templates')
     ]), extensions=[])
 # Hook up template filters.
 helpers.load_filters(ENV)
@@ -42,10 +42,11 @@ optparser.add_option('--nowarn', action='store_false', dest='warn',
 optparser.add_option('-v', '--version', action='store', dest='version',
                     default=settings.BUILD_VERSION,
                     help="Version to generate. Accepts 'passive' or 'urgent'")
+
 (options, args) = optparser.parse_args()
 
 OUTPUT_PATH = (options.output_path if options.output_path else
-               os.path.join(settings.ROOT, 'html'))
+                os.path.join(settings.BUILD_ROOT, 'html'))
 
 
 def copy_file(output_dir, fileName):
@@ -64,13 +65,14 @@ def write_output(output_dir, filename, text):
 
 def main():
     """Function run when script is run from the command line."""
-    template = ENV.get_template('index.html')
+    templates = {
+        'html': 'index.html',
+        'mobile': 'mobile.html'
+    }
 
     # allow parameter to override settings build version
     if options.version not in ('passive', 'urgent'):
         options.version = settings.BUILD_VERSION
-
-    sys.stdout.write("Writing %s template to %s\n" % (options.version, OUTPUT_PATH))
 
     if os.path.exists(OUTPUT_PATH):
         if not options.force:
@@ -82,6 +84,8 @@ def main():
             shutil.rmtree(OUTPUT_PATH)
     os.makedirs(OUTPUT_PATH)
 
+    sys.stdout.write("Writing %s template to %s\n" % (options.version, OUTPUT_PATH))
+
     # Copy "root" files into output dir's root.
     for f in (glob.glob(os.path.join(settings.ROOT, 'root', '*')) +
               glob.glob(os.path.join(settings.ROOT, 'root', '.*'))):
@@ -89,23 +93,37 @@ def main():
 
     # Place static files into output dir.
     STATIC_PATH = os.path.join(OUTPUT_PATH, 'static')
+    MOBILE_STATIC_PATH = os.path.join(STATIC_PATH, 'mobile')
     for folder in settings.STATIC_FOLDERS:
         folder_path = os.path.join(STATIC_PATH, folder)
-        shutil.copytree(os.path.join(settings.ROOT, folder), folder_path)
+        shutil.copytree(os.path.join(settings.ROOT, folder),
+                        folder_path)
+
+    for folder in settings.MOBILE_STATIC_FOLDERS:
+        mobile_folder_path = os.path.join(MOBILE_STATIC_PATH, folder)
+        shutil.copytree(os.path.join(settings.MOBILE_ROOT, folder),
+                        mobile_folder_path)
 
     for lang in settings.LANGS:
         # Make language dir, or symlink to fallback language
         LANG_PATH = os.path.join(OUTPUT_PATH, lang)
+        MOBILE_LANG_PATH = os.path.join(LANG_PATH, 'mobile')
         if lang in settings.LANG_FALLBACK:
             os.symlink(settings.LANG_FALLBACK[lang], LANG_PATH)
             continue
         else:
             os.makedirs(LANG_PATH)
+            os.makedirs(MOBILE_LANG_PATH)
 
-        # symlink static folders into language dir
+        # symlink desktop static folders into language dir
         for folder in settings.STATIC_FOLDERS:
-            os.symlink(os.path.join('..', 'static', folder),
+            os.symlink(os.path.join(STATIC_PATH, folder),
                        os.path.join(LANG_PATH, folder))
+
+        # symlink mobile static folders into language dir
+        for folder in settings.MOBILE_STATIC_FOLDERS:
+            os.symlink(os.path.join(MOBILE_STATIC_PATH, folder),
+                       os.path.join(MOBILE_LANG_PATH, folder))
 
         # Data to be passed to template
         data = {
@@ -117,7 +135,12 @@ def main():
         # Load _() translation shortcut for jinja templates and point it to dotlang.
         ENV.globals['_'] = lambda txt: translate(lang, txt, warn=options.warn)
 
-        write_output(LANG_PATH, 'index.html', template.render(data))
+        for platform, template in templates.iteritems():
+            OUTPUT_LANG_PATH = (LANG_PATH if platform == 'html' else
+                                os.path.join(LANG_PATH, 'mobile'))
+            tmpl = ENV.get_template(template)
+
+            write_output(OUTPUT_LANG_PATH, 'index.html', tmpl.render(data));
 
 
 if __name__ == '__main__':

@@ -1,6 +1,7 @@
 *.pyc
 locale/
 !js/locale/
+build/
 html/
 node_modules/
 tests/python-selenium/results/

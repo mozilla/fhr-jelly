@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="{{ LANG }}" dir="{{ DIR }}" >
+    <head>
+        <base target="_blank">
+        <meta charset="utf-8" />
+        <title>{{ _('Firefox Health Report') }}</title>
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" type="text/css" href="css/main.css" media="screen" />
+    </head>
+    <body>
+        <header>
+            <h1><a href="#dashboard" target="_self" class="navigate">{{ _('Firefox Health Report') }}</a></h1>
+            <p>{{ _('Firefox Health Report lets you optimize your Firefox and helps us build a more excellent browser. Reports will be pretty basic at first, but will continue to evolve and grow.') }} <a href="#learnmore"  target="_self" class="navigate">{{ _('Learn More&hellip;') }}</a></p>
+        </header>
+
+        <section id="dashboard" class="panel active">
+            <div class="main" role="main">
+                <ul id="carousel">
+                    <li class="enabled active_tip">
+                        <div class="tip" id="newfox">
+                            <h4>{{ _('Tip') }}</h4>
+                            <p class="firefox_icon">{{ _('Looks like your Firefox is brand new! Check back after using Firefox for a while.') }}</p>
+                        </div>
+                    </li>
+                </ul>
+
+                <h2>{{ _('Important Metrics') }}</h2>
+                <p>{{ _('Firefox Health Report records information about your browser and device. You can <a href="#raw" class="navigate">see the information we record.</a> You can also see what you share with Mozilla.') }}</p>
+                <h3><a href="#configuration" target="_self" class="navigate">{{ _('Configuration') }}</a></h3>
+                <p>{{ _('Device hardware, operating system, Firefox version.') }}</p>
+                <h3><a href="#customization" target="_self" class="navigate">{{ _('Customization') }}</a></h3>
+                <p>{{ _('Extensions, plugins, and number of installed add-ons.') }}</p>
+                <h3><a href="#performance" target="_self" class="navigate">{{ _('Performance') }}</a></h3>
+                <p>{{ _('Key performance measures, such as launch speed') }}</p>
+                <h3><a href="#weartear" target="_self" class="navigate">{{ _('Wear and tear') }}</a></h3>
+                <p>{{ _('Browsing duration, install time, number of bookmarks and pages.') }}</p>
+            </div>
+        </section>
+
+        <section id="raw" class="panel inactive">
+            <ul class="breadcrumbs">
+                <li><a href="#dashboard" target="_self" class="navigate">{{ _('Home') }}</a> &raquo;</li>
+                <li>{{ _('Raw Data') }}</li>
+            </ul>
+            <div class="main" role="main">
+                <h2>{{ _('Raw Data') }}</h2>
+                <pre></pre>
+            </div>
+        </section>
+
+        <section id="configuration" class="panel inactive">
+            <ul class="breadcrumbs">
+                <li><a href="#dashboard" target="_self" class="navigate">{{ _('Home') }}</a> &raquo;</li>
+                <li>{{ _('Configuration') }}</li>
+            </ul>
+            <div class="main" role="main">
+                <h2>{{ _('Configuration') }}</h2>
+                <p>{{ _('Device hardware, operating system, Firefox version.') }}</p>
+                <dl class="data_container">
+                    <dt id="cpu_count">{{ _('CPU Count:') }}<span></span></dt>
+                    <dd>{{ _('The number of CPU cores reported by Android.') }}</dd>
+                    <dt id="memory">{{ _('Memory in MB:') }}<span></span></dt>
+                    <dd>{{ _('The amount of memory reported by Android. Typically excludes graphics memory.') }}</dd>
+                    <dt id="app_name">{{ _('Application Name:') }}<span></span></dt>
+                    <dd>{{ _('The internal application name for the browser.') }}</dd>
+                    <dt id="app_id">{{ _('Application ID:') }}<span></span></dt>
+                    <dd>{{ _('The internal identifier for the application.') }}</dd>
+                    <dt id="app_version">{{ _('Application Version:') }}<span></span></dt>
+                    <dd>{{ _('The current version of the browser') }}</dd>
+                    <dt id="build_id">{{ _('Application Build ID:') }}<span></span></dt>
+                    <dd>{{ _('The internal build timestamp.') }}</dd>
+                    <dt id="update_channel">{{ _('Update Channel:') }}<span></span></dt>
+                    <dd>{{ _('Firefox is distributed through channels: Nightly builds, the Aurora pre-release channel, a stable Beta, and the public release. This field identifies the channel.') }}</dd>
+                    <dt id="vendor">{{ _('Vendor:') }}<span></span></dt>
+                    <dd>{{ _('The organization that built this application. Typically Mozilla.') }}</dd>
+                    <dt id="platform">{{ _('Platform Version:') }}<span></span></dt>
+                    <dd>{{ _('An internal version identifier. Typically the same as appVersion.') }}</dd>
+                    <dt id="platform_build_id">{{ _('Platform Build ID:') }}<span></span></dt>
+                    <dd>{{ _('On Android this is an alternative name for appBuildID.') }}</dd>
+                    <dt id="xpcomabi">{{ _('xpcomabi:') }}<span></span></dt>
+                    <dd>{{ _('The CPU architecture for which this application was built.') }}</dd>
+                    <dt>{{ _('OS:') }}<span>Android</span></dt>
+                    <dd>{{ _('The current operating system.') }}</dd>
+                    <dt id="environment">{{ _('Architecture:') }}<span></span></dt>
+                    <dd>{{ _('The CPU architecture for this device.') }}</dd>
+                    <dt>{{ _('System Name:') }}<span>Android</span></dt>
+                    <dd>{{ _('The current system name.') }}</dd>
+                    <dt id="android_version">{{ _('System Version:') }}<span></span></dt>
+                    <dd>{{ _('The Android OS revision.') }}</dd>
+                </dl>
+            </div>
+        </section>
+
+        <section id="customization" class="panel inactive">
+            <ul class="breadcrumbs">
+                <li><a href="#dashboard" target="_self" class="navigate">{{ _('Home') }}</a> &raquo;</li>
+                <li>{{ _('Customization') }}</li>
+            </ul>
+            <div class="main" role="main">
+                <h2>{{ _('Customization') }}</h2>
+                <p>{{ _('Whether Firefox fetches add-on blocklist results to protect you against malicious add-ons. Defaults to on.') }}</p>
+                <dl>
+                    <dt id="telemetry">{{ _('Telemetry Enabled:') }}<span></span></dt>
+                    <dd>{{ _('Whether Firefox reports detailed usage data to help with development. Defaults to off for most channels.') }}</dd>
+                    <dt id="extension_count">{{ _('Extension Count:') }}</dt>
+                    <dd>{{ _('How many extension add-ons are installed.') }}</dd>
+                    <dt id="plugin_count">{{ _('Plugin Count:') }}</dt>
+                    <dd>{{ _('How many plugin add-ons are installed.') }}</dd>
+                    <dt id="themes">{{ _('Theme Count:') }}</dt>
+                    <dd>{{ _('How many theme add-ons are installed.') }}</dd>
+                    <dt id="addons">{{ _('Addons:') }}</dt>
+                    <dd>{{ _('A collection describing the installed add-ons. Not all add-ons are reported: only plugins, extensions, and services.') }}</dd>
+                </dl>
+            </div>
+        </section>
+
+        <section id="performance" class="panel inactive">
+            <ul class="breadcrumbs">
+                <li><a href="#dashboard" target="_self" class="navigate">{{ _('Home') }}</a> &raquo;</li>
+                <li>{{ _('Performance') }}</li>
+            </ul>
+            <div class="main" role="main">
+                <h2>{{ _('Performance') }}</h2>
+                <p>{{ _('Key performance measures, such as launch speed') }}</p>
+                <dl>
+                    <dt id="search_count">{{ _('Search Counts:') }}</dt>
+                    <dd>{{ _('A count of how many searches you issued to each of Mozilla\'s partner providers.') }}</dd>
+                    <dt id="sessions_startup_time">{{ _('Sessions and Startup Times') }}</dt>
+                    <dd>{{ _('For each browsing session, Firefox Health Report records approximately how long you browsed (in seconds), and whether the session ended normally or because of a crash. Also includes startup times (in milliseconds) if available.') }}</dd>
+                </dl>
+            </div>
+        </section>
+
+        <section id="weartear" class="panel inactive">
+            <ul class="breadcrumbs">
+                <li><a href="#dashboard" target="_self" class="navigate">{{ _('Home') }}</a> &raquo;</li>
+                <li>{{ _('Wear and Tear') }}</li>
+            </ul>
+            <div class="main" role="main">
+                <h2>{{ _('Wear and Tear') }}</h2>
+                <p>{{ _('Key performance measures, such as launch speed') }}</p>
+                <dl>
+                    <dt id="profile_creation">{{ _('Profile Creation:') }}</dt>
+                    <dd>{{ _('The day on which your browser profile was created. Counted in days since January 1st 1970.') }}</dd>
+                </dl>
+            </div>
+        </section>
+
+        <section id="learnmore" class="panel inactive">
+            <ul class="breadcrumbs">
+                <li><a href="#dashboard" target="_self" class="navigate">{{ _('Home') }}</a> &raquo;</li>
+                <li>{{ _('Learn More') }}</li>
+            </ul>
+            <div class="main" role="main">
+                <p>{{ _('Firefox Health Report (FHR) analyses your browser\'s performance information, in order to provide you with useful tips that help you get the best from Firefox. For more information on Firefox Health Report, <a href="https://support.mozilla.org/kb/firefox-health-report-understand-your-android-brow" target="_blank" class="external"><span aria-hidden="true" class="external_icon"></span>visit the Mozilla Support section.</a>') }}'
+                </p>
+                <p>{{ _('For more information about how we handle your data, <a href="https://www.mozilla.org/legal/privacy/firefox.html#health-report" target="_blank" class="external"><span aria-hidden="true" class="external_icon"></span>see our privacy policy.') }}</a></p>
+            </div>
+        </section>
+
+        <footer>
+            <p id="enabled" class="share_status"><span aria-hidden="true" class="eye_icon"></span>{{ _('You are currently sharing your health report with Mozilla. ') }}<a id="showsettings_enabled" href="javascript:void(0)">{{ _('Choose what I share') }}</a></p>
+
+            <p id="disabled" class="share_status"><span aria-hidden="true" class="eye_off_icon"></span>{{ _('You are currently not sharing your health report with Mozilla. ') }}<a id="showsettings_disabled" href="javascript:void(0)">{{ _('Choose what I share') }}</a></p>
+        </footer>
+
+         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+        <script type="application/javascript;version=1.8" src="js/mobile.js"></script>
+    </body>
+</html>
