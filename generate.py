@@ -117,12 +117,12 @@ def main():
 
         # symlink desktop static folders into language dir
         for folder in settings.STATIC_FOLDERS:
-            os.symlink(os.path.join('..', 'static', folder),
+            os.symlink(os.path.join(settings.STATIC_SYMLINK_PATH, folder),
                        os.path.join(LANG_PATH, folder))
 
         # symlink mobile static folders into language dir
         for folder in settings.MOBILE_STATIC_FOLDERS:
-            os.symlink(os.path.join('..', '..', 'static', 'mobile', folder),
+            os.symlink(os.path.join(settings.MOBILE_STATIC_SYMLINK_PATH, folder),
                        os.path.join(LANG_PATH, 'mobile', folder))
 
         # Data to be passed to template
