@@ -12,6 +12,9 @@ BUILD_ROOT = os.path.join(ROOT, 'build/')
 STATIC_FOLDERS = ['css', 'fonts', 'img', 'js', 'json']
 MOBILE_STATIC_FOLDERS = ['css', 'fonts', 'img', 'js']
 
+STATIC_SYMLINK_PATH = '../static'
+MOBILE_STATIC_SYMLINK_PATH = '../../static/mobile'
+
 # L10n dir
 LOCALE_DIR = os.path.join(ROOT, 'locale')
 if not os.path.exists(LOCALE_DIR):
