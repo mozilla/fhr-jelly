@@ -13,7 +13,7 @@ import settings
 
 
 # Metadata markers to be filtered out of translations.
-METADATA_MARKERS = re.compile(r'\s?{(ok|l10n-extra)}\s?')
+METADATA_MARKERS = re.compile(r'\s?{(ok|l10n-extra)}\s?', re.IGNORECASE)
 
 # Don't even THINK this is thread-safe.
 CACHE = {}
