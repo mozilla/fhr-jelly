@@ -31,11 +31,16 @@ def parse(path):
 
         for line in lines:
             line = line.strip()
-            if line != '':
-                if line[0] == ';':
-                    source = line
-                elif source:
-                    trans[source[1:]] = line
+            if not line:
+                continue
+
+            if line[0] == '#':
+                continue
+
+            if line[0] == ';':
+                source = line[1:]
+            elif source:
+                trans[source] = line
 
     return trans
 
