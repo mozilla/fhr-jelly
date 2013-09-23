@@ -369,23 +369,23 @@ getAddonStats = function(healthreport, type) {
     var addons = healthreport.data.last['org.mozilla.addons.active'],
         addonStats = {
             enabled: 0,
-            disabled: 0
+            disabled: 0,
+            clickToPlay: 0
         };
 
     for(var addon in addons) {
         if(addons.hasOwnProperty(addon)) {
             var currentAddon = addons[addon];
             // Only total addons of the type specified
-            // If this addon has either been disabled by the user or by
-            // the app, increment the value of disable by 1.
-            if(currentAddon.type === type &&
-                (currentAddon.userDisabled || currentAddon.appDisabled)) {
+            if (currentAddon.type !== type) {
+              continue;
+            }
+            if(currentAddon.userDisabled === "askToActivate" ||
+               currentAddon.appDisabled == "askToActivate") {
+                ++addonStats.clickToPlay;
+            } else if(currentAddon.userDisabled || currentAddon.appDisabled) {
                 ++addonStats.disabled;
-            // We are here just checking that we much the addon type.
-            // In the previous 'if' we already determined that neither
-            // currentAddon.userDisabled nor currentAddon.appDisabled is true
-            // so we can safely assume here that both, the above is false.
-            } else if(currentAddon.type === type) {
+            } else {
                 ++addonStats.enabled;
             }
         }
@@ -421,6 +421,7 @@ var populateData = function(healthreport) {
     addons.push(extensionsInfo.disabled);
 
     plugins.push(pluginsInfo.enabled);
+    plugins.push(pluginsInfo.clickToPlay);
     plugins.push(pluginsInfo.disabled);
 
     // Populate vital statistics
