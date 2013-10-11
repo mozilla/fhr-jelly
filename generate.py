@@ -113,7 +113,14 @@ def main():
             continue
         else:
             os.makedirs(LANG_PATH)
-            os.makedirs(MOBILE_LANG_PATH)
+            if lang in settings.LANG_MOBILE_FALLBACK:
+                MOBILE_FALLBACK_PATH = os.path.join(
+                                        '..',
+                                        settings.LANG_MOBILE_FALLBACK[lang],
+                                        'mobile')
+                os.symlink(MOBILE_FALLBACK_PATH, MOBILE_LANG_PATH)
+            else:
+                os.makedirs(MOBILE_LANG_PATH)
 
         # symlink desktop static folders into language dir
         for folder in settings.STATIC_FOLDERS:
@@ -121,9 +128,10 @@ def main():
                        os.path.join(LANG_PATH, folder))
 
         # symlink mobile static folders into language dir
-        for folder in settings.MOBILE_STATIC_FOLDERS:
-            os.symlink(os.path.join(settings.MOBILE_STATIC_SYMLINK_PATH, folder),
-                       os.path.join(LANG_PATH, 'mobile', folder))
+        if lang not in settings.LANG_MOBILE_FALLBACK:
+            for folder in settings.MOBILE_STATIC_FOLDERS:
+                os.symlink(os.path.join(settings.MOBILE_STATIC_SYMLINK_PATH, folder),
+                           os.path.join(LANG_PATH, 'mobile', folder))
 
         # Data to be passed to template
         data = {
@@ -140,6 +148,8 @@ def main():
                                 os.path.join(LANG_PATH, 'mobile'))
             tmpl = ENV.get_template(template)
 
+            if platform =='mobile' and lang in settings.LANG_MOBILE_FALLBACK:
+                continue
             write_output(OUTPUT_LANG_PATH, 'index.html', tmpl.render(data));
 
 

@@ -56,5 +56,13 @@ LANG_FALLBACK = {
     'wo'        : 'fr',
 }
 
+# Mobile Language fallbacks. Langs listed here will be symlinked to
+# their respective fallbacks rather than generated on their owns.
+# This is for locales that do have fhr for Destop but haven't translated
+# it for mobile.
+LANG_MOBILE_FALLBACK = {
+    'pl' : 'en-US',
+}
+
 # View to build - specify either 'passive' or 'urgent'
 BUILD_VERSION = 'passive'
