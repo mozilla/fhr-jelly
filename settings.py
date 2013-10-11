@@ -61,7 +61,11 @@ LANG_FALLBACK = {
 # This is for locales that do have fhr for Destop but haven't translated
 # it for mobile.
 LANG_MOBILE_FALLBACK = {
-    'pl' : 'en-US',
+    'ja'    : 'en-US',
+    'hu'    : 'en-US',
+    'pl'    : 'en-US',
+    'pt-BR' : 'en-US',
+    'tr'    : 'en-US',
 }
 
 # View to build - specify either 'passive' or 'urgent'
