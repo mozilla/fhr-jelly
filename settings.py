@@ -62,8 +62,6 @@ LANG_FALLBACK = {
 # it for mobile.
 LANG_MOBILE_FALLBACK = {
     'ja'    : 'en-US',
-    'hu'    : 'en-US',
-    'pl'    : 'en-US',
     'pt-BR' : 'en-US',
     'tr'    : 'en-US',
 }
