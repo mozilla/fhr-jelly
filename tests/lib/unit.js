@@ -1,15 +1,22 @@
+/* globals
+    test:false,
+    equal: false,
+    asyncTest: false,
+    deepEqual: false,
+    start: false,
+    jQuery: true,
+    isCurrentMonth: false,
+    sortDates: false,
+    getBookmarksTotal: false,
+    getTotalNumberOfCrashes: false
+ */
+
 test('test-is-current-month', 2, function() {
     var oldDate = '2012-06-13',
           today = new Date();
 
     equal(isCurrentMonth(oldDate), false, 'We were expecting false and got ' + isCurrentMonth(oldDate));
     equal(isCurrentMonth(today), true, 'We were expecting true and got ' + isCurrentMonth(today));
-});
-
-test('test-file-exist', function() {
-    var response = fileExists();
-    equal(fileExists(), false, 'We do not expect the file to exist but got ' + response);
-    equal(fileExists('/js/config.json-local'), true, 'We expect the file to exist but got ' + response);
 });
 
 asyncTest('test-sort-dates-ascending', function() {

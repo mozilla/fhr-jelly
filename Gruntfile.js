@@ -1,6 +1,20 @@
+/* globals module:true */
+
 module.exports = function(grunt) {
 
+    'use strict';
+
     grunt.initConfig({
+        jshint: {
+            options: {
+                esnext: true,
+                moz: true,
+                globals: {
+                    jQuery: true
+                }
+            },
+            all: ['Gruntfile.js', 'js/*.js', 'mobile/js/*.js', 'tests/lib/*.js']
+        },
         qunit: {
             all: {
                 options: {
@@ -20,8 +34,9 @@ module.exports = function(grunt) {
         }
     });
 
+    grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-qunit');
     grunt.loadNpmTasks('grunt-contrib-connect');
 
-    grunt.registerTask('test', ['connect', 'qunit']);
+    grunt.registerTask('default', ['jshint', 'connect', 'qunit']);
 };
