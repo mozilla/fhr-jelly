@@ -3,6 +3,10 @@
   "description": "FHR find me at about:healthreport",
   "author": "espressive <sneethling@mozilla.com>",
   "version": "1.0.0",
+  "repository" : {
+    "type" : "git",
+    "url" : "git@github.com:mozilla/fhr-jelly.git"
+  },
   "devDependencies": {
     "grunt": "0.4.1",
     "grunt-cli": "0.1.9",
