@@ -62,7 +62,6 @@ LANG_FALLBACK = {
 # it for mobile.
 LANG_MOBILE_FALLBACK = {
     'ja'    : 'en-US',
-    'tr'    : 'en-US',
 }
 
 # View to build - specify either 'passive' or 'urgent'
