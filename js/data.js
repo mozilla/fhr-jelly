@@ -360,28 +360,26 @@ calculateMedianStartupTime = function() {
     // Covert the median to seconds before returning.
     return median / 1000;
 },
-// Returns an addonsState object indicating the number of addons that are
-// either enabled or disabled.
-// @healthreport The JSON
-// @type The type of addon to collect information about. Possible values are:
-//       extension and plugin
-getAddonStats = function(healthreport, type) {
-    var addons = healthreport.data.last['org.mozilla.addons.active'],
-        addonStats = {
-            enabled: 0,
-            disabled: 0,
-            clickToPlay: 0
-        };
-
+/**
+ * Returns addon stats using old HealthReport data format
+ * for extensions and plugins. This is kept for backwards
+ * compatibility untill sunset of Fx ESR24
+ * @see https://bugzilla.mozilla.org/show_bug.cgi?id=966871#c0
+ * @param {object} addonState - Empty addonsState object to populate and return
+ * @param {array} addons - Array of addons from org.mozilla.addons.active
+ * @param {string} type - The type of addon to include in calculation
+ * @return populated addonsState object.
+ */
+getAddonsForPreviousDataFormat = function(addonStats, addons, type) {
     for(var addon in addons) {
-        if(addons.hasOwnProperty(addon)) {
+        if(addons.hasOwnProperty(addon) && typeof addons[addon].type !== 'undefined') {
             var currentAddon = addons[addon];
             // Only total addons of the type specified
             if (currentAddon.type !== type) {
               continue;
             }
-            if(currentAddon.userDisabled === "askToActivate" ||
-               currentAddon.appDisabled == "askToActivate") {
+
+            if(currentAddon.userDisabled === "askToActivate") {
                 ++addonStats.clickToPlay;
             } else if(currentAddon.userDisabled || currentAddon.appDisabled) {
                 ++addonStats.disabled;
@@ -390,6 +388,89 @@ getAddonStats = function(healthreport, type) {
             }
         }
     }
+    return addonStats;
+},
+/**
+ * Returns addon stats for the extensions addon type.
+ * @param {object} addonState - Empty addonsState object to populate and return
+ * @param {array} addons - Array of addons from org.mozilla.addons.addons
+ * @return populated addonsState object.
+ */
+getExtensionsStats = function(addonStats, extensions) {
+    for(var extension in extensions) {
+        // The extensions array contains an additional element indicating the version of the API so,
+        // we need to make sure that we are dealing with an actual extension therefore, check that
+        // the type property exists.
+        if(extensions.hasOwnProperty(extension) && typeof extensions[extension].type !== 'undefined') {
+            var currentExtension = extensions[extension];
+
+            if(currentExtension.userDisabled === "askToActivate") {
+                ++addonStats.clickToPlay;
+            } else if(currentExtension.userDisabled || currentExtension.appDisabled) {
+                ++addonStats.disabled;
+            } else {
+                ++addonStats.enabled;
+            }
+        }
+    }
+    return addonStats;
+},
+/**
+ * Returns addon stats for the plugin addon type.
+ * @param {object} addonState - Empty addonsState object to populate and return
+ * @param {array} addons - Array of addons from org.mozilla.addons.plugins
+ * @return populated addonsState object.
+ */
+getPluginsStats = function(addonStats, plugins) {
+    for(var plugin in plugins) {
+        // The plugins array contains an additional element indicating the version of the API so,
+        // we need to make sure that we are dealing with an actual plugin therefore, check that
+        // the name property exists.
+        if(plugins.hasOwnProperty(plugin) && typeof plugins[plugin].name !== 'undefined') {
+            var currentPlugin = plugins[plugin];
+
+            if(currentPlugin.clicktoplay) {
+                ++addonStats.clickToPlay;
+            } else if(currentPlugin.disabled || currentPlugin.blocklisted) {
+                ++addonStats.disabled;
+            } else {
+                ++addonStats.enabled;
+            }
+        }
+    }
+    return addonStats;
+}
+/**
+ * Returns an addonsState object indicating the number of addons that are
+ * either enabled or disabled.
+ * @param {object} healthreport - The JSON object
+ * @param {string} type - The type of addon to collect information about. Possible values extension and plugin
+ * @returns A populated addonsStats object.
+ */
+getAddonStats = function(healthreport, type) {
+
+    var data = healthreport.data.last;
+    var addons = data['org.mozilla.addons.active'];
+    var addonStats = {
+            enabled: 0,
+            disabled: 0,
+            clickToPlay: 0
+        };
+
+    if (type === 'extension') {
+        if (typeof addons === 'undefined') {
+            addonStats = getExtensionsStats(addonStats, data['org.mozilla.addons.addons']);
+        } else {
+            addonStats = getAddonsForPreviousDataFormat(addonStats, addons, type);
+        }
+    } else {
+        if (typeof addons === 'undefined') {
+            addonStats = getPluginsStats(addonStats, data['org.mozilla.addons.plugins']);
+        } else {
+            addonStats = getAddonsForPreviousDataFormat(addonStats, addons, type);
+        }
+    }
+
     return addonStats;
 };
 
