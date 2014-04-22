@@ -3,36 +3,29 @@ window.onload = function() {
     'use strict';
     var panels = $('.panel'),
         payload = null,
-        prefs = null,
-        tips = document.querySelectorAll('li.enabled');
+        prefs = null;
 
-    // Tip Carousel
-    function showActiveTip(activeTip) {
-        // hide all tips.
-        for(var tip in tips) {
-          if(tips.hasOwnProperty(tip)) {
-              tips[tip].style.display = 'none';
-          }
-        }
-        // Make the current tip visible
-        activeTip.style.display = 'block';
+    /**
+     * Determines whether the current Fx profile is older than 7 days.
+     * @returns {boolean} - True if less then 7 days else false;
+     */
+    function isBrandNew() {
+        var profileAge = payload.environments.current['org.mozilla.profile.age'];
+        var profileCreationTime = parseInt(profileAge.profileCreation);
+        var todayInDays = Math.ceil(new Date().getTime() / 86400000);
+
+        // Is profile older than a week?
+        return (todayInDays - profileCreationTime) <= 7;
     }
 
-    // If we have more than one tip run the code,
-    // else do nothing
-    if(tips.length > 1) {
-      var loopr = 0,
-          counter = 0,
-          tipsLength = tips.length;
-
-      (function rotateTips() {
-          var currentTip = counter < tipsLength ? counter : counter = 0;
-
-          showActiveTip(tips[currentTip]);
-          counter += 1;
-
-          loopr = setTimeout(rotateTips, 5000);
-      })();
+    /**
+     * Conditionally shows FHR tips.
+     * @param {object} payload - The JSON FHR payload object.
+     */
+    function showTipboxes(payload) {
+        if(isBrandNew()) {
+            $('#newfox').addClass('active_tip');
+        }
     }
 
     // As we navigate between panels, for panels local to
@@ -119,6 +112,9 @@ window.onload = function() {
 
         case 'payload':
           payload = JSON.parse(event.data.content);
+
+          showTipboxes(payload);
+
           document.querySelector('#raw pre').textContent = JSON.stringify(payload, null, 2);
           populateData(payload);
           break;

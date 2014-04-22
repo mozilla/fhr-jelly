@@ -127,6 +127,7 @@ footer {
 /* Carousel */
 .carousel li {
     display: none;
+    list-style: none;
 }
 li.active_tip {
     display: block;
