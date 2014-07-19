@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ LANG }}" dir="{{ DIR }}" >
+<html lang="{{ LANG }}" dir="{{ DIR }}">
     <head>
         <base target="_blank">
         <meta charset="utf-8" />
@@ -10,22 +10,26 @@
     </head>
     <body onload="init()">
         <div class="persistentHeader">
-          <div class="headerContainer">
-            <div class="navAndBlurb">
-              <ul class="nav">
-                <li class="nav-category"><a href="#health" target="_self" class="active">{{ _('Firefox Health Report') }}</a></li>
-                <li class="nav-separator"></li>
-                <li class="nav-category"><a href="#raw" target="_self">{{ _('Raw Data') }}</a></li>
-              </ul>
-              <div class="blurb">{{ _('Get insights and performance information about your version of Firefox.') }} <a href="https://support.mozilla.org/kb/firefox-health-report-understand-your-browser-perf" class="learn_more">{{ _('Learn more...') }}</a>
-                <a href="https://www.mozilla.org/legal/privacy/firefox.html#health-report">{{ _('Privacy Policy') }}</a></div>
+            <div class="headerContainer">
+                <div class="navAndBlurb">
+                    <ul class="nav">
+                        <li class="nav-category"><a href="#health" target="_self" class="active">{{ _('Firefox Health Report') }}</a></li>
+                        <li class="nav-separator"></li>
+                        <li class="nav-category"><a href="#raw" target="_self">{{ _('Raw Data') }}</a></li>
+                    </ul>
+                    <div class="blurb">{{ _('Get insights and performance information about your version of Firefox.') }} <a href="https://support.mozilla.org/kb/firefox-health-report-understand-your-browser-perf" class="learn_more">{{ _('Learn more...') }}</a>
+                        <a href="https://www.mozilla.org/legal/privacy/firefox.html#health-report">{{ _('Privacy Policy') }}</a>
+                    </div>
+                </div>
             </div>
-          </div>
 
             <!-- activation widget -->
             <div class="activationWidget">
                 <div class="activationTrigger">
-                    <p class="activationTextContainer">{{ _('Data Sharing') }}<br><span class="statusText">{{ _('ON') }}</span></p>
+                    <p class="activationTextContainer">
+                        {{ _('Data Sharing') }}
+                        <br><span class="statusText">{{ _('ON') }}</span>
+                    </p>
                     <span class="activationTabContainer">
                         <div class="activationTabOverlay"></div>
                         <div class="activationTab"></div>
@@ -36,8 +40,8 @@
                     <div class="panelContainerArrow"></div>
                     <div class="panelContainerBase">
                         <div class="panelContainerContent">
-                        <p>{{ _('You\'ve chosen to stop sharing data with Mozilla, but you\'ll still be able to see how your browser is performing.') }}</p>
-                        <p class="greyText">{{ _('Your Health Report data will also be removed from Mozilla\'s servers. Learn more in our <a href="%(privacy_url)s">privacy policy.</a>')|format(privacy_url='https://www.mozilla.org/legal/privacy/firefox.html#health-report') }}</p>
+                            <p>{{ _('You\'ve chosen to stop sharing data with Mozilla, but you\'ll still be able to see how your browser is performing.') }}</p>
+                            <p class="greyText">{{ _('Your Health Report data will also be removed from Mozilla\'s servers. Learn more in our <a href="%(privacy_url)s">privacy policy.</a>')|format(privacy_url='https://www.mozilla.org/legal/privacy/firefox.html#health-report') }}</p>
                         </div>
                     </div>
                 </div>
@@ -79,10 +83,10 @@
                             <img class="icon" src="img/icon-thisMonth.png" height="16" width="16">{{ _('This Month') }}
                         </div>
                         <div class="statsBoxSection-content">
-                                <ul id="current_month">
-                                    <li>{{ _("time open") }}<span class="statsBoxSection-value"></span></li>
-                                    <li>{{ _("crashes") }}<span class="statsBoxSection-value"></span></li>
-                                </ul>
+                            <ul id="current_month">
+                                <li>{{ _("time open") }}<span class="statsBoxSection-value"></span></li>
+                                <li>{{ _("crashes") }}<span class="statsBoxSection-value"></span></li>
+                            </ul>
                         </div>
                     </div>
 
@@ -169,7 +173,8 @@
 
                     <div class="graph"></div>
                     <div class="yaxis-label">{{ _('Time (in seconds)') }}</div>
-                    <figcaption>{{ _('Startup time helps determine how well your version of Firefox is performing. In general, faster times (i.e. less time) indicate better performance.') }}  <a href="https://support.mozilla.org/kb/firefox-health-report-understand-your-browser-perf">{{ _('Learn more...') }}</a></figcaption>
+                    <figcaption>{{ _('Startup time helps determine how well your version of Firefox is performing. In general, faster times (i.e. less time) indicate better performance.') }} <a href="https://support.mozilla.org/kb/firefox-health-report-understand-your-browser-perf">{{ _('Learn more...') }}</a>
+                    </figcaption>
                 </figure>
             </div>
             <!-- RAW DATA -->
@@ -194,25 +199,26 @@
                     </section>
                     <article id="glossary" class="rawdata-display">
                         <section>
-                        <h3>1) {{ _('What the Firefox Health Report Measures') }}</h3>
-                        <p>{{ _('The Firefox Health Report (FHR) has 4 categories of metrics:') }}</p>
-                        <dl>
-                            <dt><a href="#sec-2-1" target="_self">{{ _('Configuration') }}</a></dt>
-                            <dd>{{ _('Device hardware, operating system, Firefox version') }}</dd>
-                            <dt><a href="#sec-2-2" target="_self">{{ _('Customizations') }}</a></dt>
-                            <dd>{{ _('Add-ons, count and type') }}</dd>
-                            <dt><a href="#sec-2-3" target="_self">{{ _('Performance') }}</a></dt>
-                            <dd>{{ _('Timing of browser events, rendering, session restores') }}</dd>
-                            <dt><a href="#sec-2-4" target="_self">{{ _('Wear and Tear') }}</a></dt>
-                            <dd>{{ _('Length of session, how old a profile is, count of crashes, count of pages') }}</dd>
-                        </dl>
+                            <h3>1) {{ _('What the Firefox Health Report Measures') }}</h3>
+                            <p>{{ _('The Firefox Health Report (FHR) has 4 categories of metrics:') }}</p>
+                            <dl>
+                                <dt><a href="#sec-2-1" target="_self">{{ _('Configuration') }}</a></dt>
+                                <dd>{{ _('Device hardware, operating system, Firefox version') }}</dd>
+                                <dt><a href="#sec-2-2" target="_self">{{ _('Customizations') }}</a></dt>
+                                <dd>{{ _('Add-ons, count and type') }}</dd>
+                                <dt><a href="#sec-2-3" target="_self">{{ _('Performance') }}</a></dt>
+                                <dd>{{ _('Timing of browser events, rendering, session restores') }}</dd>
+                                <dt><a href="#sec-2-4" target="_self">{{ _('Wear and Tear') }}</a></dt>
+                                <dd>{{ _('Length of session, how old a profile is, count of crashes, count of pages') }}</dd>
+                            </dl>
                         </section>
                         <section>
                             <h3>2) {{ _('Detailed Description') }}</h3>
                             <h4 id="sec-2-1">2.1) {{ _('Configuration') }}</h4>
                             <p>{{ _('Device hardware, operating system, Firefox version') }}</p>
                             <table rules="groups">
-                                <colgroup><col class="left" />
+                                <colgroup>
+                                    <col class="left" />
                                     <col class="left" />
                                 </colgroup>
                                 <thead>
@@ -317,7 +323,8 @@
                             <h4 id="sec-2-2">2.2) {{ _('Customizations') }}</h4>
                             <p>{{ _('Add-ons, count and type') }}</p>
                             <table rules="groups">
-                                <colgroup><col class="left" />
+                                <colgroup>
+                                    <col class="left" />
                                     <col class="left" />
                                 </colgroup>
                                 <thead>
@@ -382,7 +389,8 @@
                             <h4 id="sec-2-3">2.3) {{ _('Performance') }}</h4>
                             <p>{{ _('Timing of browser events, rendering, session restores') }}</p>
                             <table rules="groups">
-                                <colgroup><col class="left" />
+                                <colgroup>
+                                    <col class="left" />
                                     <col class="left" />
                                 </colgroup>
                                 <thead>
@@ -411,7 +419,8 @@
                             <h4 id="sec-2-4">2.4) {{ _('Wear and Tear') }}</h4>
                             <p>{{ _('Length of session, how old a profile is, count of crashes, count of pages') }}</p>
                             <table rules="groups">
-                                <colgroup><col class="left" />
+                                <colgroup>
+                                    <col class="left" />
                                     <col class="left" />
                                 </colgroup>
                                 <thead>
@@ -494,45 +503,44 @@
         <!-- Has to live inside the HTML because of l10n -->
         <script>
         // Activation widget
-        var activationWidget = $(".activationWidget"),
-            activationTrigger = $(".activationTrigger"),
-            statusTxt = $(".statusText");
+        var activationWidget = $('.activationWidget');
+        var activationTrigger = $('.activationTrigger');
+        var statusTxt = $('.statusText');
 
         var showStatusPanel = function(panel, status, showMessage) {
-
-            if(status) {
-                // If the activation panel is currently disabled
-                // then we need to remove the disabled class.
-                if(activationWidget.hasClass('disabled')) {
-                    activationWidget.removeClass("disabled");
-                    statusTxt.removeClass("disabled");
+            if (status) {
+                // If the activation panel is currently disabled then we need
+                // to remove the disabled class.
+                if (activationWidget.hasClass('disabled')) {
+                    activationWidget.removeClass('disabled');
+                    statusTxt.removeClass('disabled');
                 }
                 statusTxt.text('{{ _("ON") }}');
             } else {
-                // If the activation panel is currently active
-                // then we need to add the disabled class.
-                if(!activationWidget.hasClass('disabled')) {
-                    activationWidget.addClass("disabled");
-                    statusTxt.addClass("disabled");
+                // If the activation panel is currently active then we need
+                // to add the disabled class.
+                if (!activationWidget.hasClass('disabled')) {
+                    activationWidget.addClass('disabled');
+                    statusTxt.addClass('disabled');
                 }
                 statusTxt.text('{{ _("OFF") }}');
             }
 
-            if(showMessage) {
+            if (showMessage) {
                 status ? enableSubmission() : disableSubmission();
 
-                panel.toggleClass("toggled");
+                panel.toggleClass('toggled');
                 setTimeout(function() {
-                    panel.toggleClass("toggled");
+                    panel.toggleClass('toggled');
                 }, 5000);
             }
         };
 
         activationTrigger.click(function() {
             if (statusTxt.text() === '{{ _("ON") }}') {
-                showStatusPanel($(".disabledPanel"), false, true);
+                showStatusPanel($('.disabledPanel'), false, true);
             } else {
-                showStatusPanel($(".enabledPanel"), true, true);
+                showStatusPanel($('.enabledPanel'), true, true);
             }
         });
         </script>
