@@ -1,9 +1,9 @@
 /* jshint jquery: true, devel: true */
 window.onload = function() {
     'use strict';
-    var panels = $('.panel'),
-        payload = null,
-        prefs = null;
+    var panels = $('.panel');
+    var payload = null;
+    var prefs = null;
 
     /**
      * Determines whether the current Fx profile is older than 7 days.
@@ -23,14 +23,13 @@ window.onload = function() {
      * @param {object} payload - The JSON FHR payload object.
      */
     function showTipboxes(payload) {
-        if(isBrandNew()) {
+        if (isBrandNew()) {
             $('#newfox').addClass('active_tip');
         }
     }
 
-    // As we navigate between panels, for panels local to
-    // the health report, we manage history using URL
-    // hashes and listening for hashchanges.
+    // As we navigate between panels, for panels local to the health report, we
+    // manage history using URL hashes and listening for hashchanges.
     window.addEventListener('hashchange', function() {
         setActivePanel(window.location.hash);
     });
@@ -41,8 +40,8 @@ window.onload = function() {
                    .addClass('inactive');
         });
 
-        // Add panelId as hash to URL, this ensures we have
-        // history entries to navigate between the local panels.
+        // Add panelId as hash to URL, this ensures we have history entries to
+        // navigate between the local panels.
         window.location.hash = panelId;
         $(panelId).addClass('active');
     }
@@ -58,10 +57,10 @@ window.onload = function() {
     });
 
     function populateData(data) {
-        var sysInfo = data.environments.current['org.mozilla.sysinfo.sysinfo'],
-              geckoAppInfo = data.environments.current.geckoAppInfo,
-              appInfo = data.environments.current['org.mozilla.appInfo.appinfo'],
-              addonsCount = data.environments.current['org.mozilla.addons.counts'];
+        var sysInfo = data.environments.current['org.mozilla.sysinfo.sysinfo'];
+        var geckoAppInfo = data.environments.current.geckoAppInfo;
+        var appInfo = data.environments.current['org.mozilla.appInfo.appinfo'];
+        var addonsCount = data.environments.current['org.mozilla.addons.counts'];
 
         $('#cpu_count > span').text(sysInfo.cpuCount);
         $('#memory > span').text(sysInfo.memoryMB + ' MB');
@@ -83,63 +82,65 @@ window.onload = function() {
     }
 
     function init() {
-      window.addEventListener('message', receiveMessage, false);
+        window.addEventListener('message', receiveMessage, false);
     }
 
     function receiveMessage(event) {
-        var enabled = $('#enabled'),
-              disabled = $('#disabled');
+        var enabled = $('#enabled');
+        var disabled = $('#disabled');
 
         switch (event.data.type) {
         case 'begin':
-          // The wrapper page is ready to receive our messages.
-          requestPrefs();
-          requestPayload();
-          break;
+            // The wrapper page is ready to receive our messages.
+            requestPrefs();
+            requestPayload();
+            break;
 
         case 'prefs':
-          prefs = event.data.content;
+            prefs = event.data.content;
 
-          // Toggle footer message based on prefs state
-          if(prefs.enabled) {
-              enabled.show();
-              disabled.hide();
-          } else {
-              disabled.show();
-              enabled.hide();
-          }
-          break;
+            // Toggle footer message based on prefs state.
+            if (prefs.enabled) {
+                enabled.show();
+                disabled.hide();
+            } else {
+                disabled.show();
+                enabled.hide();
+            }
+            break;
 
         case 'payload':
-          payload = JSON.parse(event.data.content);
-
-          showTipboxes(payload);
-
-          document.querySelector('#raw pre').textContent = JSON.stringify(payload, null, 2);
-          populateData(payload);
-          break;
+            payload = JSON.parse(event.data.content);
+            showTipboxes(payload);
+            document.querySelector('#raw pre').textContent = JSON.stringify(payload, null, 2);
+            populateData(payload);
+            break;
         }
     }
 
     function requestPrefs() {
-      sendToBrowser('RequestCurrentPrefs');
+        sendToBrowser('RequestCurrentPrefs');
     }
 
     function requestPayload() {
-      sendToBrowser('RequestCurrentPayload');
+        sendToBrowser('RequestCurrentPayload');
     }
 
     function showSettings() {
-      sendToBrowser('ShowSettings');
+        sendToBrowser('ShowSettings');
     }
 
     function sendToBrowser(type) {
-      try {
-        let fhrEvent = new CustomEvent('RemoteHealthReportCommand', {detail: {command: type}});
-        document.dispatchEvent(fhrEvent);
-      } catch(e) {
-        console.log('Caught exception: ' + e);
-      }
+        try {
+            let fhrEvent = new CustomEvent('RemoteHealthReportCommand', {
+                detail: {
+                    command: type
+                }
+            });
+            document.dispatchEvent(fhrEvent);
+        } catch (e) {
+            console.log('Caught exception: ' + e);
+        }
     }
 
     init();
