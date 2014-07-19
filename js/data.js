@@ -1,73 +1,75 @@
-var ONE_DAY = 1000 * 60 * 60 * 24,
-    ONE_WEEK = ONE_DAY * 7,
-    TWO_WEEKS = ONE_DAY * 14,
-    THIRTY_DAYS_IN_SECONDS = 2592000,
-    PAINT_TIME_THRESHOLD = 300000,
-    CONFIG_URL = 'js/config.json?',
-    payload = null,
-    prefs = null,
-    // Is this the first load for the document?
-    isFirstLoad = true;
+var ONE_DAY = 1000 * 60 * 60 * 24;
+var ONE_WEEK = ONE_DAY * 7;
+var TWO_WEEKS = ONE_DAY * 14;
+var THIRTY_DAYS_IN_SECONDS = 2592000;
+var PAINT_TIME_THRESHOLD = 300000;
+var CONFIG_URL = 'js/config.json?';
+var payload = null;
+var prefs = null;
+
+// Is this the first load for the document?
+var isFirstLoad = true;
 
 // Converts the date passed [2013-06-13] to a Date object and checks
 // whether the current month is equal to the month of the
 // day argument passed.
 var isCurrentMonth = function(day) {
-    var currentYear = new Date().getYear(),
-          currentMonth = new Date().getMonth() + 1,
-          year = new Date(day).getYear(),
-          month = new Date(day).getMonth() + 1;
+    var currentYear = new Date().getYear();
+    var currentMonth = new Date().getMonth() + 1;
+    var year = new Date(day).getYear();
+    var month = new Date(day).getMonth() + 1;
 
-    if(currentYear === year && currentMonth === month) {
+    if (currentYear === year && currentMonth === month) {
         return true;
     }
     return false;
-},
+};
+
 // Gets all dates from the object, sort in the specified
 // oder and returns the new array.
-sortDates = function(days, descending) {
+var sortDates = function(days, descending) {
     var dates = [];
 
     // Gather up all of the dates
-    for(var day in days) {
-        if(days.hasOwnProperty(day)) {
+    for (var day in days) {
+        if (days.hasOwnProperty(day)) {
             dates.push(day);
         }
     }
     return descending ? dates.sort().reverse() : dates.sort();
-},
-// Returns the total open time
-calculateTotalTime = function(healthreport, historically) {
-    var days = healthreport.data.days,
-        totalTimeOpen = parseInt(healthreport.data.last['org.mozilla.appSessions.current'].totalTime, 10);
+};
 
-    for(var day in days) {
-        if(days.hasOwnProperty(day)) {
-            var monthCondition = isCurrentMonth(day) && typeof days[day]['org.mozilla.appSessions.previous'] !== 'undefined',
-                historicalCondition = typeof days[day]['org.mozilla.appSessions.previous'] !== 'undefined',
-                // Whether the function is called for the grand historical total or only for this month,
-                // will determine the condition used in the below 'if' statement.
-                activeCondition = historically ? historicalCondition : monthCondition;
+// Returns the total open time
+var calculateTotalTime = function(healthreport, historically) {
+    var days = healthreport.data.days;
+    var totalTimeOpen = parseInt(healthreport.data.last['org.mozilla.appSessions.current'].totalTime, 10);
+
+    for (var day in days) {
+        if (days.hasOwnProperty(day)) {
+            var monthCondition = isCurrentMonth(day) && typeof days[day]['org.mozilla.appSessions.previous'] !== 'undefined';
+            var historicalCondition = typeof days[day]['org.mozilla.appSessions.previous'] !== 'undefined';
+            // Whether the function is called for the grand historical total or only for this month,
+            // will determine the condition used in the below 'if' statement.
+            var activeCondition = historically ? historicalCondition : monthCondition;
 
             // Only total up values for the current month
             // Only proceed if we have appSessions data.
-            if(activeCondition) {
-
-                var cleanTotalTimeArray = days[day]['org.mozilla.appSessions.previous'].cleanTotalTime,
-                    abortedTotalTimeArray = days[day]['org.mozilla.appSessions.previous'].abortedTotalTime;
+            if (activeCondition) {
+                var cleanTotalTimeArray = days[day]['org.mozilla.appSessions.previous'].cleanTotalTime;
+                var abortedTotalTimeArray = days[day]['org.mozilla.appSessions.previous'].abortedTotalTime;
 
                 // All sessions will not always have a cleanTotalTime for a day so, ensure it is not
                 // undefined before iterating.
-                if(typeof cleanTotalTimeArray !== 'undefined') {
+                if (typeof cleanTotalTimeArray !== 'undefined') {
                     // cleanTotalTime is an array and we need to add all of the totals together.
-                    for(var cleanTotalTime in cleanTotalTimeArray) {
-                        if(cleanTotalTimeArray.hasOwnProperty(cleanTotalTime)) {
+                    for (var cleanTotalTime in cleanTotalTimeArray) {
+                        if (cleanTotalTimeArray.hasOwnProperty(cleanTotalTime)) {
                             // Parse total time as int
                             var thisCleanTotalTime = parseInt(cleanTotalTimeArray[cleanTotalTime], 10);
 
                             // If the total time is more than thirty days in seconds, we need to divide by 1000
                             // @see https://bugzilla.mozilla.org/show_bug.cgi?id=856315
-                            if(thisCleanTotalTime > THIRTY_DAYS_IN_SECONDS) {
+                            if (thisCleanTotalTime > THIRTY_DAYS_IN_SECONDS) {
                                 // Turn the milliseconds into seconds
                                 totalTimeOpen += thisCleanTotalTime / 1000;
                             } else {
@@ -79,20 +81,20 @@ calculateTotalTime = function(healthreport, historically) {
 
                 // All sessions will not always have a abortedTotalTime for a day so, ensure it is not
                 // undefined before iterating.
-                if(typeof abortedTotalTimeArray !== 'undefined') {
+                if (typeof abortedTotalTimeArray !== 'undefined') {
                     // cleanTotalTime is an array and we need to add all of the totals together.
-                    for(var abortedTotalTime in abortedTotalTimeArray) {
-                        if(abortedTotalTimeArray.hasOwnProperty(abortedTotalTime)) {
+                    for (var abortedTotalTime in abortedTotalTimeArray) {
+                        if (abortedTotalTimeArray.hasOwnProperty(abortedTotalTime)) {
                             // Parse total time as int
                             var thisAbortedTotalTime = parseInt(abortedTotalTimeArray[abortedTotalTime], 10);
 
                             // If the total time is more than thirty days in seconds, we need to divide by 1000
                             // @see https://bugzilla.mozilla.org/show_bug.cgi?id=856315
-                            if(thisAbortedTotalTime > THIRTY_DAYS_IN_SECONDS) {
+                            if (thisAbortedTotalTime > THIRTY_DAYS_IN_SECONDS) {
                                 // Turn the milliseconds into seconds
                                 totalTimeOpen += thisAbortedTotalTime / 1000;
                             } else {
-                             totalTimeOpen += thisAbortedTotalTime;
+                                totalTimeOpen += thisAbortedTotalTime;
                             }
                         }
                     }
@@ -102,79 +104,83 @@ calculateTotalTime = function(healthreport, historically) {
     }
     // Return time in minutes.
     return Math.round(totalTimeOpen / 60);
-},
-getLastCrashDate = function(days) {
-    var sortedDates = sortDates(days, true),
-        lastCrashDate = '';
+};
+
+var getLastCrashDate = function(days) {
+    var sortedDates = sortDates(days, true);
+    var lastCrashDate = '';
 
     // Loop through the dates from latest to eldest.
-    for(var day in sortedDates) {
-        if(sortedDates.hasOwnProperty(day)) {
+    for (var day in sortedDates) {
+        if (sortedDates.hasOwnProperty(day)) {
             var currentDay = sortedDates[day];
             // If the current day has an entry for crashes, use this day for
             // the last crash date, break and return.
-            if(typeof days[currentDay]['org.mozilla.crashes.crashes'] !== 'undefined') {
+            if (typeof days[currentDay]['org.mozilla.crashes.crashes'] !== 'undefined') {
                 lastCrashDate = currentDay;
                 break;
             }
         }
     }
     return lastCrashDate;
-},
-getBookmarksTotal = function(days) {
-    var sortedDates = sortDates(days, true),
-        bookmarksTotal = 0;
+};
+
+var getBookmarksTotal = function(days) {
+    var sortedDates = sortDates(days, true);
+    var bookmarksTotal = 0;
 
     // Loop through the dates from latest to eldest.
-    for(var day in sortedDates) {
-        if(sortedDates.hasOwnProperty(day)) {
-            var currentDay = sortedDates[day],
-                places = days[currentDay]['org.mozilla.places.places'];
+    for (var day in sortedDates) {
+        if (sortedDates.hasOwnProperty(day)) {
+            var currentDay = sortedDates[day];
+            var places = days[currentDay]['org.mozilla.places.places'];
 
-            if(typeof places !== 'undefined') {
+            if (typeof places !== 'undefined') {
                 bookmarksTotal = places.bookmarks;
             }
         }
     }
     return bookmarksTotal;
-},
+};
+
 // Total up crashes for current day.
-calculateCrashesTotal = function(crashes) {
+var calculateCrashesTotal = function(crashes) {
     var crashesTotal = 0;
 
     // If the current day has an entry for crashes, get in deeper
     // and look for the pending and submitted entries and total up.
-    if(typeof crashes !== 'undefined') {
+    if (typeof crashes !== 'undefined') {
         // Do we have pending crashes
-        if(typeof crashes.pending !== 'undefined') {
+        if (typeof crashes.pending !== 'undefined') {
             crashesTotal += crashes.pending;
         }
 
         // Do we have submitted crashes
-        if(typeof crashes.submitted !== 'undefined') {
+        if (typeof crashes.submitted !== 'undefined') {
             crashesTotal += crashes.submitted;
         }
     }
     return crashesTotal;
-},
+};
+
 // Calculate the total number of crashes for a period of time.
 // Currently support week, month and all, which is the default.
-getTotalNumberOfCrashes = function(period, customPayload) {
-    var crashesTotal = 0,
-        days = customPayload ? customPayload.data.days : payload.data.days;
+var getTotalNumberOfCrashes = function(period, customPayload) {
+    var crashesTotal = 0;
+    var days = customPayload ? customPayload.data.days : payload.data.days;
 
-    for(var day in days) {
-        if(days.hasOwnProperty(day)) {
+    for (var day in days) {
+        if (days.hasOwnProperty(day)) {
             var crashes = days[day]['org.mozilla.crashes.crashes'];
 
-            if(period !== 'all') {
-                var today = new Date(),
-                    // Test whether the current date falls within the last week.
-                    weekCondition = days[day] >= today - ONE_WEEK,
-                    monthCondition = isCurrentMonth(day),
-                    condition = period === 'week' ? weekCondition : monthCondition;
+            if (period !== 'all') {
+                var today = new Date();
+                // Test whether the current date falls within the last week.
+                var weekCondition = days[day] >= today - ONE_WEEK;
+                var monthCondition = isCurrentMonth(day);
+                var condition = period === 'week' ? weekCondition : monthCondition;
 
-                if(condition) {
+                if (condition) {
                     crashesTotal += calculateCrashesTotal(crashes);
                 }
             } else {
@@ -183,28 +189,29 @@ getTotalNumberOfCrashes = function(period, customPayload) {
         }
     }
     return crashesTotal;
-},
-getSessionsCount = function(customPayload) {
-    var days = customPayload ? customPayload.data.days : payload.data.days,
-        cleanSessions = 0,
-        abortedSessions = 0;
+};
 
-    for(var day in days) {
-        if(days.hasOwnProperty(day)) {
+var getSessionsCount = function(customPayload) {
+    var days = customPayload ? customPayload.data.days : payload.data.days;
+    var cleanSessions = 0;
+    var abortedSessions = 0;
+
+    for (var day in days) {
+        if (days.hasOwnProperty(day)) {
             var sessionsInfo = days[day]['org.mozilla.appSessions.previous'];
 
-            // Test whether the current day contains either session
-            // or crash data. If so, increment the session count.
-            if(typeof sessionsInfo !== 'undefined') {
-                // If there is a cleanTotalTime entry, get it's length
-                // as this indicates the number of sessions.
-                if(typeof sessionsInfo.cleanTotalTime !== 'undefined') {
+            // Test whether the current day contains either session or crash
+            // data. If so, increment the session count.
+            if (typeof sessionsInfo !== 'undefined') {
+                // If there is a cleanTotalTime entry, get its length as
+                // this indicates the number of sessions.
+                if (typeof sessionsInfo.cleanTotalTime !== 'undefined') {
                     cleanSessions += sessionsInfo.cleanTotalTime.length;
                 }
 
-                // If there is an abortedTotalTime entry, get it's length
-                // as this indicates the number of sessions.
-                if(typeof sessionsInfo.abortedTotalTime !== 'undefined') {
+                // If there is an abortedTotalTime entry, get its length as
+                // this indicates the number of sessions.
+                if (typeof sessionsInfo.abortedTotalTime !== 'undefined') {
                     abortedSessions += sessionsInfo.abortedTotalTime.length;
                 }
             }
@@ -212,55 +219,58 @@ getSessionsCount = function(customPayload) {
     }
 
     return cleanSessions + abortedSessions;
-},
+};
+
 // Computes the median of an array of values.
-computeMedian = function(values) {
-    if(values.length === 0) {
+var computeMedian = function(values) {
+    if (values.length === 0) {
         return null;
     }
-    if(values.length === 1) {
+    if (values.length === 1) {
         return values[0];
     }
-    values.sort(function(a,b) {return a - b;});
-    var half = Math.floor(values.length/2);
-    if(values.length % 2)
+    values.sort(function(a, b) { return a - b; });
+    var half = Math.floor(values.length / 2);
+    if (values.length % 2)
         return values[half];
     else
-        return (values[half-1] + values[half]) / 2;
-},
+        return (values[half - 1] + values[half]) / 2;
+};
+
 // Gets all startup times (paintTimes), or the median for each day over
 // the past 14 days. Data will be returned as an obejct as follows:
 // graphData = {
 //     dateCount: 2,
 //     startupTimes: [['1360108800000', 657], ['1360108800000', 989]]
 // }
-getAllStartupTimes = function(median) {
-    var days = payload.data.days,
-        graphData = {
+var getAllStartupTimes = function(median) {
+    var days = payload.data.days;
+    var graphData = {
             dateCount: 0,
             startupTimes: []
-        },
-        sortedDates = sortDates(payload.data.days, false),
-        today = new Date(),
-        twoWeeksAgo = new Date(today - TWO_WEEKS);
+        };
+    var sortedDates = sortDates(payload.data.days, false);
+    var today = new Date();
+    var twoWeeksAgo = new Date(today - TWO_WEEKS);
 
-    for(var day in sortedDates) {
-        var currentDay = sortedDates[day],
-            // For our comparison in the below 'if' statement,
-            // we need currentDay as a Date object.
-            currentDayAsDate = new Date(currentDay);
+    for (var day in sortedDates) {
+        var currentDay = sortedDates[day];
+
+        // For our comparison in the below 'if' statement,
+        // we need currentDay as a Date object.
+        var currentDayAsDate = new Date(currentDay);
 
         // We only want to display startup times for at most the last 14 days.
-        if(currentDayAsDate >= twoWeeksAgo && sortedDates.hasOwnProperty(day)) {
-            var sessionsInfo = days[currentDay]['org.mozilla.appSessions.previous'],
-                paintTimes = null,
-                paintTimesLength = 0,
-                paintTime = 0,
-                startupTimesTotal = 0;
+        if (currentDayAsDate >= twoWeeksAgo && sortedDates.hasOwnProperty(day)) {
+            var sessionsInfo = days[currentDay]['org.mozilla.appSessions.previous'];
+            var paintTimes = null;
+            var paintTimesLength = 0;
+            var paintTime = 0;
+            var startupTimesTotal = 0;
 
-            // Test whether the current day contains either session
-            // or crash data. If so, increment the session count.
-            if(typeof sessionsInfo !== 'undefined') {
+            // Test whether the current day contains either session or crash
+            // data. If so, increment the session count.
+            if (typeof sessionsInfo !== 'undefined') {
                 paintTimes = sessionsInfo.firstPaint;
                 paintTimesLength = paintTimes.length;
 
@@ -268,22 +278,22 @@ getAllStartupTimes = function(median) {
                 ++graphData.dateCount;
 
                 // First test whether we need to return the median startup times.
-                if(median) {
+                if (median) {
                     // If we have more than one sessions paint time for the day
                     // we need to calculate the median.
-                    if(paintTimesLength > 1) {
+                    if (paintTimesLength > 1) {
                         var validTimes = [];
 
-                        for(paintTime in paintTimes) {
+                        for (paintTime in paintTimes) {
                             // If paint time is greater than our threshold or negative, ignore it as it is
                             // probably bad data @see https://bugzilla.mozilla.org/show_bug.cgi?id=856315#c30
-                            if(paintTimes.hasOwnProperty(paintTime) &&
-                                    (paintTimes[paintTime] > 0 && paintTimes[paintTime] < PAINT_TIME_THRESHOLD)) {
+                            if (paintTimes.hasOwnProperty(paintTime) &&
+                                (paintTimes[paintTime] > 0 && paintTimes[paintTime] < PAINT_TIME_THRESHOLD)) {
                                 validTimes.push(paintTimes[paintTime]);
                             }
                         }
                         // Calculate the median, convert to seconds and push onto array
-                        if(validTimes.length > 0) {
+                        if (validTimes.length > 0) {
                             graphData.startupTimes.push([new Date(currentDay).getTime(), computeMedian(validTimes) / 1000]);
                         }
                     } else {
@@ -294,7 +304,7 @@ getAllStartupTimes = function(median) {
                         }
                     }
                 } else {
-                    for(paintTime in paintTimes) {
+                    for (paintTime in paintTimes) {
                         if (paintTimes[paintTime] > 0 && paintTimes[paintTime] < PAINT_TIME_THRESHOLD) {
                             graphData.startupTimes.push([new Date(currentDay).getTime(), paintTimes[paintTime] / 1000]);
                         }
@@ -314,34 +324,35 @@ getAllStartupTimes = function(median) {
             latest,
             currentPaintTime / 1000
         ]);
-     }
+    }
 
     return graphData;
-},
+};
+
 // This calculates our median startup time to determine whether
 // we have a slow fox. For details:
 // @see https://bugzilla.mozilla.org/show_bug.cgi?id=849879
-calculateMedianStartupTime = function() {
-    var days = payload.data.days,
-        sortedDates = sortDates(days, true),
-        counter = 0,
-        median = 0,
-        startupTimes = [];
+var calculateMedianStartupTime = function() {
+    var days = payload.data.days;
+    var sortedDates = sortDates(days, true);
+    var counter = 0;
+    var median = 0;
+    var startupTimes = [];
 
-    for(var day in sortedDates) {
-        if(sortedDates.hasOwnProperty(day)) {
-            var currentDay = sortedDates[day],
-                sessionsInfo = days[currentDay]['org.mozilla.appSessions.previous'],
-                paintTimes = null;
+    for (var day in sortedDates) {
+        if (sortedDates.hasOwnProperty(day)) {
+            var currentDay = sortedDates[day];
+            var sessionsInfo = days[currentDay]['org.mozilla.appSessions.previous'];
+            var paintTimes = null;
 
             // Do we have session info?
-            if(typeof sessionsInfo !== 'undefined') {
+            if (typeof sessionsInfo !== 'undefined') {
                 paintTimes = sessionsInfo.firstPaint;
 
                 // We only want the latest 10 paint times,
                 // and ensure that we have paint times to add.
-                if(counter < 10 && typeof paintTimes !== 'undefined') {
-                    for(var paintTime in paintTimes) {
+                if (counter < 10 && typeof paintTimes !== 'undefined') {
+                    for (var paintTime in paintTimes) {
                         if (paintTime > 0 && paintTime < PAINT_TIME_THRESHOLD) {
                             startupTimes.push(paintTimes[paintTime]);
                             ++counter;
@@ -359,7 +370,8 @@ calculateMedianStartupTime = function() {
     }
     // Covert the median to seconds before returning.
     return median / 1000;
-},
+};
+
 /**
  * Returns addon stats using old HealthReport data format
  * for extensions and plugins. This is kept for backwards
@@ -370,18 +382,18 @@ calculateMedianStartupTime = function() {
  * @param {string} type - The type of addon to include in calculation
  * @return populated addonsState object.
  */
-getAddonsForPreviousDataFormat = function(addonStats, addons, type) {
-    for(var addon in addons) {
-        if(addons.hasOwnProperty(addon) && typeof addons[addon].type !== 'undefined') {
+var getAddonsForPreviousDataFormat = function(addonStats, addons, type) {
+    for (var addon in addons) {
+        if (addons.hasOwnProperty(addon) && typeof addons[addon].type !== 'undefined') {
             var currentAddon = addons[addon];
-            // Only total addons of the type specified
+            // Only total addons of the type specified.
             if (currentAddon.type !== type) {
-              continue;
+                continue;
             }
 
-            if(currentAddon.userDisabled === "askToActivate") {
+            if (currentAddon.userDisabled === 'askToActivate') {
                 ++addonStats.clickToPlay;
-            } else if(currentAddon.userDisabled || currentAddon.appDisabled) {
+            } else if (currentAddon.userDisabled || currentAddon.appDisabled) {
                 ++addonStats.disabled;
             } else {
                 ++addonStats.enabled;
@@ -389,24 +401,25 @@ getAddonsForPreviousDataFormat = function(addonStats, addons, type) {
         }
     }
     return addonStats;
-},
+};
+
 /**
  * Returns addon stats for the extensions addon type.
  * @param {object} addonState - Empty addonsState object to populate and return
  * @param {array} addons - Array of addons from org.mozilla.addons.addons
  * @return populated addonsState object.
  */
-getExtensionsStats = function(addonStats, extensions) {
-    for(var extension in extensions) {
+var getExtensionsStats = function(addonStats, extensions) {
+    for (var extension in extensions) {
         // The extensions array contains an additional element indicating the version of the API so,
         // we need to make sure that we are dealing with an actual extension therefore, check that
         // the type property exists.
-        if(extensions.hasOwnProperty(extension) && typeof extensions[extension].type !== 'undefined') {
+        if (extensions.hasOwnProperty(extension) && typeof extensions[extension].type !== 'undefined') {
             var currentExtension = extensions[extension];
 
-            if(currentExtension.userDisabled === "askToActivate") {
+            if (currentExtension.userDisabled === 'askToActivate') {
                 ++addonStats.clickToPlay;
-            } else if(currentExtension.userDisabled || currentExtension.appDisabled) {
+            } else if (currentExtension.userDisabled || currentExtension.appDisabled) {
                 ++addonStats.disabled;
             } else {
                 ++addonStats.enabled;
@@ -414,24 +427,25 @@ getExtensionsStats = function(addonStats, extensions) {
         }
     }
     return addonStats;
-},
+};
+
 /**
  * Returns addon stats for the plugin addon type.
  * @param {object} addonState - Empty addonsState object to populate and return
  * @param {array} addons - Array of addons from org.mozilla.addons.plugins
  * @return populated addonsState object.
  */
-getPluginsStats = function(addonStats, plugins) {
-    for(var plugin in plugins) {
+var getPluginsStats = function(addonStats, plugins) {
+    for (var plugin in plugins) {
         // The plugins array contains an additional element indicating the version of the API so,
         // we need to make sure that we are dealing with an actual plugin therefore, check that
         // the name property exists.
-        if(plugins.hasOwnProperty(plugin) && typeof plugins[plugin].name !== 'undefined') {
+        if (plugins.hasOwnProperty(plugin) && typeof plugins[plugin].name !== 'undefined') {
             var currentPlugin = plugins[plugin];
 
-            if(currentPlugin.clicktoplay) {
+            if (currentPlugin.clicktoplay) {
                 ++addonStats.clickToPlay;
-            } else if(currentPlugin.disabled || currentPlugin.blocklisted) {
+            } else if (currentPlugin.disabled || currentPlugin.blocklisted) {
                 ++addonStats.disabled;
             } else {
                 ++addonStats.enabled;
@@ -439,7 +453,8 @@ getPluginsStats = function(addonStats, plugins) {
         }
     }
     return addonStats;
-}
+};
+
 /**
  * Returns an addonsState object indicating the number of addons that are
  * either enabled or disabled.
@@ -447,8 +462,7 @@ getPluginsStats = function(addonStats, plugins) {
  * @param {string} type - The type of addon to collect information about. Possible values extension and plugin
  * @returns A populated addonsStats object.
  */
-getAddonStats = function(healthreport, type) {
-
+var getAddonStats = function(healthreport, type) {
     var data = healthreport.data.last;
     var addons = data['org.mozilla.addons.active'];
     var addonStats = {
@@ -474,20 +488,19 @@ getAddonStats = function(healthreport, type) {
     return addonStats;
 };
 
-// Populates the front end templates located in index.html
+// Populates the front end templates located in index.html.
 var populateData = function(healthreport) {
-
-    // Get all containers for the data
-    var vitalStatsValueContainers = $('#vital_stats .statsBoxSection-value'),
-        currentMonthValueContainers = $('#current_month .statsBoxSection-value'),
-        addonsValueContainers = $('#addons .statsBoxSection-value'),
-        pluginValuesContainer = $('#plugins .statsBoxSection-value'),
-        vitalStats = [],
-        thisMonth = [],
-        addons = [],
-        plugins = [],
-        extensionsInfo = getAddonStats(healthreport, 'extension'),
-        pluginsInfo = getAddonStats(healthreport, 'plugin');
+    // Get all containers for the data.
+    var vitalStatsValueContainers = $('#vital_stats .statsBoxSection-value');
+    var currentMonthValueContainers = $('#current_month .statsBoxSection-value');
+    var addonsValueContainers = $('#addons .statsBoxSection-value');
+    var pluginValuesContainer = $('#plugins .statsBoxSection-value');
+    var vitalStats = [];
+    var thisMonth = [];
+    var addons = [];
+    var plugins = [];
+    var extensionsInfo = getAddonStats(healthreport, 'extension');
+    var pluginsInfo = getAddonStats(healthreport, 'plugin');
 
     // Create all of the needed data arrays.
     vitalStats.push(healthreport.geckoAppInfo.platformVersion);
@@ -505,102 +518,105 @@ var populateData = function(healthreport) {
     plugins.push(pluginsInfo.clickToPlay);
     plugins.push(pluginsInfo.disabled);
 
-    // Populate vital statistics
+    // Populate vital statistics.
     vitalStatsValueContainers.each(function(index) {
         $(this).text(vitalStats[index]);
     });
 
-    // Populate data for this month
+    // Populate data for this month.
     currentMonthValueContainers.each(function(index) {
         $(this).text(thisMonth[index]);
     });
 
-    // Populate data for addons
+    // Populate data for addons.
     addonsValueContainers.each(function(index) {
         $(this).text(addons[index]);
     });
 
-    // Populate data for plugins
+    // Populate data for plugins.
     pluginValuesContainer.each(function(index) {
         $(this).text(plugins[index]);
     });
 };
 
 function init() {
-    var fhr = {},
-          cache_buster = Math.random();
+    var fhr = {};
+    var cache_buster = Math.random();
 
     $.getJSON(CONFIG_URL + cache_buster, function(data) {
         fhr = data.fhr;
-
-        if(fhr.debug == 'true') {
-
+        if (fhr.debug == 'true') {
             var custom_event = {
-                data: {
-                    type: 'payload',
-                    content: ''
-                }
-            };
+                    data: {
+                        type: 'payload',
+                        content: ''
+                    }
+                };
 
             $.getJSON(fhr.jsonurl, function(data) {
-                // receiveMessage expects a string
+                // receiveMessage expects a string.
                 custom_event.data.content = JSON.stringify(data);
                 receiveMessage(custom_event);
             });
         } else {
-            window.addEventListener("message", receiveMessage, false);
+            window.addEventListener('message', receiveMessage, false);
             reqPrefs();
         }
     });
 }
 
 function receiveMessage(event) {
-
-    // If this is the initial load of the page, we are
-    // only requesting prefs in init and then only once
-    // the message for this is received do we ask for
+    // If this is the initial load of the page, we are only requesting prefs in
+    // init and then only once the message for this is received do we ask for
     // the payload.
-    if(isFirstLoad && event.data.type === 'prefs') {
+    if (isFirstLoad && event.data.type === 'prefs') {
         reqPayload();
         isFirstLoad = false;
     }
 
-    // The below handles all other on demand requests for
-    // prefs or payloads.
+    // The below handles all other on demand requests for prefs or payloads.
     switch (event.data.type) {
-    case "prefs":
+    case 'prefs':
         prefs = event.data.content;
-        if(prefs.enabled) {
-            showStatusPanel($(".enabledPanel"), true, false);
+        if (prefs.enabled) {
+            showStatusPanel($('.enabledPanel'), true, false);
         } else {
-            showStatusPanel($(".disabledPanel"), false, false);
+            showStatusPanel($('.disabledPanel'), false, false);
         }
         break;
-    case "payload":
-      payload = JSON.parse(event.data.content);
-      populateData(payload);
-      document.querySelector(".rawdata-display pre").textContent = JSON.stringify(payload, null, 2);
-      break;
+    case 'payload':
+        payload = JSON.parse(event.data.content);
+        populateData(payload);
+        document.querySelector('.rawdata-display pre').textContent = JSON.stringify(payload, null, 2);
+        break;
     }
 }
 
 function disableSubmission() {
-    sendToBrowser("DisableDataSubmission");
+    sendToBrowser('DisableDataSubmission');
 }
+
 function enableSubmission() {
-    sendToBrowser("EnableDataSubmission");
+    sendToBrowser('EnableDataSubmission');
 }
+
 function reqPrefs() {
-  sendToBrowser("RequestCurrentPrefs");
+    sendToBrowser('RequestCurrentPrefs');
 }
+
 function reqPayload() {
-  sendToBrowser("RequestCurrentPayload");
+    sendToBrowser('RequestCurrentPayload');
 }
+
 function sendToBrowser(type) {
-  var event = new CustomEvent("RemoteHealthReportCommand", {detail: {command: type}});
-  try {
-    document.dispatchEvent(event);
-  } catch(e) {
-    console.log(e);
-  }
+    var event = new CustomEvent('RemoteHealthReportCommand', {
+        detail: {
+            command: type
+        }
+    });
+    try {
+        document.dispatchEvent(event);
+    } catch (e) {
+        console.log(e);
+    }
 }
