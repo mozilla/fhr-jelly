@@ -106,18 +106,21 @@ var calculateTotalTime = function(healthreport, historically) {
     return Math.round(totalTimeOpen / 60);
 };
 
-var getLastCrashDate = function(days) {
-    var sortedDates = sortDates(days, true);
+var getLastCrashDate = function(data) {
+    var sortedDates = sortDates(data.days, true);
     var lastCrashDate = '';
 
     // Loop through the dates from latest to eldest.
     for (var day in sortedDates) {
         if (sortedDates.hasOwnProperty(day)) {
             var currentDay = sortedDates[day];
+            var locale = data.last['org.mozilla.appInfo.appinfo'].locale;
+
             // If the current day has an entry for crashes, use this day for
             // the last crash date, break and return.
-            if (typeof days[currentDay]['org.mozilla.crashes.crashes'] !== 'undefined') {
-                lastCrashDate = currentDay;
+            if (typeof data.days[currentDay]['org.mozilla.crashes.crashes'] !== 'undefined') {
+                // pass the locale found stored in the payload, and use en-US as a fallback.
+                lastCrashDate = new Date(currentDay).toLocaleDateString([locale, 'en-US']);
                 break;
             }
         }
@@ -505,7 +508,7 @@ var populateData = function(healthreport) {
     // Create all of the needed data arrays.
     vitalStats.push(healthreport.geckoAppInfo.platformVersion);
     vitalStats.push(calculateTotalTime(healthreport, true) + ' min');
-    vitalStats.push(getLastCrashDate(healthreport.data.days));
+    vitalStats.push(getLastCrashDate(healthreport.data));
     vitalStats.push(getBookmarksTotal(healthreport.data.days));
 
     thisMonth.push(calculateTotalTime(healthreport, false) + ' min');
