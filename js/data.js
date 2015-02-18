@@ -147,28 +147,35 @@ var getBookmarksTotal = function(days) {
 };
 
 // Total up crashes for current day.
-var calculateCrashesTotal = function(crashes) {
-    var crashesTotal = 0;
-
+var calculateCrashesTotal = function(crashes, type) {
     // If the current day has an entry for crashes, get in deeper
     // and look for the pending and submitted entries and total up.
-    if (typeof crashes !== 'undefined') {
-        // Do we have pending crashes
-        if (typeof crashes.pending !== 'undefined') {
-            crashesTotal += crashes.pending;
-        }
+    var props;
+    switch (type) {
+        case "main":
+            props = ["main-crash", "content-crash", "content-hang"];
+            break;
+        case "plugin":
+            props = ["plugin-crash", "plugin-hang"];
+            break;
+        default:
+            throw Error("Unexpected crash type");
+    }
 
-        // Do we have submitted crashes
-        if (typeof crashes.submitted !== 'undefined') {
-            crashesTotal += crashes.submitted;
-        }
+    var crashesTotal = 0;
+    if (typeof crashes !== 'undefined' && crashes._v >= 3) {
+        props.forEach(function(prop) {
+            if (prop in crashes) {
+                crashesTotal += crashes[prop];
+            }
+        });
     }
     return crashesTotal;
 };
 
 // Calculate the total number of crashes for a period of time.
 // Currently support week, month and all, which is the default.
-var getTotalNumberOfCrashes = function(period, customPayload) {
+var getTotalNumberOfCrashes = function(period, type, customPayload) {
     var crashesTotal = 0;
     var days = customPayload ? customPayload.data.days : payload.data.days;
 
@@ -184,10 +191,10 @@ var getTotalNumberOfCrashes = function(period, customPayload) {
                 var condition = period === 'week' ? weekCondition : monthCondition;
 
                 if (condition) {
-                    crashesTotal += calculateCrashesTotal(crashes);
+                    crashesTotal += calculateCrashesTotal(crashes, type);
                 }
             } else {
-                crashesTotal += calculateCrashesTotal(crashes);
+                crashesTotal += calculateCrashesTotal(crashes, type);
             }
         }
     }
@@ -512,7 +519,8 @@ var populateData = function(healthreport) {
     vitalStats.push(getBookmarksTotal(healthreport.data.days));
 
     thisMonth.push(calculateTotalTime(healthreport, false) + ' min');
-    thisMonth.push(getTotalNumberOfCrashes('month'));
+    thisMonth.push(getTotalNumberOfCrashes('month', 'main'));
+    thisMonth.push(getTotalNumberOfCrashes('month', 'plugin'));
 
     addons.push(extensionsInfo.enabled);
     addons.push(extensionsInfo.disabled);
