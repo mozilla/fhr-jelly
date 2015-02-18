@@ -627,8 +627,8 @@
           "isDefaultBrowser": 0
         },
         "org.mozilla.crashes.crashes": {
-          "_v": 1,
-          "submitted": 1
+          "_v": 5,
+          "main-crash": 1
         },
         "org.mozilla.appSessions.previous": {
           "_v": 3,

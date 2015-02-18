@@ -53,8 +53,8 @@ asyncTest('test-bookmarks', function() {
 
 asyncTest('test-total-crashes', function() {
     $.getJSON('/tests/json/multiple_sessions.json', function(payload) {
-        var totalNumberOfCrashes = getTotalNumberOfCrashes('all', payload);
-        equal(totalNumberOfCrashes, 1, 'We were expecting a total of 2 crash(es) and got ' + totalNumberOfCrashes);
+        var totalNumberOfCrashes = getTotalNumberOfCrashes('all', 'main', payload);
+        equal(totalNumberOfCrashes, 1, 'We were expecting a total of 1 crash(es) and got ' + totalNumberOfCrashes);
         start();
     });
 });

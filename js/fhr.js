@@ -149,7 +149,7 @@ $(function() {
         clearTimeout(waitr);
 
         // User has a crashy browser.
-        if (getTotalNumberOfCrashes('week') > 5) {
+        if (getTotalNumberOfCrashes('week', 'main') > 2) {
             $('#crashyfox').show('slow');
         }
 

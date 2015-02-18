@@ -22,10 +22,10 @@ $(function() {
                     output.text(getLastCrashDate(payload.data.days));
                     break;
                 case 'all_crashes':
-                    output.text(getTotalNumberOfCrashes('all', payload));
+                    output.text(getTotalNumberOfCrashes('all', 'main', payload));
                     break;
                 case 'all_crashes_month':
-                    output.text(getTotalNumberOfCrashes('month', payload));
+                    output.text(getTotalNumberOfCrashes('month', 'main', payload));
                     break;
                 case 'bookmarks':
                     output.text(getBookmarksTotal(payload.data.days));
