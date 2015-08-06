@@ -94,6 +94,7 @@ def main():
     # Place static files into output dir.
     STATIC_PATH = os.path.join(OUTPUT_PATH, 'static')
     MOBILE_STATIC_PATH = os.path.join(STATIC_PATH, 'mobile')
+    V4_STATIC_PATH = os.path.join(STATIC_PATH, 'v4')
     for folder in settings.STATIC_FOLDERS:
         folder_path = os.path.join(STATIC_PATH, folder)
         shutil.copytree(os.path.join(settings.ROOT, folder),
@@ -104,15 +105,22 @@ def main():
         shutil.copytree(os.path.join(settings.MOBILE_ROOT, folder),
                         mobile_folder_path)
 
+    for folder in settings.V4_STATIC_FOLDERS:
+        v4_folder_path = os.path.join(V4_STATIC_PATH, folder)
+        shutil.copytree(os.path.join(settings.ROOT, folder),
+                        v4_folder_path)
+
     for lang in settings.LANGS:
         # Make language dir, or symlink to fallback language
         LANG_PATH = os.path.join(OUTPUT_PATH, lang)
         MOBILE_LANG_PATH = os.path.join(LANG_PATH, 'mobile')
+        V4_LANG_PATH = os.path.join(LANG_PATH, 'v4')
         if lang in settings.LANG_FALLBACK:
             os.symlink(settings.LANG_FALLBACK[lang], LANG_PATH)
             continue
         else:
             os.makedirs(LANG_PATH)
+            os.makedirs(V4_LANG_PATH)
             if lang in settings.LANG_MOBILE_FALLBACK:
                 MOBILE_FALLBACK_PATH = os.path.join(
                                         '..',
@@ -133,6 +141,11 @@ def main():
                 os.symlink(os.path.join(settings.MOBILE_STATIC_SYMLINK_PATH, folder),
                            os.path.join(LANG_PATH, 'mobile', folder))
 
+        # symlink v4 static folders into language dir
+        for folder in settings.V4_STATIC_FOLDERS:
+            os.symlink(os.path.join(settings.V4_STATIC_SYMLINK_PATH, folder),
+                       os.path.join(LANG_PATH, 'v4', folder))
+
         # Data to be passed to template
         data = {
             'LANG': lang,
@@ -146,11 +159,13 @@ def main():
         for platform, template in templates.iteritems():
             OUTPUT_LANG_PATH = (LANG_PATH if platform == 'html' else
                                 os.path.join(LANG_PATH, 'mobile'))
+            V4_OUTPUT_LANG_PATH = os.path.join(LANG_PATH, 'v4')
             tmpl = ENV.get_template(template)
 
             if platform =='mobile' and lang in settings.LANG_MOBILE_FALLBACK:
                 continue
-            write_output(OUTPUT_LANG_PATH, 'index.html', tmpl.render(data));
+            write_output(OUTPUT_LANG_PATH, 'index.html', tmpl.render(data))
+            write_output(V4_OUTPUT_LANG_PATH, 'index.html', tmpl.render(data))
 
 
 if __name__ == '__main__':
