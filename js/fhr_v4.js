@@ -3,11 +3,8 @@ $(function() {
     $('.loading').hide();
 
     var navListItems = $('.nav li');
-    var rawTabs = $('#raw_selector').find('li a');
     var navItems = navListItems.find('a');
     var contentContainers = $('.mainContent');
-    var rawContentContainers = $('.rawdata-display');
-    var rawHeadings = $('.raw_heading');
 
     var showContainer = function(anchor) {
         // Get the id of the container to show from the href.
@@ -27,22 +24,6 @@ $(function() {
         $(this).addClass('active');
 
         showContainer($(this));
-    });
-
-    // Handle tab clicks on the raw data view.
-    rawTabs.click(function(event) {
-        event.preventDefault();
-        // Ensure all content containers are hidden.
-        rawContentContainers.hide();
-        rawHeadings.hide();
-
-        // Deactivate all tabs
-        rawTabs.removeClass('active');
-        // Set the clicked anchor to active
-        $(this).addClass('active');
-
-        showContainer($(this), true);
-        $($(this).attr('href') + '_heading').show();
     });
 
     // Show and hide the statistics for viewports less than 768px
@@ -72,77 +53,65 @@ $(function() {
         $(this).find('.expanderArrow').toggleClass('collapse');
         tipboxContent.find('.buttonRow').toggleClass('collapse');
     });
+});
 
-    var waitr = 0;
-    // Using a self executing function with a setTimeout to ensure we do not
-    // attempt to use the payload before it is ready.
-    (function waitForPayload() {
-        if (payload) {
-            showTipboxes(payload);
-            return;
-        }
-        waitr = setTimeout(waitForPayload, 500);
-    })();
+// Paints the startup times onto the main graph.
+// @param graphData an list of [[mssinceepoch, stime_ms]], for example:
+//     [[1360108800000, 657], [1360108800000, 989]]
 
-    var drawGraph = function(median) {
-        var graphData = getAllStartupTimes(median);
+function drawGraph(startupTimes) {
+    // This can be called before the page is ready, so wrap it in a ready
+    // blocker.
+    $(function() {
+        $('.graphbox').show();
         var graphContainer = $('.graph');
         var currentLocale = $('html').attr('lang');
+
+        // the default ticks can be pretty random: align them to day boundaries
+        let min = Math.min.apply(null, [date for ([date, time] of startupTimes)]);
+        let max = Math.max.apply(null, [date for ([date, time] of startupTimes)]);
+        let minoffset = min % ONE_DAY;
+        let ticks = [];
+        let interval = ONE_DAY;
+        if ((max - min) / interval > 20) {
+            interval = ONE_DAY * 2;
+        }
+        for (let tick = min - minoffset + new Date().getTimezoneOffset() * 60 * 1000;
+             tick < max; tick += interval) {
+            ticks.push(tick);
+        }
 
         // We need to localize our month names so first load our localized data,
         // then set the graph options and draw the graph.
         $.getJSON('js/locale/date_format.json', function(data) {
             var options = {
-                  colors: ['#50B432'],
-                  series: {
-                      points: {
-                          show: true,
-                          radius: 5
-                      }
-                  },
-                  xaxis: {
-                      mode: 'time',
-                      ticks: graphData.dateCount,
-                      monthNames: data[currentLocale].monthNameShort.split(','),
-                      show: true
-                  }
-              };
+                colors: ['#50b432'],
+                series: {
+                    points: {
+                        show: true,
+                        radius: 2.5,
+                    },
+                },
+                xaxis: {
+                    min: min - ONE_DAY / 2,
+                    max: max + ONE_DAY / 2,
+                    mode: 'time',
+                    timezone: 'browser',
+                    ticks: ticks,
+                    monthNames: data[currentLocale].monthNameShort.split(','),
+                    show: true,
+                }
+            };
 
-            var graph = $.plot(graphContainer, [graphData.startupTimes], options);
+            var graph = $.plot(graphContainer, [startupTimes], options);
             // We are drawing a graph so show the Y-label.
             $('.yaxis-label').show();
         }).fail(function(jqxhr, textStatus, error) {
             var errorTxt = textStatus + '[' + error + ']';
             graphContainer.text('The following error occurred while drawing the graph: ' + errorTxt);
         });
-    };
-    var clearSelectors = function(selector) {
-        var graphSelectors = $(selector).find('li a');
-
-        graphSelectors.each(function() {
-            $(this).removeClass('active');
-        });
-    };
-
-    $('#graph_all').click(function(event) {
-        event.preventDefault();
-        // Clear all currently active selectors.
-        clearSelectors('#graph_selector');
-
-        // Set this selector to active.
-        $(this).addClass('active');
-        drawGraph(false);
     });
-
-    $('#graph_median').click(function(event) {
-        event.preventDefault();
-        // Clear all currently active selectors.
-        clearSelectors('#graph_selector');
-
-        // Set this selector to active.
-        $(this).addClass('active');
-        drawGraph(true);
-    });
+};
 
     // Conditionally show tip boxes
     function showTipboxes(payload) {
@@ -159,13 +128,6 @@ $(function() {
         } else {
             // We have enough data, show the graph UI and draw the graph. By
             // default, we draw the average startup times.
-            $('.graphbox').show();
             drawGraph(true);
         }
-
-        // If our median startup time is greater than 20, we have a slowfox.
-        if (calculateMedianStartupTime() > 20) {
-            $('#slowfox').show('slow');
-        }
     }
-});

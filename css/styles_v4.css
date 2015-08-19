@@ -514,9 +514,6 @@ h3 {
     background-image: linear-gradient(#81BC2E, #659324);
     color: #fff;
 }
-.selector.raw ul {
-    margin-right: 5%;
-}
 .graph {
     clear: both;
     width: 100%;
@@ -590,24 +587,34 @@ figcaption {
 }
 
 /* Raw Data */
-#raw,
-#glossary {
+#raw {
   display: none;
 }
-#glossary_heading {
-    display: none;
-}
 .rawdata-container {
-    margin: 0;
-}
-.rawdata-container h2 {
     margin-left: 20px;
 }
 .rawdata-display {
-    clear:both;
-    margin: 0 0 30px 20px;
-    width: 815px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
 }
+#rawdata-list {
+    list-style-type: none;
+    white-space: nowrap;
+    padding: 0px;
+}
+#rawdata-list > li {
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+#rawdata-list > li.current {
+    background-color: #f27900;
+}
+#rawdata-data {
+    margin-left: 5px;
+    flex-grow: 3;
+}
+
 /* Table styles */
 table {
     margin-bottom: 20px;
