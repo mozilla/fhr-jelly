@@ -67,7 +67,8 @@ def main():
     """Function run when script is run from the command line."""
     templates = {
         'html': 'index.html',
-        'mobile': 'mobile.html'
+        'mobile': 'mobile.html',
+        'v4': 'v4.html'
     }
 
     # allow parameter to override settings build version
@@ -157,16 +158,17 @@ def main():
         ENV.globals['_'] = lambda txt: translate(lang, txt, warn=options.warn)
 
         for platform, template in templates.iteritems():
-            OUTPUT_LANG_PATH = (LANG_PATH if platform == 'html' else
-                                os.path.join(LANG_PATH, 'mobile'))
-            V4_OUTPUT_LANG_PATH = os.path.join(LANG_PATH, 'v4')
+            if platform == 'html':
+                OUTPUT_LANG_PATH = LANG_PATH
+            elif platform == 'v4':
+                OUTPUT_LANG_PATH = os.path.join(LANG_PATH, 'v4')
+            else:
+                OUTPUT_LANG_PATH = os.path.join(LANG_PATH, 'mobile')
             tmpl = ENV.get_template(template)
 
             if platform =='mobile' and lang in settings.LANG_MOBILE_FALLBACK:
                 continue
             write_output(OUTPUT_LANG_PATH, 'index.html', tmpl.render(data))
-            write_output(V4_OUTPUT_LANG_PATH, 'index.html', tmpl.render(data))
-
 
 if __name__ == '__main__':
     main()
