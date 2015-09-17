@@ -61,7 +61,7 @@ asyncTest('test-total-crashes', function() {
 
 asyncTest('test-total-crashes-for-current-month', function() {
     $.getJSON('/tests/json/multiple_sessions.json', function(payload) {
-        var totalNumberOfCrashes = getTotalNumberOfCrashes('month', payload);
+        var totalNumberOfCrashes = getTotalNumberOfCrashes('month', 'main', payload);
         equal(totalNumberOfCrashes, 0, 'We were expecting a total of 0 crash(es) for the current month and got ' + totalNumberOfCrashes);
         start();
     });
