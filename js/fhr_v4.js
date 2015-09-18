@@ -68,8 +68,8 @@ function drawGraph(startupTimes) {
         var currentLocale = $('html').attr('lang');
 
         // the default ticks can be pretty random: align them to day boundaries
-        let min = Math.min.apply(null, [date for ([date, time] of startupTimes)]);
-        let max = Math.max.apply(null, [date for ([date, time] of startupTimes)]);
+        let min = Math.min.apply(null, [for ([date, time] of startupTimes) date]);
+        let max = Math.max.apply(null, [for ([date, time] of startupTimes) date]);
         let minoffset = min % ONE_DAY;
         let ticks = [];
         let interval = ONE_DAY;
@@ -111,7 +111,7 @@ function drawGraph(startupTimes) {
             graphContainer.text('The following error occurred while drawing the graph: ' + errorTxt);
         });
     });
-};
+}
 
     // Conditionally show tip boxes
     function showTipboxes(payload) {

@@ -137,7 +137,7 @@ function pingError(id, err) {
 }
 
 function crashesFromMainPing(ping, type) {
-    let base = ping.payload.keyedHistograms['SUBPROCESS_ABNORMAL_ABORT'];
+    let base = ping.payload.keyedHistograms.SUBPROCESS_ABNORMAL_ABORT;
     if (base === undefined) {
         return 0;
     }
@@ -216,7 +216,7 @@ function populateThisMonth(pingList) {
 
     let pending = 1;
     function pendingFinished() {
-        if (--pending == 0) {
+        if (--pending === 0) {
             finish();
         }
     }
