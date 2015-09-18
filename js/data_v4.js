@@ -50,7 +50,6 @@ function isPastNDays(day, n) {
 function populateEnvironment(environment) {
     var vitalStatsValueContainers = $('#vital_stats .statsBoxSection-value');
 
-    // XXX localize me?
     let channel = environment.settings.update.channel;
 
     // XXX localize me!
