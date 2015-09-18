@@ -51,19 +51,23 @@ function populateEnvironment(environment) {
     var vitalStatsValueContainers = $('#vital_stats .statsBoxSection-value');
 
     let channel = environment.settings.update.channel;
-
-    // XXX localize me!
     let updates = environment.settings.update.enabled ?
       (environment.settings.update.autoDownload ? "automatic" : "prompt") : "disabled";
-    var vitalStats = [
+    let vitalStats = [
         environment.build.version,
         channel,
-        updates,
     ];
 
-    vitalStatsValueContainers.each(function(index) {
+    vitalStatsValueContainers.not('#vital_stats-updates')
+                             .each(function(index) {
         $(this).text(vitalStats[index]);
     });
+
+    // We localize the update value via the page template and show/hide the relevant value here.
+    for (let value of ["automatic", "prompt", "disabled"]) {
+        let show = (value == updates);
+        $('#vital_stats-updates-' + value).css('display', show ? 'inline':'none');
+    }
 
     var addonsValueContainers = $('#addons .statsBoxSection-value');
 

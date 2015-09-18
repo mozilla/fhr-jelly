@@ -72,7 +72,11 @@
                             <ul id="vital_stats">
                                 <li>{{ _("version") }}<span class="statsBoxSection-value"></span></li>
                                 <li>{{ _("update channel") }}<span class="statsBoxSection-value"></span></li>
-                                <li>{{ _("updates") }}<span class="statsBoxSection-value"></span><li>
+                                <li>{{ _("updates") }}<span id="vital_stats-updates" class="statsBoxSection-value">
+                                  <span id="vital_stats-updates-automatic">{{ _("automatic") }}</span>
+                                  <span id="vital_stats-updates-prompt">{{ _("prompt") }}</span>
+                                  <span id="vital_stats-updates-disabled">{{ _("disabled") }}</span>
+                                </span></li>
                             </ul>
                         </div>
                     </div>
