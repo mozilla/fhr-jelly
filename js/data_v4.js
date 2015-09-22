@@ -164,7 +164,7 @@ function populateThisMonth(pingList) {
     function finish() {
         var currentMonthValueContainers = $('#current_month .statsBoxSection-value');
 
-        // XXX: localize me
+        // TODO: localize properly (bug 1207111).
         let displayTime;
         if (totalTimeThisMonth < 60 * 60) {
             displayTime = Math.floor(totalTimeThisMonth / 60) + " minutes";
