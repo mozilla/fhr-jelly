@@ -715,3 +715,7 @@ html[dir=rtl] .activationTextContainer {
 html[dir=rtl] .activationTabContainer {
     float: left;
 }
+
+#vital_stats-updates > span {
+  display: none;
+}
