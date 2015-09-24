@@ -68,8 +68,8 @@ function drawGraph(startupTimes) {
         var currentLocale = $('html').attr('lang');
 
         // the default ticks can be pretty random: align them to day boundaries
-        let min = Math.min.apply(null, [for ([date, time] of startupTimes) date]);
-        let max = Math.max.apply(null, [for ([date, time] of startupTimes) date]);
+        let min = Math.min.apply(null, [for (time of startupTimes) time[0]]);
+        let max = Math.max.apply(null, [for (time of startupTimes) time[0]]);
         let minoffset = min % ONE_DAY;
         let ticks = [];
         let interval = ONE_DAY;
