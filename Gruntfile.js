@@ -19,7 +19,8 @@ module.exports = function(grunt) {
             all: {
                 options: {
                     urls: [
-                        'http://localhost:9000/tests/unit.html'
+                        'http://localhost:9000/tests/unit.html',
+                        'http://localhost:9000/tests/unit_v4.html',
                     ]
                 }
             }
