@@ -8,18 +8,18 @@ var prefs = null;
 
 Promise.prototype.finally = function(fn) {
     return this.then(
-        (v) => {
+        function(v) {
             fn();
             return v;
         },
-        (err) => {
+        function(err) {
             fn();
             throw err;
         }
     );
 };
 
-let dateFormat = new Intl.DateTimeFormat(undefined, { day: 'numeric', month: 'short', year: 'numeric' });
+var dateFormat = new Intl.DateTimeFormat(undefined, { day: 'numeric', month: 'short', year: 'numeric' });
 function displayDate(timestamp) {
     return dateFormat.format(new Date(timestamp));
 }
@@ -43,17 +43,17 @@ var isCurrentMonth = function(day) {
 };
 
 function isPastNDays(day, n) {
-    let difference = new Date().getTime() - new Date(day).getTime();
+    var difference = new Date().getTime() - new Date(day).getTime();
     return difference < ONE_DAY * n;
 }
 
 function populateEnvironment(environment) {
     var vitalStatsValueContainers = $('#vital_stats .statsBoxSection-value');
 
-    let channel = environment.settings.update.channel;
-    let updates = environment.settings.update.enabled ?
+    var channel = environment.settings.update.channel;
+    var updates = environment.settings.update.enabled ?
       (environment.settings.update.autoDownload ? "automatic" : "prompt") : "disabled";
-    let vitalStats = [
+    var vitalStats = [
         environment.build.version,
         channel,
     ];
@@ -64,29 +64,27 @@ function populateEnvironment(environment) {
     });
 
     // We localize the update value via the page template and show/hide the relevant value here.
-    for (let value of ["automatic", "prompt", "disabled"]) {
-        let show = (value == updates);
+    for (var value of ["automatic", "prompt", "disabled"]) {
+        var show = (value == updates);
         $('#vital_stats-updates-' + value).css('display', show ? 'inline':'none');
     }
 
     var addonsValueContainers = $('#addons .statsBoxSection-value');
 
-    let activeAddons = 0;
-    for (let id of Object.keys(environment.addons.activeAddons)) {
+    var activeAddons = 0;
+    for (var id of Object.keys(environment.addons.activeAddons)) {
         ++activeAddons;
     }
-    let activePlugins = 0;
-    let clickPlugins = 0;
-    for (let plugin of environment.addons.activePlugins) {
+    var activePlugins = 0;
+    var clickPlugins = 0;
+    for (var plugin of environment.addons.activePlugins) {
         if (plugin.clicktoplay) {
             ++clickPlugins;
         } else {
             ++activePlugins;
         }
     }
-    for (let plugin of Object.keys(environment.addons.activeGMPlugins)) {
-        ++activePlugins;
-    }
+    activePlugins += Object.keys(environment.addons.activeGMPlugins).length;
 
     var addons = [
         activeAddons,
@@ -99,21 +97,21 @@ function populateEnvironment(environment) {
     });
 }
 
-let pendingIDs = new Map();
+var pendingIDs = new Map();
 function promiseFetchPing(id) {
     if (pendingIDs.has(id)) {
-        let [promise, resolve, reject] = pendingIDs.get(id);
-        return promise;
+        var [p, res, rej] = pendingIDs.get(id);
+        return p;
     }
-    let evt = new CustomEvent('RemoteHealthReportCommand', {
+    var evt = new CustomEvent('RemoteHealthReportCommand', {
         detail: {
             command: 'RequestTelemetryPingData',
             id: id,
         }
     });
     document.dispatchEvent(evt);
-    let resolver, rejector;
-    let promise = new Promise((resolve, reject) => {
+    var resolver, rejector;
+    var promise = new Promise((resolve, reject) => {
         resolver = resolve;
         rejector = reject;
     }).finally(() => { pendingIDs.delete(id); });
@@ -121,7 +119,7 @@ function promiseFetchPing(id) {
     return promise;
 }
 
-let pendingCurrentSubsession = null;
+var pendingCurrentSubsession = null;
 function promiseFetchCurrentSubsession() {
     sendToBrowser("RequestCurrentPingData");
     return new Promise((resolve, reject) => {
@@ -130,21 +128,21 @@ function promiseFetchCurrentSubsession() {
 }
 
 function pingReceived(id, data) {
-    let [promise, resolve, reject] = pendingIDs.get(id);
+    var [promise, resolve, reject] = pendingIDs.get(id);
     resolve(data);
 }
 
 function pingError(id, err) {
-    let [promise, resolve, reject] = pendingIDs.get(id);
+    var [promise, resolve, reject] = pendingIDs.get(id);
     reject(err);
 }
 
 function crashesFromMainPing(ping, type) {
-    let base = ping.payload.keyedHistograms.SUBPROCESS_ABNORMAL_ABORT;
+    var base = ping.payload.keyedHistograms.SUBPROCESS_ABNORMAL_ABORT;
     if (base === undefined) {
         return 0;
     }
-    let h = base[type];
+    var h = base[type];
     if (h === undefined) {
         return 0;
     }
@@ -166,7 +164,7 @@ MainPingAccumulator.prototype = {
         if (isPastNDays(data.payload.info.subsessionStartDate, 30)) {
             if (data.payload.info.subsessionCounter == 1 &&
                 data.payload.simpleMeasurements.firstPaint) {
-                let sd = new Date(data.payload.info.subsessionStartDate).getTime();
+                var sd = new Date(data.payload.info.subsessionStartDate).getTime();
                 this.startupTimes.push([sd, data.payload.simpleMeasurements.firstPaint]);
             }
             this.mainCrashes30Days += crashesFromMainPing(data, "content");
@@ -193,13 +191,13 @@ MainPingAccumulator.prototype = {
 };
 
 function populateThisMonth(pingList) {
-    let accu = new MainPingAccumulator();
+    var accu = new MainPingAccumulator();
 
     function finish() {
         var currentMonthValueContainers = $('#current_month .statsBoxSection-value');
 
         // TODO: localize properly (bug 1207111).
-        let displayTime;
+        var displayTime;
         if (accu.totalTimeThisMonth < 60 * 60) {
             displayTime = Math.floor(accu.totalTimeThisMonth / 60) + " minutes";
         } else if (accu.totalTimeThisMonth < 60 * 60 * 48) {
@@ -231,7 +229,7 @@ function populateThisMonth(pingList) {
         }
     }
 
-    let pending = 1;
+    var pending = 1;
     function pendingFinished() {
         if (--pending === 0) {
             finish();
@@ -242,12 +240,12 @@ function populateThisMonth(pingList) {
         .finally(pendingFinished);
 
     pingList.sort((a, b) => b.timestampCreated - a.timestampCreated);
-    let linkList = document.getElementById('rawdata-list');
-    for (let {type, timestampCreated, id} of pingList) {
-        let link = document.createElement('a');
+    var linkList = document.getElementById('rawdata-list');
+    for (var {type, timestampCreated, id} of pingList) {
+        var link = document.createElement('a');
         link.setAttribute("data-id", id);
         link.textContent = displayDate(timestampCreated) + ": " + type;
-        let line = document.createElement('li');
+        var line = document.createElement('li');
         line.appendChild(link);
         linkList.appendChild(line);
 
@@ -267,7 +265,7 @@ function populateThisMonth(pingList) {
     }
 
     $(document).on('click', '#rawdata-list a', function() {
-        let id = this.getAttribute('data-id');
+        var id = this.getAttribute('data-id');
         promiseFetchPing(id).then((data) => {
             document.getElementById('rawdata-data').textContent =
                 JSON.stringify(data, null, 2);
