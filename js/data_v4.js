@@ -151,69 +151,83 @@ function crashesFromMainPing(ping, type) {
     return h.values[0];
 }
 
+function MainPingAccumulator() {
+    this.totalSessionThisMonth = 0;
+    this.totalTimeThisMonth = 0;
+    this.mainCrashesThisMonth = 0;
+    this.pluginCrashesThisMonth = 0;
+
+    this.mainCrashes30Days = 0;
+
+    this.startupTimes = [];
+}
+MainPingAccumulator.prototype = {
+    processMainPing: function(data) {
+        if (isPastNDays(data.payload.info.subsessionStartDate, 30)) {
+            if (data.payload.info.subsessionCounter == 1 &&
+                data.payload.simpleMeasurements.firstPaint) {
+                let sd = new Date(data.payload.info.subsessionStartDate).getTime();
+                this.startupTimes.push([sd, data.payload.simpleMeasurements.firstPaint]);
+            }
+            this.mainCrashes30Days += crashesFromMainPing(data, "content");
+        }
+        if (isCurrentMonth(data.payload.info.subsessionStartDate)) {
+            if (data.payload.info.subsessionCounter == 1) {
+                ++this.totalSessionThisMonth;
+            }
+            this.totalTimeThisMonth += data.payload.info.subsessionLength;
+            this.mainCrashesThisMonth += crashesFromMainPing(data, "content");
+            this.pluginCrashesThisMonth += crashesFromMainPing(data, "plugin");
+            this.pluginCrashesThisMonth += crashesFromMainPing(data, "gmplugin");
+        }
+    },
+
+    processCrashPing: function(data) {
+        if (isPastNDays(data.creationDate, 30)) {
+            this.mainCrashes30Days += 1;
+        }
+        if (isCurrentMonth(data.creationDate)) {
+            this.mainCrashesThisMonth += 1;
+        }
+    },
+};
+
 function populateThisMonth(pingList) {
-    let totalSessionThisMonth = 0;
-    let totalTimeThisMonth = 0;
-    let mainCrashesThisMonth = 0;
-    let pluginCrashesThisMonth = 0;
-
-    let mainCrashes30Days = 0;
-
-    let startupTimes = [];
+    let accu = new MainPingAccumulator();
 
     function finish() {
         var currentMonthValueContainers = $('#current_month .statsBoxSection-value');
 
         // TODO: localize properly (bug 1207111).
         let displayTime;
-        if (totalTimeThisMonth < 60 * 60) {
-            displayTime = Math.floor(totalTimeThisMonth / 60) + " minutes";
-        } else if (totalTimeThisMonth < 60 * 60 * 48) {
-            displayTime = Math.floor(totalTimeThisMonth / 60 / 60) + " hours";
+        if (accu.totalTimeThisMonth < 60 * 60) {
+            displayTime = Math.floor(accu.totalTimeThisMonth / 60) + " minutes";
+        } else if (accu.totalTimeThisMonth < 60 * 60 * 48) {
+            displayTime = Math.floor(accu.totalTimeThisMonth / 60 / 60) + " hours";
         } else {
-            displayTime = Math.floor(totalTimeThisMonth / 60 / 60 / 24) + " days";
+            displayTime = Math.floor(accu.totalTimeThisMonth / 60 / 60 / 24) + " days";
         }
 
         var thisMonth = [
-            totalSessionThisMonth,
+            accu.totalSessionThisMonth,
             displayTime,
-            mainCrashesThisMonth,
-            pluginCrashesThisMonth,
+            accu.mainCrashesThisMonth,
+            accu.pluginCrashesThisMonth,
         ];
 
         currentMonthValueContainers.each(function(index) {
             $(this).text(thisMonth[index]);
         });
 
-        if (mainCrashes30Days > 2) {
+        if (accu.mainCrashes30Days > 2) {
             $('#crashyfox').show('slow');
         }
 
-        if (startupTimes < 5) {
+        if (accu.startupTimes.length < 5) {
             $('#hungryfox').show('slow');
         } else {
-            startupTimes.sort((a, b) => (a[0] - b[0]));
-            drawGraph(startupTimes);
-        }
-    }
-
-    function processMainPing(data) {
-        if (isPastNDays(data.payload.info.subsessionStartDate, 30)) {
-            if (data.payload.info.subsessionCounter == 1 &&
-                data.payload.simpleMeasurements.firstPaint) {
-                let sd = new Date(data.payload.info.subsessionStartDate).getTime();
-                startupTimes.push([sd, data.payload.simpleMeasurements.firstPaint]);
-            }
-            mainCrashes30Days += crashesFromMainPing(data, "content");
-        }
-        if (isCurrentMonth(data.payload.info.subsessionStartDate)) {
-            if (data.payload.info.subsessionCounter == 1) {
-                ++totalSessionThisMonth;
-            }
-            totalTimeThisMonth += data.payload.info.subsessionLength;
-            mainCrashesThisMonth += crashesFromMainPing(data, "content");
-            pluginCrashesThisMonth += crashesFromMainPing(data, "plugin");
-            pluginCrashesThisMonth += crashesFromMainPing(data, "gmplugin");
+            accu.startupTimes.sort((a, b) => (a[0] - b[0]));
+            drawGraph(accu.startupTimes);
         }
     }
 
@@ -224,7 +238,7 @@ function populateThisMonth(pingList) {
         }
     }
     promiseFetchCurrentSubsession()
-        .then(processMainPing)
+        .then(accu.processMainPing.bind(accu))
         .finally(pendingFinished);
 
     pingList.sort((a, b) => b.timestampCreated - a.timestampCreated);
@@ -243,20 +257,12 @@ function populateThisMonth(pingList) {
         if (type == "main") {
             ++pending;
             promiseFetchPing(id)
-                .then(processMainPing)
+                .then(accu.processMainPing.bind(accu))
                 .finally(pendingFinished);
         } else if (type == "crash") {
             ++pending;
-            promiseFetchPing(id).then(
-                (data) => {
-                    if (isPastNDays(timestampCreated, 30)) {
-                        mainCrashes30Days += 1;
-                    }
-                    if (isCurrentMonth(timestampCreated)) {
-                        mainCrashesThisMonth += 1;
-                    }
-                }
-            ).finally(pendingFinished);
+            promiseFetchPing(id).then(accu.processCrashPing.bind(accu))
+                                .finally(pendingFinished);
         }
     }
 
