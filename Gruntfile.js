@@ -16,6 +16,9 @@ module.exports = function(grunt) {
             all: ['Gruntfile.js', 'js/*.js', 'mobile/js/*.js', 'tests/lib/*.js']
         },
         qunit: {
+            options: {
+                timeout: 10000,
+            },
             all: {
                 options: {
                     urls: [
