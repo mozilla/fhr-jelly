@@ -1,0 +1,1408 @@
+{
+  "pings": [
+    {
+      "clientId": "3fff7c6d-414d-4e02-b74d-36dc1f350e3e",
+      "type": "main",
+      "id": "e58627b1-ab66-4ecf-a321-bd35a018132e",
+      "creationDate": "2015-10-02T15:42:52.208Z",
+      "version": 4,
+      "application": {
+        "architecture": "x86-64",
+        "buildId": "20151001030236",
+        "name": "Firefox",
+        "version": "44.0a1",
+        "vendor": "Mozilla",
+        "platformVersion": "44.0a1",
+        "xpcomAbi": "x86_64-gcc3",
+        "channel": "nightly"
+      },
+      "payload": {
+        "ver": 4,
+        "simpleMeasurements": {
+          "totalTime": 128,
+          "uptime": 2,
+          "start": 8,
+          "main": 66,
+          "selectProfile": 76,
+          "afterProfileLocked": 76,
+          "startupCrashDetectionBegin": 179,
+          "startupCrashDetectionEnd": 31051,
+          "firstPaint": 958,
+          "sessionRestoreInit": 313,
+          "sessionRestored": 1176,
+          "createTopLevelWindow": 440,
+          "firstLoadURI": 1192,
+          "quitApplication": 128058,
+          "profileBeforeChange": 128165,
+          "AMI_startup_begin": 184,
+          "XPI_startup_begin": 195,
+          "XPI_bootstrap_addons_begin": 213,
+          "XPI_bootstrap_addons_end": 213,
+          "XPI_startup_end": 213,
+          "AMI_startup_end": 220,
+          "XPI_finalUIStartup": 313,
+          "sessionRestoreInitialized": 340,
+          "delayedStartupStarted": 1003,
+          "delayedStartupFinished": 1061,
+          "sessionRestoreRestoring": 1140,
+          "startupInterrupted": 0,
+          "js": {
+            "setProto": 0,
+            "customIter": 9
+          },
+          "maximalNumberOfConcurrentThreads": 41,
+          "debuggerAttached": 0,
+          "savedPings": 0,
+          "activeTicks": 15,
+          "pingsOverdue": 0
+        },
+        "histograms": {
+          "TELEMETRY_TEST_RELEASE_OPTOUT": {
+            "range": [
+              1,
+              2
+            ],
+            "bucket_count": 3,
+            "histogram_type": 3,
+            "values": {
+              "0": 1,
+              "1": 0
+            },
+            "sum": 0,
+            "sum_squares_lo": 0,
+            "sum_squares_hi": 0
+          }
+        },
+        "keyedHistograms": {
+          "TELEMETRY_TEST_KEYED_RELEASE_OPTOUT": {},
+          "SEARCH_COUNTS": {},
+          "PROCESS_CRASH_SUBMIT_ATTEMPT": {},
+          "PROCESS_CRASH_SUBMIT_SUCCESS": {},
+          "SUBPROCESS_ABNORMAL_ABORT": {
+            "content": {
+              "range": [
+                1,
+                2
+              ],
+              "bucket_count": 3,
+              "histogram_type": 4,
+              "values": {
+                "0": 1,
+                "1": 0
+              },
+              "sum": 1,
+              "sum_squares_lo": 1,
+              "sum_squares_hi": 0
+            },
+            "plugin": {},
+            "gmplugin": {}
+          }
+        },
+        "info": {
+          "reason": "shutdown",
+          "revision": "https://hg.mozilla.org/mozilla-central/rev/096c0f407f8b",
+          "asyncPluginInit": false,
+          "timezoneOffset": 120,
+          "previousBuildId": null,
+          "sessionId": "bcee556c-e6fb-5b42-9303-b942337824c8",
+          "subsessionId": "e1dc8ede-6348-b441-bd42-30a6b63a22bd",
+          "previousSessionId": "1dc5c412-d6f0-e945-86ee-2c3dade32a0b",
+          "previousSubsessionId": "d9376584-f900-754a-bef0-286182d4c293",
+          "subsessionCounter": 1,
+          "profileSubsessionCounter": 128,
+          "sessionStartDate": "2015-10-02T00:00:00.0+02:00",
+          "subsessionStartDate": "2015-10-02T00:00:00.0+02:00",
+          "sessionLength": 18000,
+          "subsessionLength": 18000,
+          "addons": "%7B8620c15f-30dc-4dba-a131-7c5d20cf4a29%7D:3.7.1-signed,%7B972ce4c6-7e08-4474-a285-3208198ce6fd%7D:44.0a1",
+          "flashVersion": "19.0.0.185"
+        }
+      },
+      "environment": {
+        "build": {
+          "applicationId": "{ec8030f7-c20a-464f-9b0e-13a3a9e97384}",
+          "applicationName": "Firefox",
+          "architecture": "x86-64",
+          "buildId": "20151001030236",
+          "version": "44.0a1",
+          "vendor": "Mozilla",
+          "platformVersion": "44.0a1",
+          "xpcomAbi": "x86_64-gcc3",
+          "hotfixVersion": "20140527.01.10",
+          "architecturesInBinary": "i386-x86_64"
+        },
+        "partner": {
+          "distributionId": null,
+          "distributionVersion": null,
+          "partnerId": null,
+          "distributor": null,
+          "distributorChannel": null,
+          "partnerNames": []
+        },
+        "system": {
+          "memoryMB": 16384,
+          "virtualMaxMB": null,
+          "cpu": {
+            "count": 8,
+            "cores": 4,
+            "vendor": "GenuineIntel",
+            "family": 6,
+            "model": 70,
+            "stepping": 1,
+            "l2cacheKB": 256,
+            "l3cacheKB": 6144,
+            "speedMHz": 2600,
+            "extensions": [
+              "hasMMX",
+              "hasSSE",
+              "hasSSE2",
+              "hasSSE3",
+              "hasSSSE3",
+              "hasSSE4_1",
+              "hasSSE4_2"
+            ]
+          },
+          "os": {
+            "name": "Darwin",
+            "version": "13.4.0",
+            "locale": "en-DE"
+          },
+          "hdd": {
+            "profile": {
+              "model": null,
+              "revision": null
+            },
+            "binary": {
+              "model": null,
+              "revision": null
+            },
+            "system": {
+              "model": null,
+              "revision": null
+            }
+          },
+          "gfx": {
+            "D2DEnabled": null,
+            "DWriteEnabled": null,
+            "adapters": [
+              {
+                "description": null,
+                "vendorID": "0x10de",
+                "deviceID": "0x0fe9",
+                "subsysID": null,
+                "RAM": null,
+                "driver": null,
+                "driverVersion": null,
+                "driverDate": null,
+                "GPUActive": true
+              }
+            ],
+            "monitors": [
+              {
+                "screenWidth": 1440,
+                "screenHeight": 900,
+                "scale": 2
+              },
+              {
+                "screenWidth": 2560,
+                "screenHeight": 1440,
+                "scale": 1
+              }
+            ],
+            "features": {
+              "compositor": "opengl"
+            }
+          }
+        },
+        "settings": {
+          "blocklistEnabled": true,
+          "e10sEnabled": true,
+          "telemetryEnabled": false,
+          "isInOptoutSample": false,
+          "locale": "en-US",
+          "update": {
+            "channel": "nightly",
+            "enabled": true,
+            "autoDownload": true
+          },
+          "userPrefs": {
+            "browser.cache.disk.capacity": 358400,
+            "browser.newtabpage.enhanced": true,
+            "browser.shell.checkDefaultBrowser": false,
+            "browser.urlbar.suggest.searches": true,
+            "browser.urlbar.userMadeSearchSuggestionsChoice": true,
+            "devtools.chrome.enabled": true,
+            "extensions.autoDisableScopes": 10,
+            "extensions.enabledScopes": 5,
+            "extensions.update.enabled": false
+          },
+          "addonCompatibilityCheckEnabled": true,
+          "isDefaultBrowser": true,
+          "defaultSearchEngine": "yahoo",
+          "defaultSearchEngineData": {
+            "name": "Yahoo",
+            "loadPath": "jar:[app]/omni.ja!browser/yahoo.xml",
+            "submissionURL": "https://search.yahoo.com/yhs/search?p=&ei=UTF-8&hspart=mozilla&hsimp=yhs-001"
+          }
+        },
+        "profile": {
+          "creationDate": 16315
+        },
+        "addons": {
+          "activeAddons": {
+            "{8620c15f-30dc-4dba-a131-7c5d20cf4a29}": {
+              "blocklisted": false,
+              "description": "Useful tools for the nightly tester.",
+              "name": "Nightly Tester Tools",
+              "userDisabled": false,
+              "appDisabled": false,
+              "version": "3.7.1-signed",
+              "scope": 1,
+              "type": "extension",
+              "foreignInstall": false,
+              "hasBinaryComponents": false,
+              "installDay": 16693,
+              "updateDay": 16693,
+              "signedState": 2
+            }
+          },
+          "theme": {
+            "id": "{972ce4c6-7e08-4474-a285-3208198ce6fd}",
+            "blocklisted": false,
+            "description": "The default theme.",
+            "name": "Default",
+            "userDisabled": false,
+            "appDisabled": false,
+            "version": "44.0a1",
+            "scope": 4,
+            "foreignInstall": false,
+            "hasBinaryComponents": false,
+            "installDay": 16314,
+            "updateDay": 16709
+          },
+          "activePlugins": [
+            {
+              "name": "Shockwave Flash",
+              "version": "19.0.0.185",
+              "description": "Shockwave Flash 19.0 r0",
+              "blocklisted": false,
+              "disabled": false,
+              "clicktoplay": true,
+              "mimeTypes": [
+                "application/x-shockwave-flash",
+                "application/futuresplash"
+              ],
+              "updateDay": 16700
+            }
+          ],
+          "activeGMPlugins": {
+            "gmp-gmpopenh264": {
+              "version": "1.4",
+              "userDisabled": false,
+              "applyBackgroundUpdates": 1
+            }
+          },
+          "activeExperiment": {},
+          "persona": null
+        }
+      }
+    },
+    {
+      "clientId": "3fff7c6d-414d-4e02-b74d-36dc1f350e3e",
+      "type": "main",
+      "id": "e58627b1-ab66-4ecf-a321-bd35a018132e",
+      "creationDate": "2015-10-01T15:42:52.208Z",
+      "version": 4,
+      "application": {
+        "architecture": "x86-64",
+        "buildId": "20151001030236",
+        "name": "Firefox",
+        "version": "44.0a1",
+        "vendor": "Mozilla",
+        "platformVersion": "44.0a1",
+        "xpcomAbi": "x86_64-gcc3",
+        "channel": "nightly"
+      },
+      "payload": {
+        "ver": 4,
+        "simpleMeasurements": {
+          "totalTime": 128,
+          "uptime": 2,
+          "start": 8,
+          "main": 66,
+          "selectProfile": 76,
+          "afterProfileLocked": 76,
+          "startupCrashDetectionBegin": 179,
+          "startupCrashDetectionEnd": 31051,
+          "firstPaint": 958,
+          "sessionRestoreInit": 313,
+          "sessionRestored": 1176,
+          "createTopLevelWindow": 440,
+          "firstLoadURI": 1192,
+          "quitApplication": 128058,
+          "profileBeforeChange": 128165,
+          "AMI_startup_begin": 184,
+          "XPI_startup_begin": 195,
+          "XPI_bootstrap_addons_begin": 213,
+          "XPI_bootstrap_addons_end": 213,
+          "XPI_startup_end": 213,
+          "AMI_startup_end": 220,
+          "XPI_finalUIStartup": 313,
+          "sessionRestoreInitialized": 340,
+          "delayedStartupStarted": 1003,
+          "delayedStartupFinished": 1061,
+          "sessionRestoreRestoring": 1140,
+          "startupInterrupted": 0,
+          "js": {
+            "setProto": 0,
+            "customIter": 9
+          },
+          "maximalNumberOfConcurrentThreads": 41,
+          "debuggerAttached": 0,
+          "savedPings": 0,
+          "activeTicks": 15,
+          "pingsOverdue": 0
+        },
+        "histograms": {
+          "TELEMETRY_TEST_RELEASE_OPTOUT": {
+            "range": [
+              1,
+              2
+            ],
+            "bucket_count": 3,
+            "histogram_type": 3,
+            "values": {
+              "0": 1,
+              "1": 0
+            },
+            "sum": 0,
+            "sum_squares_lo": 0,
+            "sum_squares_hi": 0
+          }
+        },
+        "keyedHistograms": {
+          "TELEMETRY_TEST_KEYED_RELEASE_OPTOUT": {},
+          "SEARCH_COUNTS": {},
+          "PROCESS_CRASH_SUBMIT_ATTEMPT": {},
+          "PROCESS_CRASH_SUBMIT_SUCCESS": {},
+          "SUBPROCESS_ABNORMAL_ABORT": {}
+        },
+        "info": {
+          "reason": "shutdown",
+          "revision": "https://hg.mozilla.org/mozilla-central/rev/096c0f407f8b",
+          "asyncPluginInit": false,
+          "timezoneOffset": 120,
+          "previousBuildId": null,
+          "sessionId": "bcee556c-e6fb-5b42-9303-b942337824c8",
+          "subsessionId": "e1dc8ede-6348-b441-bd42-30a6b63a22bd",
+          "previousSessionId": "1dc5c412-d6f0-e945-86ee-2c3dade32a0b",
+          "previousSubsessionId": "d9376584-f900-754a-bef0-286182d4c293",
+          "subsessionCounter": 1,
+          "profileSubsessionCounter": 127,
+          "sessionStartDate": "2015-10-01T00:00:00.0+02:00",
+          "subsessionStartDate": "2015-10-01T00:00:00.0+02:00",
+          "sessionLength": 18000,
+          "subsessionLength": 18000,
+          "addons": "%7B8620c15f-30dc-4dba-a131-7c5d20cf4a29%7D:3.7.1-signed,%7B972ce4c6-7e08-4474-a285-3208198ce6fd%7D:44.0a1",
+          "flashVersion": "19.0.0.185"
+        }
+      },
+      "environment": {
+        "build": {
+          "applicationId": "{ec8030f7-c20a-464f-9b0e-13a3a9e97384}",
+          "applicationName": "Firefox",
+          "architecture": "x86-64",
+          "buildId": "20151001030236",
+          "version": "44.0a1",
+          "vendor": "Mozilla",
+          "platformVersion": "44.0a1",
+          "xpcomAbi": "x86_64-gcc3",
+          "hotfixVersion": "20140527.01.10",
+          "architecturesInBinary": "i386-x86_64"
+        },
+        "partner": {
+          "distributionId": null,
+          "distributionVersion": null,
+          "partnerId": null,
+          "distributor": null,
+          "distributorChannel": null,
+          "partnerNames": []
+        },
+        "system": {
+          "memoryMB": 16384,
+          "virtualMaxMB": null,
+          "cpu": {
+            "count": 8,
+            "cores": 4,
+            "vendor": "GenuineIntel",
+            "family": 6,
+            "model": 70,
+            "stepping": 1,
+            "l2cacheKB": 256,
+            "l3cacheKB": 6144,
+            "speedMHz": 2600,
+            "extensions": [
+              "hasMMX",
+              "hasSSE",
+              "hasSSE2",
+              "hasSSE3",
+              "hasSSSE3",
+              "hasSSE4_1",
+              "hasSSE4_2"
+            ]
+          },
+          "os": {
+            "name": "Darwin",
+            "version": "13.4.0",
+            "locale": "en-DE"
+          },
+          "hdd": {
+            "profile": {
+              "model": null,
+              "revision": null
+            },
+            "binary": {
+              "model": null,
+              "revision": null
+            },
+            "system": {
+              "model": null,
+              "revision": null
+            }
+          },
+          "gfx": {
+            "D2DEnabled": null,
+            "DWriteEnabled": null,
+            "adapters": [
+              {
+                "description": null,
+                "vendorID": "0x10de",
+                "deviceID": "0x0fe9",
+                "subsysID": null,
+                "RAM": null,
+                "driver": null,
+                "driverVersion": null,
+                "driverDate": null,
+                "GPUActive": true
+              }
+            ],
+            "monitors": [
+              {
+                "screenWidth": 1440,
+                "screenHeight": 900,
+                "scale": 2
+              },
+              {
+                "screenWidth": 2560,
+                "screenHeight": 1440,
+                "scale": 1
+              }
+            ],
+            "features": {
+              "compositor": "opengl"
+            }
+          }
+        },
+        "settings": {
+          "blocklistEnabled": true,
+          "e10sEnabled": true,
+          "telemetryEnabled": false,
+          "isInOptoutSample": false,
+          "locale": "en-US",
+          "update": {
+            "channel": "nightly",
+            "enabled": true,
+            "autoDownload": true
+          },
+          "userPrefs": {
+            "browser.cache.disk.capacity": 358400,
+            "browser.newtabpage.enhanced": true,
+            "browser.shell.checkDefaultBrowser": false,
+            "browser.urlbar.suggest.searches": true,
+            "browser.urlbar.userMadeSearchSuggestionsChoice": true,
+            "devtools.chrome.enabled": true,
+            "extensions.autoDisableScopes": 10,
+            "extensions.enabledScopes": 5,
+            "extensions.update.enabled": false
+          },
+          "addonCompatibilityCheckEnabled": true,
+          "isDefaultBrowser": true,
+          "defaultSearchEngine": "yahoo",
+          "defaultSearchEngineData": {
+            "name": "Yahoo",
+            "loadPath": "jar:[app]/omni.ja!browser/yahoo.xml",
+            "submissionURL": "https://search.yahoo.com/yhs/search?p=&ei=UTF-8&hspart=mozilla&hsimp=yhs-001"
+          }
+        },
+        "profile": {
+          "creationDate": 16315
+        },
+        "addons": {
+          "activeAddons": {
+            "{8620c15f-30dc-4dba-a131-7c5d20cf4a29}": {
+              "blocklisted": false,
+              "description": "Useful tools for the nightly tester.",
+              "name": "Nightly Tester Tools",
+              "userDisabled": false,
+              "appDisabled": false,
+              "version": "3.7.1-signed",
+              "scope": 1,
+              "type": "extension",
+              "foreignInstall": false,
+              "hasBinaryComponents": false,
+              "installDay": 16693,
+              "updateDay": 16693,
+              "signedState": 2
+            }
+          },
+          "theme": {
+            "id": "{972ce4c6-7e08-4474-a285-3208198ce6fd}",
+            "blocklisted": false,
+            "description": "The default theme.",
+            "name": "Default",
+            "userDisabled": false,
+            "appDisabled": false,
+            "version": "44.0a1",
+            "scope": 4,
+            "foreignInstall": false,
+            "hasBinaryComponents": false,
+            "installDay": 16314,
+            "updateDay": 16709
+          },
+          "activePlugins": [
+            {
+              "name": "Shockwave Flash",
+              "version": "19.0.0.185",
+              "description": "Shockwave Flash 19.0 r0",
+              "blocklisted": false,
+              "disabled": false,
+              "clicktoplay": true,
+              "mimeTypes": [
+                "application/x-shockwave-flash",
+                "application/futuresplash"
+              ],
+              "updateDay": 16700
+            }
+          ],
+          "activeGMPlugins": {
+            "gmp-gmpopenh264": {
+              "version": "1.4",
+              "userDisabled": false,
+              "applyBackgroundUpdates": 1
+            }
+          },
+          "activeExperiment": {},
+          "persona": null
+        }
+      }
+    },
+    {
+      "clientId": "3fff7c6d-414d-4e02-b74d-36dc1f350e3e",
+      "type": "main",
+      "id": "591bcccb-f90b-4cf7-959e-5c4c139cfc76",
+      "creationDate": "2015-09-27T12:28:52.208Z",
+      "version": 4,
+      "application": {
+        "architecture": "x86-64",
+        "buildId": "20151001030236",
+        "name": "Firefox",
+        "version": "44.0a1",
+        "vendor": "Mozilla",
+        "platformVersion": "44.0a1",
+        "xpcomAbi": "x86_64-gcc3",
+        "channel": "nightly"
+      },
+      "payload": {
+        "ver": 4,
+        "simpleMeasurements": {
+          "totalTime": 128,
+          "uptime": 2,
+          "start": 8,
+          "main": 66,
+          "selectProfile": 76,
+          "afterProfileLocked": 76,
+          "startupCrashDetectionBegin": 179,
+          "startupCrashDetectionEnd": 31051,
+          "firstPaint": 958,
+          "sessionRestoreInit": 313,
+          "sessionRestored": 1176,
+          "createTopLevelWindow": 440,
+          "firstLoadURI": 1192,
+          "quitApplication": 128058,
+          "profileBeforeChange": 128165,
+          "AMI_startup_begin": 184,
+          "XPI_startup_begin": 195,
+          "XPI_bootstrap_addons_begin": 213,
+          "XPI_bootstrap_addons_end": 213,
+          "XPI_startup_end": 213,
+          "AMI_startup_end": 220,
+          "XPI_finalUIStartup": 313,
+          "sessionRestoreInitialized": 340,
+          "delayedStartupStarted": 1003,
+          "delayedStartupFinished": 1061,
+          "sessionRestoreRestoring": 1140,
+          "startupInterrupted": 0,
+          "js": {
+            "setProto": 0,
+            "customIter": 9
+          },
+          "maximalNumberOfConcurrentThreads": 41,
+          "debuggerAttached": 0,
+          "savedPings": 0,
+          "activeTicks": 15,
+          "pingsOverdue": 0
+        },
+        "histograms": {
+          "TELEMETRY_TEST_RELEASE_OPTOUT": {
+            "range": [
+              1,
+              2
+            ],
+            "bucket_count": 3,
+            "histogram_type": 3,
+            "values": {
+              "0": 1,
+              "1": 0
+            },
+            "sum": 0,
+            "sum_squares_lo": 0,
+            "sum_squares_hi": 0
+          }
+        },
+        "keyedHistograms": {
+          "TELEMETRY_TEST_KEYED_RELEASE_OPTOUT": {},
+          "SEARCH_COUNTS": {},
+          "PROCESS_CRASH_SUBMIT_ATTEMPT": {},
+          "PROCESS_CRASH_SUBMIT_SUCCESS": {},
+          "SUBPROCESS_ABNORMAL_ABORT": {}
+        },
+        "info": {
+          "reason": "shutdown",
+          "revision": "https://hg.mozilla.org/mozilla-central/rev/096c0f407f8b",
+          "asyncPluginInit": false,
+          "timezoneOffset": 120,
+          "previousBuildId": null,
+          "sessionId": "bcee556c-e6fb-5b42-9303-b942337824c8",
+          "subsessionId": "e1dc8ede-6348-b441-bd42-30a6b63a22bd",
+          "previousSessionId": "1dc5c412-d6f0-e945-86ee-2c3dade32a0b",
+          "previousSubsessionId": "d9376584-f900-754a-bef0-286182d4c293",
+          "subsessionCounter": 1,
+          "profileSubsessionCounter": 126,
+          "sessionStartDate": "2015-09-27T00:00:00.0+02:00",
+          "subsessionStartDate": "2015-09-27T00:00:00.0+02:00",
+          "sessionLength": 128,
+          "subsessionLength": 127,
+          "addons": "%7B8620c15f-30dc-4dba-a131-7c5d20cf4a29%7D:3.7.1-signed,%7B972ce4c6-7e08-4474-a285-3208198ce6fd%7D:44.0a1",
+          "flashVersion": "19.0.0.185"
+        }
+      },
+      "environment": {
+        "build": {
+          "applicationId": "{ec8030f7-c20a-464f-9b0e-13a3a9e97384}",
+          "applicationName": "Firefox",
+          "architecture": "x86-64",
+          "buildId": "20151001030236",
+          "version": "44.0a1",
+          "vendor": "Mozilla",
+          "platformVersion": "44.0a1",
+          "xpcomAbi": "x86_64-gcc3",
+          "hotfixVersion": "20140527.01.10",
+          "architecturesInBinary": "i386-x86_64"
+        },
+        "partner": {
+          "distributionId": null,
+          "distributionVersion": null,
+          "partnerId": null,
+          "distributor": null,
+          "distributorChannel": null,
+          "partnerNames": []
+        },
+        "system": {
+          "memoryMB": 16384,
+          "virtualMaxMB": null,
+          "cpu": {
+            "count": 8,
+            "cores": 4,
+            "vendor": "GenuineIntel",
+            "family": 6,
+            "model": 70,
+            "stepping": 1,
+            "l2cacheKB": 256,
+            "l3cacheKB": 6144,
+            "speedMHz": 2600,
+            "extensions": [
+              "hasMMX",
+              "hasSSE",
+              "hasSSE2",
+              "hasSSE3",
+              "hasSSSE3",
+              "hasSSE4_1",
+              "hasSSE4_2"
+            ]
+          },
+          "os": {
+            "name": "Darwin",
+            "version": "13.4.0",
+            "locale": "en-DE"
+          },
+          "hdd": {
+            "profile": {
+              "model": null,
+              "revision": null
+            },
+            "binary": {
+              "model": null,
+              "revision": null
+            },
+            "system": {
+              "model": null,
+              "revision": null
+            }
+          },
+          "gfx": {
+            "D2DEnabled": null,
+            "DWriteEnabled": null,
+            "adapters": [
+              {
+                "description": null,
+                "vendorID": "0x10de",
+                "deviceID": "0x0fe9",
+                "subsysID": null,
+                "RAM": null,
+                "driver": null,
+                "driverVersion": null,
+                "driverDate": null,
+                "GPUActive": true
+              }
+            ],
+            "monitors": [
+              {
+                "screenWidth": 1440,
+                "screenHeight": 900,
+                "scale": 2
+              },
+              {
+                "screenWidth": 2560,
+                "screenHeight": 1440,
+                "scale": 1
+              }
+            ],
+            "features": {
+              "compositor": "opengl"
+            }
+          }
+        },
+        "settings": {
+          "blocklistEnabled": true,
+          "e10sEnabled": true,
+          "telemetryEnabled": false,
+          "isInOptoutSample": false,
+          "locale": "en-US",
+          "update": {
+            "channel": "nightly",
+            "enabled": true,
+            "autoDownload": true
+          },
+          "userPrefs": {
+            "browser.cache.disk.capacity": 358400,
+            "browser.newtabpage.enhanced": true,
+            "browser.shell.checkDefaultBrowser": false,
+            "browser.urlbar.suggest.searches": true,
+            "browser.urlbar.userMadeSearchSuggestionsChoice": true,
+            "devtools.chrome.enabled": true,
+            "extensions.autoDisableScopes": 10,
+            "extensions.enabledScopes": 5,
+            "extensions.update.enabled": false
+          },
+          "addonCompatibilityCheckEnabled": true,
+          "isDefaultBrowser": true,
+          "defaultSearchEngine": "yahoo",
+          "defaultSearchEngineData": {
+            "name": "Yahoo",
+            "loadPath": "jar:[app]/omni.ja!browser/yahoo.xml",
+            "submissionURL": "https://search.yahoo.com/yhs/search?p=&ei=UTF-8&hspart=mozilla&hsimp=yhs-001"
+          }
+        },
+        "profile": {
+          "creationDate": 16315
+        },
+        "addons": {
+          "activeAddons": {
+            "{8620c15f-30dc-4dba-a131-7c5d20cf4a29}": {
+              "blocklisted": false,
+              "description": "Useful tools for the nightly tester.",
+              "name": "Nightly Tester Tools",
+              "userDisabled": false,
+              "appDisabled": false,
+              "version": "3.7.1-signed",
+              "scope": 1,
+              "type": "extension",
+              "foreignInstall": false,
+              "hasBinaryComponents": false,
+              "installDay": 16693,
+              "updateDay": 16693,
+              "signedState": 2
+            }
+          },
+          "theme": {
+            "id": "{972ce4c6-7e08-4474-a285-3208198ce6fd}",
+            "blocklisted": false,
+            "description": "The default theme.",
+            "name": "Default",
+            "userDisabled": false,
+            "appDisabled": false,
+            "version": "44.0a1",
+            "scope": 4,
+            "foreignInstall": false,
+            "hasBinaryComponents": false,
+            "installDay": 16314,
+            "updateDay": 16709
+          },
+          "activePlugins": [
+            {
+              "name": "Shockwave Flash",
+              "version": "19.0.0.185",
+              "description": "Shockwave Flash 19.0 r0",
+              "blocklisted": false,
+              "disabled": false,
+              "clicktoplay": true,
+              "mimeTypes": [
+                "application/x-shockwave-flash",
+                "application/futuresplash"
+              ],
+              "updateDay": 16700
+            }
+          ],
+          "activeGMPlugins": {
+            "gmp-gmpopenh264": {
+              "version": "1.4",
+              "userDisabled": false,
+              "applyBackgroundUpdates": 1
+            }
+          },
+          "activeExperiment": {},
+          "persona": null
+        }
+      }
+    },
+    {
+      "type": "crash",
+      "id": "b1eff1bd-5775-c249-9024-8497165008b2",
+      "creationDate": "2015-09-10T13:55:27.087Z",
+      "version": 4,
+      "application": {
+        "architecture": "x86-64",
+        "buildId": "20151001030236",
+        "name": "Firefox",
+        "version": "44.0a1",
+        "vendor": "Mozilla",
+        "platformVersion": "44.0a1",
+        "xpcomAbi": "x86_64-gcc3",
+        "channel": "nightly"
+      },
+      "payload": {
+        "version": 1,
+        "crashDate": "2015-09-10",
+        "metadata": {
+          "ProductName": "Firefox",
+          "ReleaseChannel": "nightly",
+          "Version": "44.0a1",
+          "BuildID": "20151001030236",
+          "ProductID": "{ec8030f7-c20a-464f-9b0e-13a3a9e97384}",
+          "SecondsSinceLastCrash": "24"
+        },
+        "hasCrashEnvironment": true
+      },
+      "clientId": "3fff7c6d-414d-4e02-b74d-36dc1f350e3e",
+      "environment": {
+        "build": {
+          "applicationId": "{ec8030f7-c20a-464f-9b0e-13a3a9e97384}",
+          "applicationName": "Firefox",
+          "architecture": "x86-64",
+          "buildId": "20151001030236",
+          "version": "44.0a1",
+          "vendor": "Mozilla",
+          "platformVersion": "44.0a1",
+          "xpcomAbi": "x86_64-gcc3",
+          "hotfixVersion": "20140527.01.10",
+          "architecturesInBinary": "i386-x86_64"
+        },
+        "partner": {
+          "distributionId": null,
+          "distributionVersion": null,
+          "partnerId": null,
+          "distributor": null,
+          "distributorChannel": null,
+          "partnerNames": []
+        },
+        "system": {
+          "memoryMB": 16384,
+          "virtualMaxMB": null,
+          "cpu": {
+            "count": 8,
+            "cores": 4,
+            "vendor": "GenuineIntel",
+            "family": 6,
+            "model": 70,
+            "stepping": 1,
+            "l2cacheKB": 256,
+            "l3cacheKB": 6144,
+            "speedMHz": 2600,
+            "extensions": [
+              "hasMMX",
+              "hasSSE",
+              "hasSSE2",
+              "hasSSE3",
+              "hasSSSE3",
+              "hasSSE4_1",
+              "hasSSE4_2"
+            ]
+          },
+          "os": {
+            "name": "Darwin",
+            "version": "13.4.0",
+            "locale": "en-DE"
+          },
+          "hdd": {
+            "profile": {
+              "model": null,
+              "revision": null
+            },
+            "binary": {
+              "model": null,
+              "revision": null
+            },
+            "system": {
+              "model": null,
+              "revision": null
+            }
+          },
+          "gfx": {
+            "D2DEnabled": null,
+            "DWriteEnabled": null,
+            "adapters": [
+              {
+                "description": null,
+                "vendorID": "0x10de",
+                "deviceID": "0x0fe9",
+                "subsysID": null,
+                "RAM": null,
+                "driver": null,
+                "driverVersion": null,
+                "driverDate": null,
+                "GPUActive": true
+              }
+            ],
+            "monitors": [
+              {
+                "screenWidth": 1440,
+                "screenHeight": 900,
+                "scale": 2
+              },
+              {
+                "screenWidth": 2560,
+                "screenHeight": 1440,
+                "scale": 1
+              }
+            ],
+            "features": {
+              "compositor": "none"
+            }
+          }
+        },
+        "settings": {
+          "blocklistEnabled": true,
+          "e10sEnabled": true,
+          "telemetryEnabled": true,
+          "isInOptoutSample": false,
+          "locale": "en-US",
+          "update": {
+            "channel": "nightly",
+            "enabled": true,
+            "autoDownload": true
+          },
+          "userPrefs": {
+            "browser.cache.disk.capacity": 358400,
+            "browser.newtabpage.enhanced": true,
+            "browser.shell.checkDefaultBrowser": false,
+            "browser.urlbar.suggest.searches": true,
+            "browser.urlbar.userMadeSearchSuggestionsChoice": true,
+            "devtools.chrome.enabled": true,
+            "extensions.autoDisableScopes": 10,
+            "extensions.enabledScopes": 5,
+            "extensions.update.enabled": false
+          },
+          "addonCompatibilityCheckEnabled": true,
+          "isDefaultBrowser": true
+        },
+        "profile": {
+          "creationDate": 16315
+        },
+        "addons": {
+          "activeAddons": {
+            "{8620c15f-30dc-4dba-a131-7c5d20cf4a29}": {
+              "blocklisted": false,
+              "description": "Useful tools for the nightly tester.",
+              "name": "Nightly Tester Tools",
+              "userDisabled": false,
+              "appDisabled": false,
+              "version": "3.7.1-signed",
+              "scope": 1,
+              "type": "extension",
+              "foreignInstall": false,
+              "hasBinaryComponents": false,
+              "installDay": 16693,
+              "updateDay": 16693,
+              "signedState": 2
+            }
+          },
+          "theme": {
+            "id": "{972ce4c6-7e08-4474-a285-3208198ce6fd}",
+            "blocklisted": false,
+            "description": "The default theme.",
+            "name": "Default",
+            "userDisabled": false,
+            "appDisabled": false,
+            "version": "44.0a1",
+            "scope": 4,
+            "foreignInstall": false,
+            "hasBinaryComponents": false,
+            "installDay": 16314,
+            "updateDay": 16709
+          },
+          "activePlugins": [
+            {
+              "name": "Shockwave Flash",
+              "version": "19.0.0.185",
+              "description": "Shockwave Flash 19.0 r0",
+              "blocklisted": false,
+              "disabled": false,
+              "clicktoplay": true,
+              "mimeTypes": [
+                "application/x-shockwave-flash",
+                "application/futuresplash"
+              ],
+              "updateDay": 16700
+            }
+          ],
+          "activeGMPlugins": {
+            "gmp-gmpopenh264": {
+              "version": "1.4",
+              "userDisabled": false,
+              "applyBackgroundUpdates": 1
+            }
+          },
+          "activeExperiment": {},
+          "persona": null
+        }
+      }
+    },
+    {
+      "clientId": "3fff7c6d-414d-4e02-b74d-36dc1f350e3e",
+      "type": "main",
+      "id": "591bcccb-f90b-4cf7-959e-5c4c139cfc76",
+      "creationDate": "2015-08-02T15:42:52.208Z",
+      "version": 4,
+      "application": {
+        "architecture": "x86-64",
+        "buildId": "20151001030236",
+        "name": "Firefox",
+        "version": "44.0a1",
+        "vendor": "Mozilla",
+        "platformVersion": "44.0a1",
+        "xpcomAbi": "x86_64-gcc3",
+        "channel": "nightly"
+      },
+      "payload": {
+        "ver": 4,
+        "simpleMeasurements": {
+          "totalTime": 128,
+          "uptime": 2,
+          "start": 8,
+          "main": 66,
+          "selectProfile": 76,
+          "afterProfileLocked": 76,
+          "startupCrashDetectionBegin": 179,
+          "startupCrashDetectionEnd": 31051,
+          "firstPaint": 958,
+          "sessionRestoreInit": 313,
+          "sessionRestored": 1176,
+          "createTopLevelWindow": 440,
+          "firstLoadURI": 1192,
+          "quitApplication": 128058,
+          "profileBeforeChange": 128165,
+          "AMI_startup_begin": 184,
+          "XPI_startup_begin": 195,
+          "XPI_bootstrap_addons_begin": 213,
+          "XPI_bootstrap_addons_end": 213,
+          "XPI_startup_end": 213,
+          "AMI_startup_end": 220,
+          "XPI_finalUIStartup": 313,
+          "sessionRestoreInitialized": 340,
+          "delayedStartupStarted": 1003,
+          "delayedStartupFinished": 1061,
+          "sessionRestoreRestoring": 1140,
+          "startupInterrupted": 0,
+          "js": {
+            "setProto": 0,
+            "customIter": 9
+          },
+          "maximalNumberOfConcurrentThreads": 41,
+          "debuggerAttached": 0,
+          "savedPings": 0,
+          "activeTicks": 15,
+          "pingsOverdue": 0
+        },
+        "histograms": {
+          "TELEMETRY_TEST_RELEASE_OPTOUT": {
+            "range": [
+              1,
+              2
+            ],
+            "bucket_count": 3,
+            "histogram_type": 3,
+            "values": {
+              "0": 1,
+              "1": 0
+            },
+            "sum": 0,
+            "sum_squares_lo": 0,
+            "sum_squares_hi": 0
+          }
+        },
+        "keyedHistograms": {
+          "TELEMETRY_TEST_KEYED_RELEASE_OPTOUT": {},
+          "SEARCH_COUNTS": {},
+          "PROCESS_CRASH_SUBMIT_ATTEMPT": {},
+          "PROCESS_CRASH_SUBMIT_SUCCESS": {},
+          "SUBPROCESS_ABNORMAL_ABORT": {
+            "content": {
+              "range": [
+                1,
+                2
+              ],
+              "bucket_count": 3,
+              "histogram_type": 4,
+              "values": {
+                "0": 1,
+                "1": 0
+              },
+              "sum": 1,
+              "sum_squares_lo": 1,
+              "sum_squares_hi": 0
+            },
+            "plugin": {},
+            "gmplugin": {}
+          }
+        },
+        "info": {
+          "reason": "shutdown",
+          "revision": "https://hg.mozilla.org/mozilla-central/rev/096c0f407f8b",
+          "asyncPluginInit": false,
+          "timezoneOffset": 120,
+          "previousBuildId": null,
+          "sessionId": "bcee556c-e6fb-5b42-9303-b942337824c8",
+          "subsessionId": "e1dc8ede-6348-b441-bd42-30a6b63a22bd",
+          "previousSessionId": "1dc5c412-d6f0-e945-86ee-2c3dade32a0b",
+          "previousSubsessionId": "d9376584-f900-754a-bef0-286182d4c293",
+          "subsessionCounter": 1,
+          "profileSubsessionCounter": 125,
+          "sessionStartDate": "2015-08-02T00:00:00.0+02:00",
+          "subsessionStartDate": "2015-08-02T00:00:00.0+02:00",
+          "sessionLength": 128,
+          "subsessionLength": 127,
+          "addons": "%7B8620c15f-30dc-4dba-a131-7c5d20cf4a29%7D:3.7.1-signed,%7B972ce4c6-7e08-4474-a285-3208198ce6fd%7D:44.0a1",
+          "flashVersion": "19.0.0.185"
+        }
+      },
+      "environment": {
+        "build": {
+          "applicationId": "{ec8030f7-c20a-464f-9b0e-13a3a9e97384}",
+          "applicationName": "Firefox",
+          "architecture": "x86-64",
+          "buildId": "20151001030236",
+          "version": "44.0a1",
+          "vendor": "Mozilla",
+          "platformVersion": "44.0a1",
+          "xpcomAbi": "x86_64-gcc3",
+          "hotfixVersion": "20140527.01.10",
+          "architecturesInBinary": "i386-x86_64"
+        },
+        "partner": {
+          "distributionId": null,
+          "distributionVersion": null,
+          "partnerId": null,
+          "distributor": null,
+          "distributorChannel": null,
+          "partnerNames": []
+        },
+        "system": {
+          "memoryMB": 16384,
+          "virtualMaxMB": null,
+          "cpu": {
+            "count": 8,
+            "cores": 4,
+            "vendor": "GenuineIntel",
+            "family": 6,
+            "model": 70,
+            "stepping": 1,
+            "l2cacheKB": 256,
+            "l3cacheKB": 6144,
+            "speedMHz": 2600,
+            "extensions": [
+              "hasMMX",
+              "hasSSE",
+              "hasSSE2",
+              "hasSSE3",
+              "hasSSSE3",
+              "hasSSE4_1",
+              "hasSSE4_2"
+            ]
+          },
+          "os": {
+            "name": "Darwin",
+            "version": "13.4.0",
+            "locale": "en-DE"
+          },
+          "hdd": {
+            "profile": {
+              "model": null,
+              "revision": null
+            },
+            "binary": {
+              "model": null,
+              "revision": null
+            },
+            "system": {
+              "model": null,
+              "revision": null
+            }
+          },
+          "gfx": {
+            "D2DEnabled": null,
+            "DWriteEnabled": null,
+            "adapters": [
+              {
+                "description": null,
+                "vendorID": "0x10de",
+                "deviceID": "0x0fe9",
+                "subsysID": null,
+                "RAM": null,
+                "driver": null,
+                "driverVersion": null,
+                "driverDate": null,
+                "GPUActive": true
+              }
+            ],
+            "monitors": [
+              {
+                "screenWidth": 1440,
+                "screenHeight": 900,
+                "scale": 2
+              },
+              {
+                "screenWidth": 2560,
+                "screenHeight": 1440,
+                "scale": 1
+              }
+            ],
+            "features": {
+              "compositor": "opengl"
+            }
+          }
+        },
+        "settings": {
+          "blocklistEnabled": true,
+          "e10sEnabled": true,
+          "telemetryEnabled": false,
+          "isInOptoutSample": false,
+          "locale": "en-US",
+          "update": {
+            "channel": "nightly",
+            "enabled": true,
+            "autoDownload": true
+          },
+          "userPrefs": {
+            "browser.cache.disk.capacity": 358400,
+            "browser.newtabpage.enhanced": true,
+            "browser.shell.checkDefaultBrowser": false,
+            "browser.urlbar.suggest.searches": true,
+            "browser.urlbar.userMadeSearchSuggestionsChoice": true,
+            "devtools.chrome.enabled": true,
+            "extensions.autoDisableScopes": 10,
+            "extensions.enabledScopes": 5,
+            "extensions.update.enabled": false
+          },
+          "addonCompatibilityCheckEnabled": true,
+          "isDefaultBrowser": true,
+          "defaultSearchEngine": "yahoo",
+          "defaultSearchEngineData": {
+            "name": "Yahoo",
+            "loadPath": "jar:[app]/omni.ja!browser/yahoo.xml",
+            "submissionURL": "https://search.yahoo.com/yhs/search?p=&ei=UTF-8&hspart=mozilla&hsimp=yhs-001"
+          }
+        },
+        "profile": {
+          "creationDate": 16315
+        },
+        "addons": {
+          "activeAddons": {
+            "{8620c15f-30dc-4dba-a131-7c5d20cf4a29}": {
+              "blocklisted": false,
+              "description": "Useful tools for the nightly tester.",
+              "name": "Nightly Tester Tools",
+              "userDisabled": false,
+              "appDisabled": false,
+              "version": "3.7.1-signed",
+              "scope": 1,
+              "type": "extension",
+              "foreignInstall": false,
+              "hasBinaryComponents": false,
+              "installDay": 16693,
+              "updateDay": 16693,
+              "signedState": 2
+            }
+          },
+          "theme": {
+            "id": "{972ce4c6-7e08-4474-a285-3208198ce6fd}",
+            "blocklisted": false,
+            "description": "The default theme.",
+            "name": "Default",
+            "userDisabled": false,
+            "appDisabled": false,
+            "version": "44.0a1",
+            "scope": 4,
+            "foreignInstall": false,
+            "hasBinaryComponents": false,
+            "installDay": 16314,
+            "updateDay": 16709
+          },
+          "activePlugins": [
+            {
+              "name": "Shockwave Flash",
+              "version": "19.0.0.185",
+              "description": "Shockwave Flash 19.0 r0",
+              "blocklisted": false,
+              "disabled": false,
+              "clicktoplay": true,
+              "mimeTypes": [
+                "application/x-shockwave-flash",
+                "application/futuresplash"
+              ],
+              "updateDay": 16700
+            }
+          ],
+          "activeGMPlugins": {
+            "gmp-gmpopenh264": {
+              "version": "1.4",
+              "userDisabled": false,
+              "applyBackgroundUpdates": 1
+            }
+          },
+          "activeExperiment": {},
+          "persona": null
+        }
+      }
+    }
+  ]
+}

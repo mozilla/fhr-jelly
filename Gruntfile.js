@@ -23,7 +23,6 @@ module.exports = function(grunt) {
                 options: {
                     urls: [
                         'http://localhost:9000/tests/unit.html',
-                        'http://localhost:9000/tests/unit_v4.html',
                     ]
                 }
             }

@@ -30,7 +30,11 @@ var isFirstLoad = true;
 // Converts the date passed to a Date object and checks
 // whether the current month is equal to the month of the
 // day argument passed.
-var isCurrentMonth = function(day) {
+var isCurrentMonth = function(day, now) {
+    if (!now) {
+        now = new Date();
+    }
+
     var currentYear = new Date().getYear();
     var currentMonth = new Date().getMonth() + 1;
     var year = new Date(day).getYear();
@@ -42,7 +46,11 @@ var isCurrentMonth = function(day) {
     return false;
 };
 
-function isPastNDays(day, n) {
+function isPastNDays(day, n, now) {
+    if (!now) {
+        now = new Date();
+    }
+
     var difference = new Date().getTime() - new Date(day).getTime();
     return difference < ONE_DAY * n;
 }
@@ -143,13 +151,13 @@ function crashesFromMainPing(ping, type) {
         return 0;
     }
     var h = base[type];
-    if (h === undefined) {
+    if (h === undefined || Object.keys(h).length === 0) {
         return 0;
     }
     return h.values[0];
 }
 
-function MainPingAccumulator() {
+function MainPingAccumulator(now) {
     this.totalSessionThisMonth = 0;
     this.totalTimeThisMonth = 0;
     this.mainCrashesThisMonth = 0;
@@ -158,10 +166,19 @@ function MainPingAccumulator() {
     this.mainCrashes30Days = 0;
 
     this.startupTimes = [];
+
+    this.now = now;
 }
 MainPingAccumulator.prototype = {
+    processPing: function(data) {
+        if (data.type == "main") {
+            this.processMainPing(data);
+        } else if (data.type == "crash") {
+            this.processCrashPing(data);
+        }
+    },
     processMainPing: function(data) {
-        if (isPastNDays(data.payload.info.subsessionStartDate, 30)) {
+        if (isPastNDays(data.payload.info.subsessionStartDate, 30, this.now)) {
             if (data.payload.info.subsessionCounter == 1 &&
                 data.payload.simpleMeasurements.firstPaint) {
                 var sd = new Date(data.payload.info.subsessionStartDate).getTime();
@@ -169,7 +186,7 @@ MainPingAccumulator.prototype = {
             }
             this.mainCrashes30Days += crashesFromMainPing(data, "content");
         }
-        if (isCurrentMonth(data.payload.info.subsessionStartDate)) {
+        if (isCurrentMonth(data.payload.info.subsessionStartDate, this.now)) {
             if (data.payload.info.subsessionCounter == 1) {
                 ++this.totalSessionThisMonth;
             }
@@ -181,17 +198,18 @@ MainPingAccumulator.prototype = {
     },
 
     processCrashPing: function(data) {
-        if (isPastNDays(data.creationDate, 30)) {
+        if (isPastNDays(data.creationDate, 30, this.now)) {
             this.mainCrashes30Days += 1;
         }
-        if (isCurrentMonth(data.creationDate)) {
+        if (isCurrentMonth(data.creationDate, this.now)) {
             this.mainCrashesThisMonth += 1;
         }
     },
 };
 
 function populateThisMonth(pingList) {
-    var accu = new MainPingAccumulator();
+    var now = new Date();
+    var accu = new MainPingAccumulator(now);
 
     function finish() {
         var currentMonthValueContainers = $('#current_month .statsBoxSection-value');
@@ -236,7 +254,7 @@ function populateThisMonth(pingList) {
         }
     }
     promiseFetchCurrentSubsession()
-        .then(accu.processMainPing.bind(accu))
+        .then(accu.processPing.bind(accu))
         .finally(pendingFinished);
 
     pingList.sort((a, b) => b.timestampCreated - a.timestampCreated);
@@ -249,19 +267,13 @@ function populateThisMonth(pingList) {
         line.appendChild(link);
         linkList.appendChild(line);
 
-        if (!isPastNDays(timestampCreated, 35)) {
+        if (!isPastNDays(timestampCreated, 35, now)) {
             continue;
         }
-        if (type == "main") {
-            ++pending;
-            promiseFetchPing(id)
-                .then(accu.processMainPing.bind(accu))
-                .finally(pendingFinished);
-        } else if (type == "crash") {
-            ++pending;
-            promiseFetchPing(id).then(accu.processCrashPing.bind(accu))
-                                .finally(pendingFinished);
-        }
+        ++pending;
+        promiseFetchPing(id)
+            .then(accu.processPing.bind(accu))
+            .finally(pendingFinished);
     }
 
     $(document).on('click', '#rawdata-list a', function() {
