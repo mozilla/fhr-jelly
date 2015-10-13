@@ -59,8 +59,10 @@ function populateEnvironment(environment) {
     var vitalStatsValueContainers = $('#vital_stats .statsBoxSection-value');
 
     var channel = environment.settings.update.channel;
-    var updates = environment.settings.update.enabled ?
-      (environment.settings.update.autoDownload ? "automatic" : "prompt") : "disabled";
+    var updates = "disabled";
+    if (environment.settings.update.enabled) {
+      updates = environment.settings.update.autoDownload ? "automatic" : "prompt";
+    }
     var vitalStats = [
         environment.build.version,
         channel,
