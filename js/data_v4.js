@@ -35,8 +35,8 @@ var isCurrentMonth = function(day, now) {
         now = new Date();
     }
 
-    var currentYear = new Date().getYear();
-    var currentMonth = new Date().getMonth() + 1;
+    var currentYear = now.getYear();
+    var currentMonth = now.getMonth() + 1;
     var year = new Date(day).getYear();
     var month = new Date(day).getMonth() + 1;
 
@@ -51,7 +51,7 @@ function isPastNDays(day, n, now) {
         now = new Date();
     }
 
-    var difference = new Date().getTime() - new Date(day).getTime();
+    var difference = now.getTime() - new Date(day).getTime();
     return difference < ONE_DAY * n;
 }
 
