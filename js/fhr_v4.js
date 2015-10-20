@@ -70,13 +70,16 @@ function drawGraph(startupTimes) {
         // the default ticks can be pretty random: align them to day boundaries
         let min = Math.min.apply(null, [for (time of startupTimes) time[0]]);
         let max = Math.max.apply(null, [for (time of startupTimes) time[0]]);
+
         let minoffset = min % ONE_DAY;
+        let timezoneOffset = new Date().getTimezoneOffset() * 60 * 1000;
         let ticks = [];
         let interval = ONE_DAY;
         if ((max - min) / interval > 20) {
             interval = ONE_DAY * 2;
         }
-        for (let tick = min - minoffset + new Date().getTimezoneOffset() * 60 * 1000;
+
+        for (let tick = min - minoffset + timezoneOffset;
              tick <= max; tick += interval) {
             ticks.push(tick);
         }
