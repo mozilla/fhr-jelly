@@ -77,7 +77,7 @@ function drawGraph(startupTimes) {
             interval = ONE_DAY * 2;
         }
         for (let tick = min - minoffset + new Date().getTimezoneOffset() * 60 * 1000;
-             tick < max; tick += interval) {
+             tick <= max; tick += interval) {
             ticks.push(tick);
         }
 
