@@ -107,7 +107,10 @@ function drawGraph(startupTimes) {
                 }
             };
 
-            var graph = $.plot(graphContainer, [startupTimes], options);
+            // The startup times are in ms, we want to display seconds.
+            let startupTimesSec = [for (t of startupTimes) [t[0], t[1] / 1000]];
+
+            var graph = $.plot(graphContainer, [startupTimesSec], options);
             // We are drawing a graph so show the Y-label.
             $('.yaxis-label').show();
         }).fail(function(jqxhr, textStatus, error) {
