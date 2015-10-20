@@ -100,6 +100,7 @@ function drawGraph(startupTimes) {
                     max: max + ONE_DAY / 2,
                     mode: 'time',
                     timezone: 'browser',
+                    timeformat: "%b %e",
                     ticks: ticks,
                     monthNames: data[currentLocale].monthNameShort.split(','),
                     show: true,
