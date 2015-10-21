@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="{{ LANG }}" dir="{{ DIR }}">
+    <head>
+        <base target="_blank">
+        <meta charset="utf-8" />
+        <title>{{ _('Firefox Health Report') }}</title>
+
+        <link href="css/normalize.css" type="text/css" rel="stylesheet" media="screen" />
+        <link href="css/styles_v4.css" type="text/css" rel="stylesheet" media="screen" />
+    </head>
+    <body onload="init()">
+        <div class="persistentHeader">
+            <div class="headerContainer">
+                <div class="navAndBlurb">
+                    <ul class="nav">
+                        <li class="nav-category"><a href="#health" target="_self" class="active">{{ _('Firefox Health Report') }}</a></li>
+                        <li class="nav-separator"></li>
+                        <li class="nav-category"><a href="#raw" target="_self">{{ _('Raw Data') }}</a></li>
+                    </ul>
+                    <div class="blurb">{{ _('Get insights and performance information about your version of Firefox.') }} <a href="https://support.mozilla.org/kb/firefox-health-report-understand-your-browser-perf" class="learn_more">{{ _('Learn more...') }}</a>
+                        <a href="https://www.mozilla.org/legal/privacy/firefox.html#health-report">{{ _('Privacy Policy') }}</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- activation widget -->
+            <div class="activationWidget">
+                <div class="activationTrigger">
+                    <p class="activationTextContainer">
+                        {{ _('Data Sharing') }}
+                        <br><span class="statusText">{{ _('ON') }}</span>
+                    </p>
+                    <span class="activationTabContainer">
+                        <div class="activationTabOverlay"></div>
+                        <div class="activationTab"></div>
+                    </span>
+                </div>
+
+                <div class="panelContainer disabledPanel">
+                    <div class="panelContainerArrow"></div>
+                    <div class="panelContainerBase">
+                        <div class="panelContainerContent">
+                            <p>{{ _('You\'ve chosen to stop sharing data with Mozilla, but you\'ll still be able to see how your browser is performing.') }}</p>
+                            <p class="greyText">{{ _('Your Health Report data will also be removed from Mozilla\'s servers. Learn more in our <a href="%(privacy_url)s">privacy policy.</a>')|format(privacy_url='https://www.mozilla.org/legal/privacy/firefox.html#health-report') }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panelContainer enabledPanel">
+                    <div class="panelContainerArrow"></div>
+                    <div class="panelContainerBase">
+                        <div class="panelContainerContent">
+                            <p>{{ _('You\'ve chosen to share your data with Mozilla from time to time. Thanks for being part of our mission to build a brighter future for the Web.') }}</p>
+                            <p class="greyText">{{ _('Learn how we handle your data in our <a href="%(privacy_url)s">privacy policy.</a>')|format(privacy_url='https://www.mozilla.org/legal/privacy/firefox.html#health-report') }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="outerContainer">
+            <div class="sidebar">
+                <!-- enabled by media queries -->
+                <a href="#showstats" id="showstats" class="menu_toggle"><span class="visually-hidden" aria-hidden="true">{{ _('Show Statistics') }}</span></a>
+                <div class="statsBox">
+
+                    <div class="statsBoxSection">
+                        <div class="statsBoxSection-header">
+                            <img class="icon" src="img/icon-vitalStats.png" height="16" width="28">{{ _('Vital Stats') }}
+                        </div>
+                        <div class="statsBoxSection-content">
+                            <ul id="vital_stats">
+                                <li>{{ _("version") }}<span class="statsBoxSection-value"></span></li>
+                                <li>{{ _("update channel") }}<span class="statsBoxSection-value"></span></li>
+                                <li>{{ _("updates") }}<span id="vital_stats-updates" class="statsBoxSection-value">
+                                  <span id="vital_stats-updates-automatic">{{ _("automatic") }}</span>
+                                  <span id="vital_stats-updates-prompt">{{ _("prompt") }}</span>
+                                  <span id="vital_stats-updates-disabled">{{ _("disabled") }}</span>
+                                </span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="statsBoxSection">
+                        <div class="statsBoxSection-header">
+                            <img class="icon" src="img/icon-thisMonth.png" height="16" width="16">{{ _('This Month') }}
+                        </div>
+                        <div class="statsBoxSection-content">
+                            <ul id="current_month">
+                                <li>{{ _("total sessions") }}<span class="statsBoxSection-value"></span></li>
+                                <li>{{ _("time open") }}<span class="statsBoxSection-value"></span></li>
+                                <li>{{ _("application crashes") }}<span class="statsBoxSection-value"></span></li>
+                                <li>{{ _("plugin crashes") }}<span class="statsBoxSection-value"></span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="statsBoxSection">
+                        <div class="statsBoxSection-header">
+                            <img class="icon" src="img/icon-addons.png" height="16" width="16">{{ _('Active Add-ons') }}<span class="statsBoxSection-value"><!--{{ _('View List') }}--></span>
+                        </div>
+                        <div class="statsBoxSection-content">
+                            <ul id="addons">
+                                <li>{{ _("Extensions") }}<span class="statsBoxSection-value"></span></li>
+                                <li>{{ _("Plugins") }}<span class="statsBoxSection-value"></span></li>
+                                <li>{{ _("Plugins (Click-to-Activate)") }}<span class="statsBoxSection-value"></span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div id="health" class="mainContent">
+                <!-- TipBoxes -->
+                <div class="tipBoxes">
+                    <div id="crashyfox" class="tipBox-container">
+                        <div class="icon closeTip"></div>
+                        <div class="tipBox-header">
+                            <div class="icon expanderArrow"></div>
+                            <div class="text">{{ _('Tips') }}</div>
+                        </div>
+                        <div class="tipBox-content">
+                            <p>{{ _('It looks like your browser has crashed a number of times recently. To learn more:') }}</p>
+                            <ul>
+                                <li>{{ _('Visit our <a href="%(sumo_url)s">support website</a>')|format(sumo_url='https://support.mozilla.org/kb/firefox-crashes-troubleshoot-prevent-and-get-help') }}</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div id="slowfox" class="tipBox-container">
+                        <div class="icon closeTip"></div>
+                        <div class="tipBox-header">
+                            <div class="icon expanderArrow"></div>
+                            <div class="text">{{ _('Tips') }}</div>
+                        </div>
+                        <div class="tipBox-content">
+                            <p>{{ _('Your browser seems to be running slower than usual. To learn more:') }}</p>
+                            <ul>
+                                <li>{{ _('Visit our <a href="%(sumo_url)s">support website</a>')|format(sumo_url='https://support.mozilla.org/kb/firefox-health-report-says-your-browser-is-slow') }}</li>
+                                <li>{{ _('View more <a href="%(details_url)s">detailed information</a>')|format(details_url='https://support.mozilla.org/kb/firefox-takes-long-time-start-up') }}</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div id="hungryfox" class="tipBox-container">
+                        <div class="icon closeTip"></div>
+                        <div class="tipBox-header">
+                            <div class="icon expanderArrow"></div>
+                            <div class="text">{{ _('Tips') }}</div>
+                        </div>
+                        <div class="tipBox-content">
+                            <p>{{ _('You\'ll be able to see more interesting and detailed information the more you use your browser. Check back in a couple of weeks to start seeing some trends.') }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <figure class="graphbox">
+                    <h2>{{ _('Startup Time by Day') }}</h2>
+
+                    <div class="graph"></div>
+                    <div class="yaxis-label">{{ _('Time (in seconds)') }}</div>
+                    <figcaption>{{ _('Startup time helps determine how well your version of Firefox is performing. In general, faster times (i.e. less time) indicate better performance.') }} <a href="https://support.mozilla.org/kb/firefox-health-report-understand-your-browser-perf">{{ _('Learn more...') }}</a>
+                    </figcaption>
+                </figure>
+            </div>
+            <!-- RAW DATA -->
+            <div id="raw" class="mainContent">
+                <div class="rawdata-container">
+                    <h2 id="data_heading" class="raw_heading">{{ _('Raw Data') }}</h2>
+                    <p>{{ _('Firefox Health Report (FHR) records anonymous data about your computer, configuration, usage, performance, and error conditions. This data helps us improve Firefox for you and for other Firefox users.') }} (<a href="https://gecko.readthedocs.org/en/latest/toolkit/components/telemetry/telemetry/">{{ _("Read technical documentation for the data format and fields.") }}</a>)</p>
+
+                    <section id="data" class="rawdata-display">
+                      <ol id="rawdata-list">
+                      </ol>
+                      <pre id="rawdata-data"></pre>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <div class="loading">
+            <img src="img/loading.png" />
+        </div>
+
+        <script type="text/javascript" src="js/lib/jquery.js"></script>
+        <script type="text/javascript" src="js/lib/jquery.flot.js"></script>
+        <script type="text/javascript" src="js/lib/jquery.flot.time.js"></script>
+
+        <!-- Has to live inside the HTML because of l10n -->
+        <script>
+        // Activation widget
+        var activationWidget = $('.activationWidget');
+        var activationTrigger = $('.activationTrigger');
+        var statusTxt = $('.statusText');
+
+        var showStatusPanel = function(panel, status, showMessage) {
+            if (status) {
+                // If the activation panel is currently disabled then we need
+                // to remove the disabled class.
+                if (activationWidget.hasClass('disabled')) {
+                    activationWidget.removeClass('disabled');
+                    statusTxt.removeClass('disabled');
+                }
+                statusTxt.text('{{ _("ON") }}');
+            } else {
+                // If the activation panel is currently active then we need
+                // to add the disabled class.
+                if (!activationWidget.hasClass('disabled')) {
+                    activationWidget.addClass('disabled');
+                    statusTxt.addClass('disabled');
+                }
+                statusTxt.text('{{ _("OFF") }}');
+            }
+
+            if (showMessage) {
+                status ? enableSubmission() : disableSubmission();
+
+                panel.toggleClass('toggled');
+                setTimeout(function() {
+                    panel.toggleClass('toggled');
+                }, 5000);
+            }
+        };
+
+        activationTrigger.click(function() {
+            if (statusTxt.text() === '{{ _("ON") }}') {
+                showStatusPanel($('.disabledPanel'), false, true);
+            } else {
+                showStatusPanel($('.enabledPanel'), true, true);
+            }
+        });
+        </script>
+        <script type="text/javascript;version=1.8" src="js/fhr_v4.js"></script>
+        <script type="text/javascript;version=1.8" src="js/data_v4.js"></script>
+    </body>
+</html>
