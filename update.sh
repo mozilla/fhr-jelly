@@ -30,6 +30,11 @@ pushd $CODE_DIR/$APP
 
 git pull
 
+# The previous l10n repository was on SVN; clean out any existing checkouts.
+if [ -d "locale/.svn" ]; then
+  rm -r "locale"
+fi
+
 if [ ! -d "locale" ]; then
     git clone ${LOCALE_REPO} "locale"
 fi
