@@ -5,7 +5,7 @@ WEB_DIR="$CODE_DIR/web-output"
 ENV=$(echo "$CODE_DIR" | cut -f3 -d'/')
 SITE=$(echo "$CODE_DIR" | cut -f5 -d'/')
 APP=fhr-jelly
-LOCALE_REPO="https://svn.mozilla.org/projects/l10n-misc/trunk/firefoxhealthreport/locale"
+LOCALE_REPO="https://github.com/mozilla-l10n/fhr-l10n.git"
 
 
 ### No edits needed below here ###
@@ -30,11 +30,16 @@ pushd $CODE_DIR/$APP
 
 git pull
 
+# The previous l10n repository was on SVN; clean out any existing checkouts.
+if [ -d "locale/.svn" ]; then
+  rm -r "locale"
+fi
+
 if [ ! -d "locale" ]; then
-    svn checkout ${LOCALE_REPO}
+    git clone ${LOCALE_REPO} "locale"
 fi
 pushd locale
-svn up
+git pull
 popd
 
 ./generate.py --output-dir $WEB_DIR -f --nowarn
