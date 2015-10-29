@@ -15,12 +15,11 @@ bunch of static, localized output files.
 
     git clone git://github.com/mozilla/fhr-jelly.git
 
-The localization files will live in SVN, but do not exist yet.
-Check them out into the subdirectory
-"locale" to pull in translations.
+The localization files will live in another Git repository and do not exist yet.
+Check them out into the subdirectory "locale" to pull in translations.
 
     cd fhr-jelly
-    svn checkout https://svn.mozilla.org/projects/l10n-misc/trunk/firefoxhealthreport/locale/
+    git clone https://github.com/mozilla-l10n/fhr-l10n.git locale
 
 ### Choosing a build version
 
@@ -109,6 +108,9 @@ This software is licensed under the [Mozilla Tri-License][MPL]:
       James Long <jlong@mozilla.com>
       Fred Wenzel <fwenzel@mozilla.com>
       Laura Thomson <lthomson@mozilla.com>
+      Benjamin Smedberg <bsmedberg@mozilla.com>
+      Katie Parlante <kparlante@mozilla.com>
+      Georg Fritzsche <gfritzsche@mozilla.com>
 
     Alternatively, the contents of this file may be used under the terms of
     either the GNU General Public License Version 2 or later (the "GPL"), or
