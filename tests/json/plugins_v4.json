@@ -1,0 +1,141 @@
+{
+  "ping": {
+    "environment": {
+      "addons": {
+        "activeAddons": {
+          "{8620c15f-30dc-4dba-a131-7c5d20cf4a29}": {
+            "blocklisted": false,
+            "description": "Useful tools for the nightly tester.",
+            "name": "Nightly Tester Tools",
+            "userDisabled": false,
+            "appDisabled": false,
+            "version": "3.7.1-signed",
+            "scope": 1,
+            "type": "extension",
+            "foreignInstall": false,
+            "hasBinaryComponents": false,
+            "installDay": 16693,
+            "updateDay": 16693,
+            "signedState": 2
+          }
+        },
+        "activePlugins": [
+          {
+            "name": "Shockwave Flash",
+            "version": "19.0.0.185",
+            "description": "Shockwave Flash 19.0 r0",
+            "blocklisted": false,
+            "disabled": false,
+            "clicktoplay": false,
+            "mimeTypes": [
+              "application/x-shockwave-flash",
+              "application/futuresplash"
+            ],
+            "updateDay": 16700
+          },
+          {
+            "name": "QuickTime Plug-in 7.7.8",
+            "version": "7.7.8.0",
+            "description": "The QuickTime Plugin allows you to view a wide variety of multimedia content in Web pages. For more ",
+            "blocklisted": false,
+            "disabled": false,
+            "clicktoplay": true,
+            "mimeTypes": [
+              "application\/sdp",
+              "application\/x-sdp",
+              "application\/x-rtsp",
+              "video\/quicktime",
+              "video\/flc",
+              "audio\/x-wav",
+              "audio\/wav"
+            ],
+            "updateDay": 16707
+          },
+          {
+            "name": "QuickTime Plug-in 7.7.8",
+            "version": "7.7.8.0",
+            "description": "The QuickTime Plugin allows you to view a wide variety of multimedia content in Web pages. For more ",
+            "blocklisted": false,
+            "disabled": false,
+            "clicktoplay": true,
+            "mimeTypes": [
+              "audio\/aiff",
+              "audio\/x-aiff",
+              "audio\/basic",
+              "audio\/mid",
+              "audio\/vnd.qcelp",
+              "audio\/x-gsm",
+              "audio\/amr",
+              "audio\/aac"
+            ],
+            "updateDay": 16707
+          },
+          {
+            "name": "QuickTime Plug-in 7.7.8",
+            "version": "7.7.8.0",
+            "description": "The QuickTime Plugin allows you to view a wide variety of multimedia content in Web pages. For more ",
+            "blocklisted": false,
+            "disabled": false,
+            "clicktoplay": true,
+            "mimeTypes": [
+              "audio\/x-aac",
+              "audio\/x-caf",
+              "audio\/x-ac3",
+              "video\/x-mpeg",
+              "video\/mpeg"
+            ],
+            "updateDay": 16707
+          },
+          {
+            "name": "QuickTime Plug-in 7.7.8",
+            "version": "7.7.8.0",
+            "description": "The QuickTime Plugin allows you to view a wide variety of multimedia content in Web pages. For more ",
+            "blocklisted": false,
+            "disabled": false,
+            "clicktoplay": true,
+            "mimeTypes": [
+              "audio\/mpeg",
+              "audio\/x-mpeg",
+              "video\/3gpp",
+              "audio\/3gpp",
+              "video\/3gpp2",
+              "audio\/3gpp2",
+              "video\/sd-video"
+            ],
+            "updateDay": 16707
+          },
+          {
+            "name": "QuickTime Plug-in 7.7.8",
+            "version": "7.7.8.0",
+            "description": "The QuickTime Plugin allows you to view a wide variety of multimedia content in Web pages. For more ",
+            "blocklisted": false,
+            "disabled": false,
+            "clicktoplay": true,
+            "mimeTypes": [
+              "application\/x-mpeg",
+              "video\/mp4",
+              "audio\/mp4",
+              "audio\/x-m4a",
+              "audio\/x-m4p",
+              "audio\/x-m4b",
+              "video\/x-m4v"
+            ],
+            "updateDay": 16707
+          }
+        ],
+        "activeGMPlugins": {
+          "gmp-gmpopenh264": {
+            "version": "1.4",
+            "userDisabled": false,
+            "applyBackgroundUpdates": 1
+          },
+          "some-drm-stuff": {
+            "version": "3.5",
+            "userDisabled": true,
+            "applyBackgroundUpdates": 1
+          }
+        }
+      }
+    }
+  }
+}

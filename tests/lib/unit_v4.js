@@ -34,3 +34,15 @@ asyncTest('test-totals', function() {
         start();
     });
 });
+
+asyncTest('test-plugins', function() {
+    $.getJSON('/tests/json/plugins_v4.json', function(data) {
+        var counts = countPlugins(data.ping.environment);
+
+        equal(counts.activeAddons, 1, 'Expected 1 active addon and got ' + counts.activeAddons);
+        equal(counts.activePlugins, 2, 'Expected 2 active plugins (1 NPAPI and 1 GMP) and got ' + counts.activePlugins);
+        equal(counts.clickToPlayPlugins, 1, 'Expected 1 click-to-play plugin and got ' + counts.clickToPlayPlugins);
+
+        start();
+    });
+});
