@@ -55,6 +55,46 @@ function isPastNDays(day, n, now) {
     return difference < ONE_DAY * n;
 }
 
+function countPlugins(environment) {
+    var activeAddons = 0;
+    for (var id of Object.keys(environment.addons.activeAddons)) {
+        ++activeAddons;
+    }
+    var activePlugins = 0;
+    var clickPlugins = 0;
+
+    var seenPlugins = new Set();
+    for (var plugin of environment.addons.activePlugins) {
+        // The addon manager collapses plugins with the same name and description
+        // into one entry. We'll match that to avoid user confusion.
+        var pluginId = plugin.name + plugin.description;
+        if (seenPlugins.has(pluginId)) {
+            continue;
+        }
+        seenPlugins.add(pluginId);
+
+        if (plugin.clicktoplay) {
+            ++clickPlugins;
+        } else {
+            ++activePlugins;
+        }
+    }
+
+    for (var gmpId of Object.keys(environment.addons.activeGMPlugins)) {
+        var gmp = environment.addons.activeGMPlugins[gmpId];
+        // Firefox <=45 may submit disabled GMPs, we'll filter them out here.
+        if (!gmp.userDisabled) {
+            ++activePlugins;
+        }
+    }
+
+    return {
+        activeAddons: activeAddons,
+        activePlugins: activePlugins,
+        clickToPlayPlugins: clickPlugins,
+    };
+}
+
 function populateEnvironment(environment) {
     var vitalStatsValueContainers = $('#vital_stats .statsBoxSection-value');
 
@@ -81,25 +121,11 @@ function populateEnvironment(environment) {
 
     var addonsValueContainers = $('#addons .statsBoxSection-value');
 
-    var activeAddons = 0;
-    for (var id of Object.keys(environment.addons.activeAddons)) {
-        ++activeAddons;
-    }
-    var activePlugins = 0;
-    var clickPlugins = 0;
-    for (var plugin of environment.addons.activePlugins) {
-        if (plugin.clicktoplay) {
-            ++clickPlugins;
-        } else {
-            ++activePlugins;
-        }
-    }
-    activePlugins += Object.keys(environment.addons.activeGMPlugins).length;
-
+    var counts = countPlugins(environment);
     var addons = [
-        activeAddons,
-        activePlugins,
-        clickPlugins,
+        counts.activeAddons,
+        counts.activePlugins,
+        counts.clickToPlayPlugins,
     ];
 
     addonsValueContainers.each(function(index) {
