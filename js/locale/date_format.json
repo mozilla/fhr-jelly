@@ -1,12 +1,9 @@
 {
     "ach": {
-        "monthNameShort": "Dwe me acel,Dwe me aryo,Dwe me adek,Dwe me angwen,Dwe me abic,Dwe me abicel,Dwe me abiro,Dwe me aboro,Dwe me abonguen,Dwe me apar,Dwe me aparacel,Dwe me apararyo"
+        "monthNameShort": "Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec"
     },
     "af": {
         "monthNameShort": "Jan,Feb,Mrt,Apr,Mei,Jun,Jul,Aug,Sep,Okt,Nov,Des"
-    },
-    "ak": {
-        "monthNameShort": "San,Ogy,Ɛbɔ,Ofo,Kɔt,Obi,Kut,Dif,Ɔbɛ,Ahi,Obu,Ɔpɛ"
     },
     "an": {
         "monthNameShort": "chi,feb,mar,abr,may,chn,chl,ago,set,oct,nov,avi"
@@ -20,8 +17,8 @@
     "ast": {
         "monthNameShort": "Xin,Feb,Mar,Abr,May,Xun,Xnt,Ago,Set,Och,Pay,Avi"
     },
-    "be": {
-        "monthNameShort": "Стд,Лют,Сак,Крс,Трв,Чэр,Ліп,Жнв,Вер,Кас,Ліс,Снж"
+    "az": {
+        "monthNameShort": "Yan,Fev,Mar,Apr,May,İyun,İyul,Avq,Sen,Okt,Noy,Dek"
     },
     "bg": {
         "monthNameShort": "Яну,Фев,Мар,Апр,Май,Юни,Юли,Авг,Сеп,Окт,Ное,Дек"
@@ -41,11 +38,11 @@
     "ca": {
         "monthNameShort": "gen,febr,març,abr,maig,juny,jul,ag,set,oct,nov,des"
     },
+    "cak": {
+        "monthNameShort": "nab'ey ik',ruka'n ik',Mar,Rukaj ik',ro' ik',Ruwaq ik',Ruwuq ik',ruwaqxaq ik',rub'elej ik',rulaj ik',rujulaj ik',rukab'laj ik'"
+    },
     "cs": {
         "monthNameShort": "Led,Úno,Bře,Dub,Kvě,Čvn,Čnc,Srp,Zář,Říj,Lis,Pro"
-    },
-    "csb": {
-        "monthNameShort": "Stë,Gro,Strë,Łżë,Môj,Cze,Lëp,Zél,Séw,Ruj,Lës,Gòd"
     },
     "cy": {
         "monthNameShort": "Ion,Chw,Maw,Ebr,Mai,Meh,Gor,Aws,Med,Hyd,Tach,Rha"
@@ -55,6 +52,9 @@
     },
     "de": {
         "monthNameShort": "Jan,Feb,Mär,Apr,Mai,Jun,Jul,Aug,Sep,Okt,Nov,Dez"
+    },
+    "dsb": {
+        "monthNameShort": "Jan,Feb,Měr,Apr,Maj,Jun,Jul,Awg,Sep,Okt,Now,Dec"
     },
     "el": {
         "monthNameShort": "Ιαν,Φεβ,Μαρ,Απρ,Μαι,Ιον,Ιολ,Αυγ,Σεπ,Οκτ,Νοε,Δεκ"
@@ -125,6 +125,9 @@
     "hr": {
         "monthNameShort": "Sij,Vel,Ožu,Tra,Svi,Lip,Srp,Kol,Ruj,Lis,Stu,Pro"
     },
+    "hsb": {
+        "monthNameShort": "Jan,Feb,Měr,Apr,Mej,Jun,Jul,Awg,Sep,Okt,Now,Dec"
+    },
     "hu": {
         "monthNameShort": "Jan.,Febr.,Márc.,Ápr.,Máj.,Jún.,Júl.,Aug.,Szept.,Okt.,Nov.,Dec."
     },
@@ -149,6 +152,9 @@
     "ka": {
         "monthNameShort": "იან,თებ,მარ,აპრ,მაი,ივნ,ივლ,აგვ,სექ,ოქტ,ნოე,დეკ"
     },
+    "kab": {
+        "monthNameShort": "Yen,Fuṛ,Meɣ,Yeb,Mag,Yun,Yul,Ɣuc,Cṭam,Tub,Wamb,Duj"
+    },
     "kk": {
         "monthNameShort": "Қаң,Ақп,Нау,Сәу,Мам,Мау,Шіл,Там,Қыр,Қаз,Қар,Жел"
     },
@@ -160,12 +166,6 @@
     },
     "ko": {
         "monthNameShort": "1월,2월,3월,4월,5월,6월,7월,8월,9월,10월,11월,12월"
-    },
-    "ku": {
-        "monthNameShort": "Çil,Sib,Ada,Nîs,Gulan,Hez,Tem,Teb,Îlo,Cot,Mij,Kan"
-    },
-    "lg": {
-        "monthNameShort": "Jani,Febu,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec"
     },
     "lij": {
         "monthNameShort": "Zen,Fre,Màr,Arv,Màz,Zùg,Lùg,Agó,Set,Òtô,Nov,Dex"
@@ -185,11 +185,11 @@
     "ml": {
         "monthNameShort": "ജാ,ഫെ,മാ,ഏ,മേ,ജൂ,ജൂലൈ,ആഗ,സെപ്,ഒക്,നവം,ഡിസം"
     },
-    "mn": {
-        "monthNameShort": "Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec"
-    },
     "mr": {
         "monthNameShort": "जॅन,फेब,मार,एप्र,मे,जून,जुलै,ऑग,स्पटे,ऑक्ट,नोव्ह,डिसे"
+    },
+    "ms": {
+        "monthNameShort": "Jan,Feb,Mac,Apr,Mei,Jun,Julai,Ogos,Sep,Okt,Nov,Dis"
     },
     "my": {
         "monthNameShort": "Jan,ဖေ,မတ်,ဧပြီ,မေ,ဇွန်,ဇူ,သြ,စက်,အောက်,နို,ဒီ"
@@ -202,12 +202,6 @@
     },
     "nn-NO": {
         "monthNameShort": "jan,feb,mar,apr,mai,jun,jul,aug,sep,okt,nov,des"
-    },
-    "nso": {
-        "monthNameShort": "Jan,Feb,Matš,Apr,Mei,Jun,Jul,Ago,Set,Okt,Nof,Dis"
-    },
-    "oc": {
-        "monthNameShort": "Gen,Feb,Mar,Abr,Mai,Jun,Jul,Ago,Set,Oct,Nov,Dec"
     },
     "or": {
         "monthNameShort": "ଜାନୁଆରୀ,ଫେବ୍ରୁଆରୀ,ମାର୍ଚ,ଏପ୍ରିଲ,ମଇ,ଜୁନ,ଜୁଲାଇ,ଅଗଷ୍ଟ,ସେପ୍ଟେମ୍ବର,ଅକ୍ଟୋବର,ନଭେମ୍ବର,ଡ଼ିସେମ୍ବର"
@@ -233,9 +227,6 @@
     "ru": {
         "monthNameShort": "Январь,Февраль,Март,Апрель,Май,Июнь,Июль,Август,Сентябрь,Октябрь,Ноябрь,Декабрь"
     },
-    "sah": {
-        "monthNameShort": "Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec"
-    },
     "si": {
         "monthNameShort": "ජන,පෙබ,මාර්,අප්‍රි,මැයි,ජුනි,ජූලි,අගෝ,සැප්,ඔක්,නොවැ,දෙසැ"
     },
@@ -257,14 +248,8 @@
     "sv-SE": {
         "monthNameShort": "Jan,Feb,Mar,Apr,Maj,Jun,Jul,Aug,Sep,Okt,Nov,Dec"
     },
-    "sw": {
-        "monthNameShort": "Januari,Februari,Ma,Aprili,Mei,Juni,Julai,Ago,Septemba,Okt,Novemba,Dis"
-    },
     "ta": {
         "monthNameShort": "ஜன,பிப்,மார்,ஏப்,மே,ஜூன்,ஜூலை,ஆக,செப்,அக்,நவ,டிச"
-    },
-    "ta-LK": {
-        "monthNameShort": "Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec"
     },
     "te": {
         "monthNameShort": "జన,ఫిబ్ర,మార్చి,ఏప్రి,మే,జూన్,జులై,ఆగ,సెప్టెం,అక్టో,నవం,డిసెం"
@@ -281,11 +266,14 @@
     "ur": {
         "monthNameShort": "Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec"
     },
+    "uz": {
+        "monthNameShort": "Yan,Fev,Mar,Apr,May,Iyun,Iyul,Avg,Sen,Okt,Noy,Dek"
+    },
     "vi": {
         "monthNameShort": "Thg01,Thg02,Thg03,Thg04,Thg05,Thg06,Thg07,Thg08,Thg09,Thg10,Thg11,Thg12"
     },
-    "wo": {
-        "monthNameShort": "Sam,Fee,Mar,Awr,Me,suw,Sulet,Waxset,Satun,Okto,Now,Des"
+    "xh": {
+        "monthNameShort": "Jan,Feb,UMatsh,Epr,Meyi,UJun,Jul,Agas,Sep,Okhth,Nov,Dis"
     },
     "zh-CN": {
         "monthNameShort": "一月,二月,三月,四月,五月,六月,七月,八月,九月,十月,十一月,十二月"
