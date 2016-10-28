@@ -89,9 +89,10 @@ function drawGraph(startupTimes) {
         $.getJSON('js/locale/date_format.json', function(data) {
             // Get localized month names, or fallback to en-US if they're not
             // available
-            let localizedMonthNames = (currentLocale in data)
-                ? data[currentLocale].monthNameShort.split(',')
-                : data['en-US'].monthNameShort.split(',');
+            let localeData = (currentLocale in data)
+                ? data[currentLocale]
+                : data['en-US'];
+            let localizedMonthNames = localeData.monthNameShort.split(',');
 
             var options = {
                 colors: ['#50b432'],
