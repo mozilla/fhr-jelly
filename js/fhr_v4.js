@@ -87,6 +87,13 @@ function drawGraph(startupTimes) {
         // We need to localize our month names so first load our localized data,
         // then set the graph options and draw the graph.
         $.getJSON('js/locale/date_format.json', function(data) {
+            // Get localized month names, or fallback to en-US if they're not
+            // available
+            let localeData = (currentLocale in data)
+                ? data[currentLocale]
+                : data['en-US'];
+            let localizedMonthNames = localeData.monthNameShort.split(',');
+
             var options = {
                 colors: ['#50b432'],
                 series: {
@@ -102,7 +109,7 @@ function drawGraph(startupTimes) {
                     timezone: 'browser',
                     timeformat: "%b %e",
                     ticks: ticks,
-                    monthNames: data[currentLocale].monthNameShort.split(','),
+                    monthNames: localizedMonthNames,
                     show: true,
                 }
             };

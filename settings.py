@@ -28,17 +28,18 @@ LANG_FILENAME = 'fhr.lang'
 
 # List of languages.
 LANGS = (
-    'ach', 'af', 'ak', 'an', 'ar', 'as', 'ast', 'az', 'be', 'bg',
-    'bn-BD', 'bn-IN', 'br', 'bs', 'ca', 'cs', 'csb', 'cy', 'da',
-    'de', 'dsb', 'el', 'en-GB', 'en-US', 'en-ZA', 'eo', 'es-AR', 'es-CL',
-    'es-ES', 'es-MX', 'et', 'eu', 'fa', 'ff', 'fi', 'fr', 'fy-NL',
-    'ga-IE', 'gd', 'gl', 'gu-IN', 'he', 'hi-IN', 'hr', 'hu', 'hy-AM',
-    'hsb', 'id', 'is', 'it', 'ja', 'ja-JP-mac', 'ka', 'kk', 'km', 'kn',
-    'ko', 'ku', 'lg', 'lij', 'lt', 'lv', 'mai', 'mk', 'ml', 'mn',
-    'mr', 'ms', 'my', 'nb-NO', 'nl', 'nn-NO', 'nso', 'oc', 'or', 'pa-IN',
-    'pl', 'pt-BR', 'pt-PT', 'rm', 'ro', 'ru', 'sah', 'si', 'sk', 'sl',
-    'son', 'sq', 'sr', 'sv-SE', 'sw', 'ta', 'ta-LK', 'te', 'th', 'tr',
-    'uk', 'ur', 'vi', 'wo', 'xh', 'zh-CN', 'zh-TW', 'zu',
+    'ach', 'af', 'an', 'ar', 'as', 'ast', 'az', 'bg', 'bn-BD',
+    'bn-IN', 'br', 'bs', 'ca', 'cak', 'cs', 'cy', 'da', 'de',
+    'dsb', 'el', 'en-GB', 'en-US', 'en-ZA', 'eo', 'es-AR',
+    'es-CL', 'es-ES', 'es-MX', 'et', 'eu', 'fa', 'ff', 'fi',
+    'fr', 'fy-NL', 'ga-IE', 'gd', 'gl', 'gu-IN', 'he', 'hi-IN',
+    'hr', 'hsb', 'hu', 'hy-AM', 'id', 'is', 'it', 'ja-JP-mac',
+    'ja', 'ka', 'kab', 'kk', 'km', 'kn', 'ko', 'lij', 'lt',
+    'lv', 'mai', 'mk', 'ml', 'mr', 'ms', 'my', 'nb-NO', 'nl',
+    'nn-NO', 'or', 'pa-IN', 'pl', 'pt-BR', 'pt-PT', 'rm',
+    'ro', 'ru', 'si', 'sk', 'sl', 'son', 'sq', 'sr', 'sv-SE',
+    'ta', 'te', 'th', 'tr', 'uk', 'ur', 'uz', 'vi', 'xh',
+    'zh-CN', 'zh-TW', 'zu',
 )
 
 # RTL languages.
@@ -48,24 +49,17 @@ RTL_LANGS = ('ar', 'fa', 'he', 'ur')
 # fallbacks rather than generated on their owns. Both sides must exist in
 # LANGS.
 LANG_FALLBACK = {
-    'be'        : 'ru',
     'en-ZA'     : 'en-US',
     'he'        : 'en-US',
     'ja-JP-mac' : 'ja',
-    'mn'        : 'ru',
-    'nn-NO'     : 'nb-NO',
-    'oc'        : 'fr',
-    'sw'        : 'en-US',
-    'wo'        : 'fr',
 }
 
 # Mobile Language fallbacks. Langs listed here will be symlinked to
 # their respective fallbacks rather than generated on their owns.
 # This is for locales that do have fhr for Destop but haven't translated
 # it for mobile.
-LANG_MOBILE_FALLBACK = {
-    'ja'    : 'en-US',
-}
+# e.g. 'ja' : 'en-US',
+LANG_MOBILE_FALLBACK = {}
 
 # View to build - specify either 'passive' or 'urgent'
 BUILD_VERSION = 'passive'
