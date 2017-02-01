@@ -185,7 +185,7 @@ function crashesFromMainPing(ping, type) {
     return h.values[0];
 }
 
-function MainPingAccumulator(now) {
+function PingAccumulator(now) {
     this.totalSessionThisMonth = 0;
     this.totalTimeThisMonth = 0;
     this.mainCrashesThisMonth = 0;
@@ -196,8 +196,10 @@ function MainPingAccumulator(now) {
     this.startupTimes = [];
 
     this.now = now;
+
+    this.ACCUMULATED_PING_TYPES = ["main", "crash-ping"];
 }
-MainPingAccumulator.prototype = {
+PingAccumulator.prototype = {
     processPing: function(data) {
         if (data.type == "main") {
             this.processMainPing(data);
@@ -237,7 +239,7 @@ MainPingAccumulator.prototype = {
 
 function populateThisMonth(pingList) {
     var now = new Date();
-    var accu = new MainPingAccumulator(now);
+    var accu = new PingAccumulator(now);
 
     function finish() {
         var currentMonthValueContainers = $('#current_month .statsBoxSection-value');
@@ -298,6 +300,14 @@ function populateThisMonth(pingList) {
         if (!isPastNDays(timestampCreated, 35, now)) {
             continue;
         }
+
+        // We only parse main and crash-ping(s) in PingAccumulator,
+        // so don't load other ping types contents.
+        // The other pings are still visible in the raw data section.
+        if (!accu.ACCUMULATED_PING_TYPES.includes(type)) {
+            continue;
+        }
+
         ++pending;
         promiseFetchPing(id)
             .then(accu.processPing.bind(accu))
