@@ -288,14 +288,14 @@ function populateThisMonth(pingList) {
         .finally(pendingFinished);
 
     pingList.sort((a, b) => b.timestampCreated - a.timestampCreated);
-    var linkList = document.getElementById('rawdata-list');
+    var fragment = document.createDocumentFragment();
     for (var {type, timestampCreated, id} of pingList) {
         var link = document.createElement('a');
         link.setAttribute("data-id", id);
         link.textContent = displayDate(timestampCreated) + ": " + type;
         var line = document.createElement('li');
         line.appendChild(link);
-        linkList.appendChild(line);
+        fragment.appendChild(line);
 
         if (!isPastNDays(timestampCreated, 35, now)) {
             continue;
@@ -313,6 +313,9 @@ function populateThisMonth(pingList) {
             .then(accu.processPing.bind(accu))
             .finally(pendingFinished);
     }
+
+    var linkList = document.getElementById('rawdata-list');
+    linkList.appendChild(fragment);
 
     $(document).on('click', '#rawdata-list a', function() {
         var id = this.getAttribute('data-id');
