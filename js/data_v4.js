@@ -421,3 +421,8 @@ function sendToBrowser(type) {
         console.log(e);
     }
 }
+
+// bind init to window.onload() so that it no longer needs to be inline
+$(document).ready(function() {
+    $(window).on('load', init);
+});
