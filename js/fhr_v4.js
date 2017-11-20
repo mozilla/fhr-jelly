@@ -68,8 +68,8 @@ function drawGraph(startupTimes) {
         var currentLocale = $('html').attr('lang');
 
         // the default ticks can be pretty random: align them to day boundaries
-        let min = Math.min.apply(null, [for (time of startupTimes) time[0]]);
-        let max = Math.max.apply(null, [for (time of startupTimes) time[0]]);
+        let min = Math.min.apply(null, startupTimes.map(time => time[0]));
+        let max = Math.max.apply(null, startupTimes.map(time => time[0]));
 
         let minoffset = min % ONE_DAY;
         let timezoneOffset = new Date().getTimezoneOffset() * 60 * 1000;
@@ -115,7 +115,7 @@ function drawGraph(startupTimes) {
             };
 
             // The startup times are in ms, we want to display seconds.
-            let startupTimesSec = [for (t of startupTimes) [t[0], t[1] / 1000]];
+            let startupTimesSec = startupTimes.map(t => [t[0], t[1] / 1000]);
 
             var graph = $.plot(graphContainer, [startupTimesSec], options);
             // We are drawing a graph so show the Y-label.
