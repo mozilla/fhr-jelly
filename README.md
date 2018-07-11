@@ -1,3 +1,5 @@
+**This project is not active anymore. about:healthreport was removed from Firefox in version 59 ([bug 1352497](https://bugzilla.mozilla.org/show_bug.cgi?id=1352497)).**
+
 # Firefox Health Report - Jelly
 
 [![Build Status](https://travis-ci.org/mozilla/fhr-jelly.png?branch=master)](https://travis-ci.org/mozilla/fhr-jelly)
